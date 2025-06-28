@@ -10,7 +10,7 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<LoginController>();
+    final controller = Get.find<AuthController>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

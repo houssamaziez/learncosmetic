@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:learncosmetic/core/services/local_storage_service.dart';
 import 'package:learncosmetic/domain/repositories/user/user_repository_impl.dart';
 import 'package:learncosmetic/domain/usecases/%20login_user.dart';
 import 'package:learncosmetic/domain/usecases/register_user.dart';
@@ -11,14 +12,14 @@ import 'package:learncosmetic/routes/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await LocalStorageService.init();
+  await LocalStorageService.init();
   final client = Client();
   final dataSource = UserRemoteDataSourceImpl(client);
   final repository = UserRemoteDataSourceImpl(client);
   final usecaselogin = LoginUser(repository);
   final usecaseregister = RegisterUser(repository);
 
-  final controller = LoginController(
+  final controller = AuthController(
     loginUser: usecaselogin,
     registerUser: usecaseregister,
   );

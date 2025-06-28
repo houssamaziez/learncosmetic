@@ -1,41 +1,41 @@
-// // import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
 
-// /// A service for storing and retrieving local key-value data
-// class LocalStorageService {
-//   // static SharedPreferences? _prefs;
+/// A service for storing and retrieving local key-value data using GetStorage
+class LocalStorageService {
+  static final GetStorage _box = GetStorage();
 
-//   /// Initializes the storage instance
-//   static Future<void> init() async {
-//     // _prefs = await SharedPreferences.getInstance();
-//   }
+  /// Initializes the storage (must be called before any access)
+  static Future<void> init() async {
+    await GetStorage.init();
+  }
 
-//   /// Saves a string value by key
-//   static Future<void> setString(String key, String value) async {
-//     await _prefs?.setString(key, value);
-//   }
+  /// Saves a string value by key
+  static void setString(String key, String value) {
+    _box.write(key, value);
+  }
 
-//   /// Retrieves a string value by key
-//   static String? getString(String key) {
-//     return _prefs?.getString(key);
-//   }
+  /// Retrieves a string value by key
+  static String? getString(String key) {
+    return _box.read<String>(key);
+  }
 
-//   /// Saves a boolean value by key
-//   static Future<void> setBool(String key, bool value) async {
-//     await _prefs?.setBool(key, value);
-//   }
+  /// Saves a boolean value by key
+  static void setBool(String key, bool value) {
+    _box.write(key, value);
+  }
 
-//   /// Retrieves a boolean value by key
-//   static bool getBool(String key, {bool defaultValue = false}) {
-//     return _prefs?.getBool(key) ?? defaultValue;
-//   }
+  /// Retrieves a boolean value by key
+  static bool getBool(String key, {bool defaultValue = false}) {
+    return _box.read<bool>(key) ?? defaultValue;
+  }
 
-//   /// Clears all stored data
-//   static Future<void> clear() async {
-//     await _prefs?.clear();
-//   }
+  /// Clears all stored data
+  static Future<void> clear() async {
+    await _box.erase();
+  }
 
-//   /// Removes a specific key
-//   static Future<void> remove(String key) async {
-//     await _prefs?.remove(key);
-//   }
-// }
+  /// Removes a specific key
+  static Future<void> remove(String key) async {
+    await _box.remove(key);
+  }
+}

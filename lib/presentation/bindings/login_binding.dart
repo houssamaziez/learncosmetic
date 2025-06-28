@@ -14,7 +14,7 @@ class LoginBinding extends Bindings {
     Get.lazyPut(() => UserRemoteDataSourceImpl(Get.find()));
     Get.lazyPut(() => LoginUser(Get.find()));
     Get.lazyPut(
-      () => LoginController(loginUser: Get.find(), registerUser: Get.find()),
+      () => AuthController(loginUser: Get.find(), registerUser: Get.find()),
     );
   }
 }

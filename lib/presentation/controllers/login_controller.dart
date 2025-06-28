@@ -6,11 +6,11 @@ import '../../../core/services/local_storage_service.dart';
 import '../../domain/usecases/register_user.dart';
 import '../../routes/app_routes.dart';
 
-class LoginController extends GetxController {
+class AuthController extends GetxController {
   final LoginUser loginUser;
   final RegisterUser registerUser;
 
-  LoginController({required this.loginUser, required this.registerUser});
+  AuthController({required this.loginUser, required this.registerUser});
 
   // Fields
   final nameController = TextEditingController();
@@ -38,7 +38,6 @@ class LoginController extends GetxController {
 
     try {
       final user = await loginUser(email, password);
-      // await LocalStorageService.setString('token', user.token ?? '');
       Get.offAllNamed(AppRoutes.home);
     } catch (e) {
       ErrorNotifier.show(e.toString());

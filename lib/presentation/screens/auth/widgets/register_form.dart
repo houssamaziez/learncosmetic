@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/controllers/login_controller.dart';
 import '../../../../core/constants/app_size.dart';
+import '../../../widgets/app_text_field.dart';
 import '../../../widgets/button_all.dart';
 
 class RegisterForm extends StatelessWidget {
@@ -9,7 +10,7 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<LoginController>();
+    final controller = Get.find<AuthController>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,46 +27,28 @@ class RegisterForm extends StatelessWidget {
           );
         }),
 
-        // Name field
-        TextField(
+        AppTextField(
           controller: controller.nameController,
-          decoration: const InputDecoration(
-            labelText: 'الاسم الكامل',
-            border: OutlineInputBorder(),
-          ),
+          label: 'الاسم الكامل',
         ),
         const SizedBox(height: AppSize.spacingM),
-
-        // Email field
-        TextField(
+        AppTextField(
           controller: controller.emailController,
-          keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
-            labelText: 'البريد الإلكتروني',
-            border: OutlineInputBorder(),
-          ),
+          label: 'البريد الإلكتروني',
         ),
         const SizedBox(height: AppSize.spacingM),
 
-        // Password field
-        TextField(
+        AppTextField(
           controller: controller.passwordController,
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'كلمة المرور',
-            border: OutlineInputBorder(),
-          ),
+          label: 'كلمة المرور',
+          isPassword: true,
         ),
         const SizedBox(height: AppSize.spacingM),
 
-        // Confirm password
-        TextField(
+        AppTextField(
           controller: controller.confirmPasswordController,
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'تأكيد كلمة المرور',
-            border: OutlineInputBorder(),
-          ),
+          label: 'تأكيد كلمة المرور',
+          isPassword: true,
         ),
         const SizedBox(height: AppSize.spacingL),
 

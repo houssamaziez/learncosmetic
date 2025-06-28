@@ -3,7 +3,9 @@ import 'package:http/http.dart' as http;
 import '../../../../core/errors/exceptions.dart';
 import '../../../core/constants/api_constants.dart';
 import '../../../core/constants/api_headers.dart';
+import '../../../core/constants/error_notifier.dart';
 import '../../../core/network/http_error_handler.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../../../data/models/user_model.dart';
 import 'user_repository.dart';
 
@@ -22,6 +24,8 @@ class UserRemoteDataSourceImpl implements UserRepository {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
+      LocalStorageService.setString('token', data['token'] ?? '');
+
       return UserModel.fromJson(data['user']);
     } else {
       HttpErrorHandler.handle(response.statusCode, response.body);
@@ -72,6 +76,7 @@ class UserRemoteDataSourceImpl implements UserRepository {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
+      ErrorNotifier.showSuccess(data['message']);
       return UserModel.fromJson(data['user']);
     } else {
       HttpErrorHandler.handle(response.statusCode, response.body);
