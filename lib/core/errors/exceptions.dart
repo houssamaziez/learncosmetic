@@ -20,14 +20,6 @@ class CacheException implements Exception {
 }
 
 /// Thrown when there is no internet connection
-class NetworkException implements Exception {
-  final String message;
-
-  NetworkException([this.message = 'No internet connection']);
-
-  @override
-  String toString() => 'NetworkException: $message';
-}
 
 /// Generic exception for unexpected failures
 class UnexpectedException implements Exception {
