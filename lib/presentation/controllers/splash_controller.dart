@@ -27,7 +27,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
 
   void _navigateToNext() {
     // TODO: Add your logic here (check login, etc)
-    // Get.offAllNamed(AppRoutes.login);
+    Get.offAllNamed(AppRoutes.login);
   }
 
   @override

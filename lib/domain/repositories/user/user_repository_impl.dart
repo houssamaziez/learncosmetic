@@ -51,4 +51,30 @@ class UserRemoteDataSourceImpl implements UserRepository {
     // TODO: implement getProfile
     throw UnimplementedError();
   }
+
+  @override
+  Future<UserModel?> register(
+    String name,
+    String email,
+    String password,
+    String confirmPassword,
+  ) async {
+    final response = await client.post(
+      Uri.parse(ApiConstants.register),
+      headers: ApiHeaders.json,
+      body: json.encode({
+        'name': name,
+        'email': email,
+        'password': password,
+        'password_confirmation': confirmPassword,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return UserModel.fromJson(data['user']);
+    } else {
+      HttpErrorHandler.handle(response.statusCode, response.body);
+    }
+  }
 }

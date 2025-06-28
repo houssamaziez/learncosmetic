@@ -16,6 +16,7 @@ class AppSize {
   static const double radiusXL = 32;
 
   // Spacing
+  static const double spacingXS = 4;
   static const double spacingS = 8;
   static const double spacingM = 16;
   static const double spacingL = 24;

@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/bindings/splash_binding.dart';
+import 'package:learncosmetic/presentation/screens/auth/auth_screen.dart';
 import 'package:learncosmetic/presentation/screens/splash/splash_screen.dart';
 
+import '../presentation/bindings/login_binding.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -11,11 +13,11 @@ class AppPages {
       page: () => const SplashScreen(),
       binding: SplashBinding(),
     ),
-    // GetPage(
-    //   name: AppRoutes.login,
-    //   page: () => const LoginScreen(),
-    //   binding: LoginBinding(),
-    // ),
+    GetPage(
+      name: AppRoutes.login,
+      page: () => const AuthScreen(),
+      binding: LoginBinding(),
+    ),
     // GetPage(
     //   name: AppRoutes.home,
     //   page: () => const HomeScreen(),
