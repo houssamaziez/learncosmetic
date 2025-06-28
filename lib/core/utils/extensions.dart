@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 /// Extension on String for validations and formatting
 extension StringExtensions on String {
   /// Capitalizes the first letter of the string
@@ -27,22 +25,22 @@ extension StringExtensions on String {
 }
 
 /// Extension on DateTime for formatting
-extension DateTimeExtensions on DateTime {
-  /// Formats the date as 'dd/MM/yyyy'
-  String toShortDate() {
-    return DateFormat('dd/MM/yyyy').format(this);
-  }
+// extension DateTimeExtensions on DateTime {
+//   /// Formats the date as 'dd/MM/yyyy'
+//   String toShortDate() {
+//     return DateFormat('dd/MM/yyyy').format(this);
+//   }
 
-  /// Formats the time as 'HH:mm'
-  String toShortTime() {
-    return DateFormat('HH:mm').format(this);
-  }
+//   /// Formats the time as 'HH:mm'
+//   String toShortTime() {
+//     return DateFormat('HH:mm').format(this);
+//   }
 
-  /// Formats the date and time as 'yyyy-MM-dd – HH:mm'
-  String toFullDateTime() {
-    return DateFormat('yyyy-MM-dd – HH:mm').format(this);
-  }
-}
+//   /// Formats the date and time as 'yyyy-MM-dd – HH:mm'
+//   String toFullDateTime() {
+//     return DateFormat('yyyy-MM-dd – HH:mm').format(this);
+//   }
+// }
 
 /// Extension on List for safe access
 extension ListExtensions<T> on List<T> {

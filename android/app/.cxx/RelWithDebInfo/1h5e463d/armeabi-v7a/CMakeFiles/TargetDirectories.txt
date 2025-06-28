@@ -1,0 +1,2 @@
+/Users/mac/Desktop/learncosmetic/android/app/.cxx/RelWithDebInfo/1h5e463d/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+/Users/mac/Desktop/learncosmetic/android/app/.cxx/RelWithDebInfo/1h5e463d/armeabi-v7a/CMakeFiles/edit_cache.dir

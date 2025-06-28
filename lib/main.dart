@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:learncosmetic/core/services/local_storage_service.dart';
+import 'package:learncosmetic/domain/repositories/user/user_repository_impl.dart';
+import 'package:learncosmetic/domain/usecases/%20login_user.dart';
+import 'package:learncosmetic/presentation/controllers/login_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocalStorageService.init();
+  // await LocalStorageService.init();
+  final client = Client();
+  final dataSource = UserRemoteDataSourceImpl(client);
+  final repository = UserRemoteDataSourceImpl(client);
+  final usecase = LoginUser(repository);
+  final controller = LoginController(loginUser: usecase);
+
+  Get.put(controller); // تسجيله في GetX
   runApp(const MyApp());
 }
 
@@ -59,16 +71,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  final controller = Get.find<LoginController>();
 
   void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+    controller.login();
   }
 
   @override

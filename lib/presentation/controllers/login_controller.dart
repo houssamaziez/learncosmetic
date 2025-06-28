@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:learncosmetic/data/models/user_model.dart';
 
 import '../../../core/services/local_storage_service.dart';
+import '../../core/constants/error_notifier.dart';
 import '../../domain/usecases/ login_user.dart';
 
 class LoginController extends GetxController {
@@ -10,8 +11,8 @@ class LoginController extends GetxController {
 
   LoginController({required this.loginUser});
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(text: 'houssam@mail.com');
+  final passwordController = TextEditingController(text: '123456');
 
   var isLoading = false.obs;
   var loginError = ''.obs;
@@ -29,11 +30,11 @@ class LoginController extends GetxController {
     loginError.value = '';
 
     try {
-      UserModel user = await loginUser(email, password);
-      await LocalStorageService.setString('token', 'example_token');
+      UserModel? user = await loginUser(email, password);
+      // await LocalStorageService.setString('token', 'example_token');
       Get.offAllNamed('/home'); // Navigate to home screen
     } catch (e) {
-      loginError.value = 'Login failed. Please try again.';
+      ErrorNotifier.show((e).toString());
     } finally {
       isLoading.value = false;
     }

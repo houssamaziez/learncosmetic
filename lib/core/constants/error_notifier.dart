@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class ErrorNotifier {
@@ -6,14 +7,13 @@ class ErrorNotifier {
   static void show(String message, {String title = 'Error'}) {
     if (message.isEmpty) return;
 
-    Get.snackbar(
-      title,
-      message,
+    Fluttertoast.showToast(
+      msg: '$message',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
       backgroundColor: Colors.red.shade100,
-      colorText: Colors.red.shade900,
-      snackPosition: SnackPosition.BOTTOM,
-      margin: const EdgeInsets.all(12),
-      duration: const Duration(seconds: 3),
+      textColor: Colors.red.shade900,
+      timeInSecForIosWeb: 3,
     );
   }
 

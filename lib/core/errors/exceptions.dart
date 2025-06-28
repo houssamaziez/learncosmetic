@@ -6,7 +6,7 @@ class ServerException implements Exception {
   ServerException({this.message = 'Server error occurred', this.statusCode});
 
   @override
-  String toString() => 'ServerException: $message (statusCode: $statusCode)';
+  String toString() => message;
 }
 
 /// Thrown when there is a caching failure (e.g. local storage read/write issues)
