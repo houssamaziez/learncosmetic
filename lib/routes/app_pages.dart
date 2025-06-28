@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
+import 'package:learncosmetic/presentation/bindings/home_binding.dart';
 import 'package:learncosmetic/presentation/bindings/splash_binding.dart';
 import 'package:learncosmetic/presentation/screens/auth/auth_screen.dart';
+import 'package:learncosmetic/presentation/screens/home/home_wrapper_screen.dart';
 import 'package:learncosmetic/presentation/screens/splash/splash_screen.dart';
 
 import '../presentation/bindings/login_binding.dart';
@@ -18,11 +20,11 @@ class AppPages {
       page: () => const AuthScreen(),
       binding: LoginBinding(),
     ),
-    // GetPage(
-    //   name: AppRoutes.home,
-    //   page: () => const HomeScreen(),
-    //   binding: HomeBinding(),
-    // ),
+    GetPage(
+      name: AppRoutes.home,
+      page: () => HomeWrapperScreen(),
+      binding: HomeBinding(),
+    ),
     // GetPage(
     //   name: AppRoutes.profile,
     //   page: () => const ProfileScreen(),
