@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/controllers/login_controller.dart';
 import '../../../../core/constants/app_size.dart';
+import '../../../widgets/button_all.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -70,22 +71,10 @@ class RegisterForm extends StatelessWidget {
 
         // Register button
         Obx(
-          () => SizedBox(
-            width: double.infinity,
-            height: AppSize.buttonHeight,
-            child: ElevatedButton(
-              onPressed:
-                  controller.isLoading.value
-                      ? null
-                      : () => controller.register(),
-              child:
-                  controller.isLoading.value
-                      ? const CircularProgressIndicator(
-                        color: Colors.white,
-                        strokeWidth: 2,
-                      )
-                      : const Text('إنشاء حساب'),
-            ),
+          () => ButtonAll(
+            label: 'انشاء حساب',
+            isLoading: controller.isLoading.value,
+            onPressed: controller.register,
           ),
         ),
       ],

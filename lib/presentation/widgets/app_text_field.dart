@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_size.dart';
 
-class AppTextField extends StatelessWidget {
+class AppTextField extends StatefulWidget {
   final String label;
   final TextEditingController controller;
   final bool isPassword;
@@ -20,28 +20,60 @@ class AppTextField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<AppTextField> createState() => _AppTextFieldState();
+}
+
+class _AppTextFieldState extends State<AppTextField> {
+  bool _obscureText = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.isPassword;
+  }
+
+  void _toggleObscure() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
-          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+          widget.label,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: AppSize.fontSizeM,
+          ),
         ),
         const SizedBox(height: AppSize.spacingXS),
         TextField(
-          controller: controller,
-          obscureText: isPassword,
-          keyboardType: keyboardType,
-          onChanged: onChanged,
+          controller: widget.controller,
+          obscureText: _obscureText,
+          keyboardType: widget.keyboardType,
+          onChanged: widget.onChanged,
           decoration: InputDecoration(
-            hintText: hintText,
+            hintText: widget.hintText,
+            suffixIcon:
+                widget.isPassword
+                    ? IconButton(
+                      icon: Icon(
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.grey,
+                      ),
+                      onPressed: _toggleObscure,
+                    )
+                    : null,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppSize.radiusS),
             ),
             contentPadding: const EdgeInsets.symmetric(
-              vertical: 14,
-              horizontal: 12,
+              vertical: AppSize.paddingM,
+              horizontal: AppSize.paddingM,
             ),
           ),
         ),

@@ -22,9 +22,8 @@ class CustomTabButton extends StatelessWidget {
           height: AppSize.buttonHeight,
           decoration: BoxDecoration(
             color: isSelected ? const Color(0xFF540B0E) : Colors.transparent,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(AppSize.paddingS),
-              topRight: Radius.circular(AppSize.paddingS),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(AppSize.radiusM),
             ),
           ),
           alignment: Alignment.center,

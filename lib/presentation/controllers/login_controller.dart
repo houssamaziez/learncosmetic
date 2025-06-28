@@ -14,8 +14,8 @@ class LoginController extends GetxController {
 
   // Fields
   final nameController = TextEditingController();
-  final emailController = TextEditingController(text: 'houssam@mail.com');
-  final passwordController = TextEditingController(text: '123456');
+  final emailController = TextEditingController(text: 'houssam@gmail.com');
+  final passwordController = TextEditingController(text: 'secret123');
   final confirmPasswordController = TextEditingController();
 
   final isLoading = false.obs;

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/constants/app_size.dart';
 import '../../../controllers/login_controller.dart';
+import '../../../widgets/app_text_field.dart';
+import '../../../widgets/button_all.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -26,24 +28,34 @@ class LoginForm extends StatelessWidget {
         }),
 
         // Email
-        TextField(
+        // TextField(
+        //   controller: controller.emailController,
+        //   keyboardType: TextInputType.emailAddress,
+        //   decoration: const InputDecoration(
+        //     labelText: 'البريد الإلكتروني',
+        //     border: OutlineInputBorder(),
+        //   ),
+        // ),
+        AppTextField(
           controller: controller.emailController,
+          label: 'البريد الإلكتروني',
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
-            labelText: 'البريد الإلكتروني',
-            border: OutlineInputBorder(),
-          ),
         ),
         const SizedBox(height: AppSize.spacingM),
 
         // Password
-        TextField(
+        // TextField(
+        //   controller: controller.passwordController,
+        //   obscureText: true,
+        //   decoration: const InputDecoration(
+        //     labelText: 'كلمة المرور',
+        //     border: OutlineInputBorder(),
+        //   ),
+        // ),
+        AppTextField(
           controller: controller.passwordController,
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'كلمة المرور',
-            border: OutlineInputBorder(),
-          ),
+          label: 'كلمة المرور',
+          isPassword: true,
         ),
         const SizedBox(height: AppSize.spacingS),
 
@@ -62,24 +74,10 @@ class LoginForm extends StatelessWidget {
 
         // Login button
         Obx(
-          () => SizedBox(
-            width: double.infinity,
-            height: AppSize.buttonHeight,
-            child: ElevatedButton(
-              onPressed:
-                  controller.isLoading.value
-                      ? null
-                      : () {
-                        controller.login();
-                      },
-              child:
-                  controller.isLoading.value
-                      ? const CircularProgressIndicator(
-                        color: Colors.white,
-                        strokeWidth: 2,
-                      )
-                      : const Text('تسجيل الدخول'),
-            ),
+          () => ButtonAll(
+            label: 'تسجيل الدخول',
+            isLoading: controller.isLoading.value,
+            onPressed: controller.login,
           ),
         ),
       ],

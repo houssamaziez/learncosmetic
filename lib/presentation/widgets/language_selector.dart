@@ -27,6 +27,7 @@ class LanguageSelector extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: AppSize.paddingS,
+                    vertical: AppSize.paddingXS,
                   ),
                   child: Text(
                     lang['label'] as String,
