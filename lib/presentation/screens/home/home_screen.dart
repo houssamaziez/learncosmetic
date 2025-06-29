@@ -11,16 +11,18 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            const CustomAppBar(),
-            const HomeSearchBar(),
-            BannerSlider(),
-            SectionHeader(title: "الأقسام الرئيسية", onSeeAll: () {}),
-            CategoryList(),
-            SectionHeader(title: "الدورات الأكثر شعبية", onSeeAll: () {}),
-            PopularCoursesList(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const CustomAppBar(),
+              const HomeSearchBar(),
+              BannerSlider(),
+              SectionHeader(title: "الأقسام الرئيسية", onSeeAll: () {}),
+              CategoryList(),
+              SectionHeader(title: "الدورات الأكثر شعبية", onSeeAll: () {}),
+              PopularCoursesList(),
+            ],
+          ),
         ),
       ),
     );
