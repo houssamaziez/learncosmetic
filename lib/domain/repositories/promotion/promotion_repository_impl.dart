@@ -12,18 +12,22 @@ class PromotionRepositoryImpl implements PromotionRepository {
   PromotionRepositoryImpl({required this.client});
 
   @override
-  Future<PromotionBanner?> getPromotions() async {
+  Future<List<PromotionBanner>?> getPromotions() async {
     final response = await client.get(
       Uri.parse(ApiConstants.promotions),
       headers: ApiHeaders.json,
     );
-
+    var datejson = json.decode(response.body)['data']['data'];
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      var data =
+          (json.decode(response.body)['data']['data'] as List)
+              .map((promotion) => PromotionBanner.fromJson(promotion))
+              .toList();
+      return data;
     } else {
       HttpErrorHandler.handle(response.statusCode, response.body);
     }
-    return null;
+    return [];
   }
 
   @override

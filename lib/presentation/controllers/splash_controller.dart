@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../core/services/local_storage_service.dart';
 import '../../routes/app_routes.dart';
 
 class SplashController extends GetxController with GetTickerProviderStateMixin {
@@ -26,8 +27,9 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void _navigateToNext() {
-    // TODO: Add your logic here (check login, etc)
-    Get.offAllNamed(AppRoutes.login);
+    LocalStorageService.getString('token') != null
+        ? Get.offAllNamed(AppRoutes.home)
+        : Get.offAllNamed(AppRoutes.login);
   }
 
   @override

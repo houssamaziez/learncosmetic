@@ -1,5 +1,8 @@
 class ApiConstants {
-  static const String baseUrl = 'http://192.168.137.245:8000/api';
+  static const String host = 'http://192.168.137.245:8000';
+  static const String apiPath = "/api";
+
+  static const String baseUrl = '$host$apiPath';
 
   // Endpoints
   static const String login = '$baseUrl/login';

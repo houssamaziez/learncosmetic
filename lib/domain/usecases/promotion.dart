@@ -7,7 +7,7 @@ class PromotionUsecase {
 
   PromotionUsecase(this.repository);
 
-  Future<PromotionBanner?> call() {
+  Future<List<PromotionBanner>?> call() {
     return repository.getPromotions();
   }
 }
