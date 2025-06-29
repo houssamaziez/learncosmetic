@@ -1,5 +1,7 @@
+import '../../../data/models/promotion_banner.dart';
+
 abstract class PromotionRepository {
-  Future<PromotionRepository?> getPromotions();
+  Future<PromotionBanner?> getPromotions();
 
   Future<void> addPromotion();
 

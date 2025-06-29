@@ -11,16 +11,15 @@ class PromotionRepositoryImpl implements PromotionRepository {
 
   PromotionRepositoryImpl({required this.client});
 
-  Future<PromotionRepository?> getPromotions() async {
+  @override
+  Future<PromotionBanner?> getPromotions() async {
     final response = await client.get(
       Uri.parse(ApiConstants.promotions),
       headers: ApiHeaders.json,
     );
 
     if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-
-      return data;
+      return json.decode(response.body);
     } else {
       HttpErrorHandler.handle(response.statusCode, response.body);
     }

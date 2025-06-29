@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:learncosmetic/domain/repositories/promotion/promotion_repository.dart';
 import '../../../../core/errors/exceptions.dart';
 import '../../../core/constants/api_constants.dart';
 import '../../../core/constants/api_headers.dart';

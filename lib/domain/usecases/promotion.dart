@@ -1,12 +1,13 @@
 import 'package:learncosmetic/data/models/promotion_banner.dart';
 import 'package:learncosmetic/domain/repositories/promotion/promotion_repository.dart';
+import 'package:learncosmetic/domain/repositories/promotion/promotion_repository_impl.dart';
 
 class PromotionUsecase {
-  final PromotionRepository repository;
+  final PromotionRepositoryImpl repository;
 
   PromotionUsecase(this.repository);
 
-  Future<PromotionRepository?> call(String email, String password) {
+  Future<PromotionBanner?> call() {
     return repository.getPromotions();
   }
 }
