@@ -33,6 +33,6 @@ class HomeController extends GetxController {
     Get.put(
       PromotionsController(PromotionUsecase(Get.find())),
     ).fetchPromotions();
-    Get.put(CategoryController(CategoryUsecase(Get.find()))).fetchPromotions();
+    Get.put(CategoryController(CategoryUsecase(Get.find()))).fetchCategory();
   }
 }

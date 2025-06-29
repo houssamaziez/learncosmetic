@@ -21,7 +21,7 @@ class CategoryController extends GetxController {
     // fetchPromotions();
   }
 
-  Future<List<CategoryModel>?> fetchPromotions() async {
+  Future<List<CategoryModel>?> fetchCategory() async {
     isLoading.value = true;
     try {
       // Simulate fetching promotions from a repository
