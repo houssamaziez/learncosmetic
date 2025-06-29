@@ -13,7 +13,7 @@ class CategoryController extends GetxController {
   CategoryController(this.categorysUsecase);
   // Fields
   final isLoading = false.obs;
-  final promotions = <CategoryModel>[].obs; // Example list of promotions
+  final category = <CategoryModel>[].obs; // Example list of promotions
 
   @override
   void onInit() {
@@ -26,7 +26,7 @@ class CategoryController extends GetxController {
     try {
       // Simulate fetching promotions from a repository
       final List<CategoryModel>? result = await categorysUsecase();
-      promotions.value = result!;
+      category.value = result!;
       return result;
     } catch (e) {
       throw Exception('PromotionBanner not found');

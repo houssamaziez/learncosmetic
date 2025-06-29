@@ -17,10 +17,16 @@ class BannerSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (controllerPromotions.promotions.isEmpty) {
+      if (controllerPromotions.isLoading.value) {
         return const SizedBox(
           height: 180,
           child: Center(child: CircularProgressIndicator()),
+        );
+      }
+      if (controllerPromotions.promotions.isEmpty) {
+        return const SizedBox(
+          height: 180,
+          child: Center(child: Text('No promotions found')),
         );
       }
 

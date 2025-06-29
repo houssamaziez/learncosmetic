@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:learncosmetic/presentation/controllers/category_controller.dart';
 import 'category_item.dart';
 
 class CategoryList extends StatelessWidget {
@@ -6,35 +8,43 @@ class CategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categories = [
-      {'title': 'مكياج', 'icon': Icons.brush},
-      {'title': 'عطور', 'icon': Icons.local_florist},
-      {'title': 'العناية بالبشرة', 'icon': Icons.spa},
-      {'title': 'العناية بالشعر', 'icon': Icons.water_drop},
-      {
-        'title': 'أظافر',
-        'icon': Icons.star,
-      }, // using Icons.star as a substitute
-    ];
+    final CategoryController controllerCategory =
+        Get.find<CategoryController>();
 
-    return SizedBox(
-      height: 100,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        itemCount: categories.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 12),
-        itemBuilder: (context, index) {
-          final item = categories[index];
-          return CategoryItem(
-            title: item['title'] as String,
-            icon: item['icon'] as IconData,
-            onTap: () {
-              // Handle category tap
-            },
-          );
-        },
-      ),
-    );
+    return Obx(() {
+      if (controllerCategory.isLoading.value) {
+        return const SizedBox(
+          height: 180,
+          child: Center(child: CircularProgressIndicator()),
+        );
+      }
+
+      if (controllerCategory.category.isEmpty) {
+        return const SizedBox(
+          height: 180,
+          child: Center(child: Text('No categories found')),
+        );
+      }
+
+      return SizedBox(
+        height: 100,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemCount: controllerCategory.category.length,
+          separatorBuilder: (_, __) => const SizedBox(width: 12),
+          itemBuilder: (context, index) {
+            final item = controllerCategory.category[index];
+            return CategoryItem(
+              title: item.name as String,
+              icon: item.icon as String,
+              onTap: () {
+                // Handle category tap
+              },
+            );
+          },
+        ),
+      );
+    });
   }
 }

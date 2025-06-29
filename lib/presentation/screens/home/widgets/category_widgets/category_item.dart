@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:learncosmetic/core/constants/api_constants.dart';
 
 class CategoryItem extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final String icon;
   final VoidCallback? onTap;
 
   const CategoryItem({
@@ -25,7 +26,15 @@ class CategoryItem extends StatelessWidget {
               color: const Color(0xFF540B0E).withOpacity(0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: const Color(0xFF540B0E), size: 28),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Image.network(
+                fit: BoxFit.cover,
+                ApiConstants.host + "/" + icon,
+                width: 10,
+                height: 11,
+              ),
+            ),
           ),
           const SizedBox(height: 6),
           Text(
