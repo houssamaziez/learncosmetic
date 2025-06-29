@@ -10,4 +10,5 @@ class ApiConstants {
   static const String register = '$baseUrl/register';
   static const String promotions = '$baseUrl/promotions';
   static const String categories = '$baseUrl/categories';
+  static const String playlists = '$baseUrl/playlists';
 }

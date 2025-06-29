@@ -1,28 +1,30 @@
 import 'package:learncosmetic/core/constants/api_constants.dart';
 import 'package:learncosmetic/core/constants/api_headers.dart';
 import 'package:learncosmetic/core/network/http_error_handler.dart';
+import 'package:learncosmetic/data/models/playlist_model.dart';
 import 'package:learncosmetic/domain/repositories/category/category_repository.dart'
     show CategoryRepository;
 import 'package:http/http.dart' as http;
+import 'package:learncosmetic/domain/repositories/playlist/playlist_repository.dart';
 import 'dart:convert';
 
 import '../../../data/models/category_model.dart';
 
-class CategoryRepositoryImpl implements CategoryRepository {
+class PlaylistRepositoryImpl implements PlaylistRepository {
   final http.Client client;
 
-  CategoryRepositoryImpl({required this.client});
+  PlaylistRepositoryImpl({required this.client});
 
   @override
-  Future<List<CategoryModel>?> getCategorys() async {
+  Future<List<Playlist>?> getPlaylist() async {
     final response = await client.get(
-      Uri.parse(ApiConstants.categories),
+      Uri.parse(ApiConstants.playlists),
       headers: ApiHeaders.json,
     );
     if (response.statusCode == 200) {
       var data =
           (json.decode(response.body)['data'] as List)
-              .map((promotion) => CategoryModel.fromJson(promotion))
+              .map((playlist) => Playlist.fromJson(playlist))
               .toList();
       return data;
     } else {
