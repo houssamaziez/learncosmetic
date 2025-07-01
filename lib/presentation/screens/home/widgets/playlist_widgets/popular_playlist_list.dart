@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:learncosmetic/core/constants/api_constants.dart';
 
-class PopularCourseCard extends StatelessWidget {
+class PopularPlaylistCard extends StatelessWidget {
   final String title;
   final String imagePath;
   final String subtitle;
   final VoidCallback? onTap;
 
-  const PopularCourseCard({
+  const PopularPlaylistCard({
     super.key,
     required this.title,
     required this.imagePath,
@@ -39,7 +40,7 @@ class PopularCourseCard extends StatelessWidget {
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(16),
               ),
-              child: Image.asset(
+              child: Image.network(
                 imagePath,
                 height: 100,
                 width: 160,

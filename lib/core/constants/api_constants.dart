@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const String host = 'http://192.168.2.112:8000';
+  static const String host = 'http://192.168.2.96:8000';
   static const String apiPath = "/api";
 
   static const String baseUrl = '$host$apiPath';
@@ -11,4 +11,5 @@ class ApiConstants {
   static const String promotions = '$baseUrl/promotions';
   static const String categories = '$baseUrl/categories';
   static const String playlists = '$baseUrl/playlists';
+  static const String episode = '$baseUrl/episode/playlist/';
 }

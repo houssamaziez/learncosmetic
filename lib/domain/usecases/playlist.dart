@@ -9,4 +9,8 @@ class PlaylistUsecase {
   Future<List<Playlist>?> call() {
     return repository.getPlaylist();
   }
+
+  Future<List<Playlist>?> getbyId() {
+    return repository.getPlaylist();
+  }
 }

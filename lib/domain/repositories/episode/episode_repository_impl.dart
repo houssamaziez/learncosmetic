@@ -1,30 +1,30 @@
 import 'package:learncosmetic/core/constants/api_constants.dart';
 import 'package:learncosmetic/core/constants/api_headers.dart';
 import 'package:learncosmetic/core/network/http_error_handler.dart';
-import 'package:learncosmetic/data/models/playlist_model.dart';
-import 'package:learncosmetic/domain/repositories/category/category_repository.dart'
-    show CategoryRepository;
+
 import 'package:http/http.dart' as http;
-import 'package:learncosmetic/domain/repositories/playlist/playlist_repository.dart';
+import 'package:learncosmetic/data/models/episode_model.dart';
+import 'package:learncosmetic/domain/repositories/episode/episode_repository.dart';
 import 'dart:convert';
 
 import '../../../data/models/category_model.dart';
 
-class PlaylistRepositoryImpl implements PlaylistRepository {
+class EpisodeRepositoryImpl implements EpisodeRepository {
   final http.Client client;
 
-  PlaylistRepositoryImpl({required this.client});
+  EpisodeRepositoryImpl({required this.client});
 
   @override
-  Future<List<Playlist>?> getPlaylist() async {
+  Future<List<Episode>?> getEpisode(int idPlaylist) async {
     final response = await client.get(
-      Uri.parse(ApiConstants.playlists),
+      Uri.parse(ApiConstants.episode + idPlaylist.toString()),
       headers: ApiHeaders.json,
     );
     if (response.statusCode == 200) {
+      var varmapdata = json.decode(response.body)['data'];
       var data =
-          (json.decode(response.body)['data'] as List)
-              .map((playlist) => Playlist.fromJson(playlist))
+          (varmapdata as List)
+              .map((promotion) => Episode.fromJson(promotion))
               .toList();
       return data;
     } else {
@@ -55,18 +55,5 @@ class PlaylistRepositoryImpl implements PlaylistRepository {
   Future<void> updatePromotion() {
     // TODO: implement updatePromotion
     throw UnimplementedError();
-  }
-
-  @override
-  Future<Playlist?> getByIdPlaylist(int id) async {
-    final response = await client.get(
-      Uri.parse(ApiConstants.playlists + id.toString()),
-      headers: ApiHeaders.json,
-    );
-    if (response.statusCode == 200) {
-      return Playlist.fromJson(json.decode(response.body)['data']);
-    } else {
-      HttpErrorHandler.handle(response.statusCode, response.body);
-    }
   }
 }

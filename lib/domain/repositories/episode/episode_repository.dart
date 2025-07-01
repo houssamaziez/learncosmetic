@@ -1,11 +1,10 @@
-import 'package:learncosmetic/data/models/playlist_model.dart';
+import 'package:learncosmetic/data/models/episode_model.dart';
 
 import '../../../data/models/category_model.dart';
 import '../../../data/models/promotion_banner.dart';
 
-abstract class PlaylistRepository {
-  Future<List<Playlist>?> getPlaylist();
-  Future<Playlist?> getByIdPlaylist(int id);
+abstract class EpisodeRepository {
+  Future<List<Episode>?> getEpisode(int idPlaylist);
 
   Future<void> addPromotion();
 

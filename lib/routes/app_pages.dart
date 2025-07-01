@@ -6,6 +6,7 @@ import 'package:learncosmetic/presentation/screens/home/home_wrapper_screen.dart
 import 'package:learncosmetic/presentation/screens/splash/splash_screen.dart';
 
 import '../presentation/bindings/login_binding.dart';
+import '../presentation/screens/home/playlist/playlist_screen_details.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -25,11 +26,11 @@ class AppPages {
       page: () => HomeWrapperScreen(),
       binding: HomeBinding(),
     ),
-    // GetPage(
-    //   name: AppRoutes.profile,
-    //   page: () => const ProfileScreen(),
-    //   binding: ProfileBinding(),
-    // ),
+    GetPage(
+      name: AppRoutes.playlistDetails,
+      page: () => const PlaylistScreenDetails(),
+      // binding: ProfileBinding(),
+    ),
     // GetPage(
     //   name: AppRoutes.settings,
     //   page: () => const SettingsScreen(),
