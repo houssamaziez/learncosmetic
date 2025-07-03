@@ -12,6 +12,8 @@ import 'package:chewie/chewie.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../error/not_found_list.dart';
+
 class CourseScreen extends StatefulWidget {
   final String id;
   const CourseScreen({super.key, required this.id});
@@ -75,9 +77,7 @@ class _CourseScreenState extends State<CourseScreen> {
         }
 
         if (controller.episodes.isEmpty) {
-          return const Scaffold(
-            body: Center(child: Text('لا توجد قوائم تشغيل')),
-          );
+          return NotFoundScreenList();
         }
 
         final episode = controller.episodes[controller.selectedIndex];

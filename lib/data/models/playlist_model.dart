@@ -4,7 +4,8 @@ class Playlist {
   final String description;
   final String? imageUrl;
   final CategoryPlaylist category;
-  final int coursesCount; // Add this line
+  final int coursesCount;
+  final String totalDuration; // Add this line
 
   Playlist({
     required this.id,
@@ -12,7 +13,8 @@ class Playlist {
     required this.description,
     this.imageUrl,
     required this.category,
-    required this.coursesCount, // Add this line
+    required this.coursesCount,
+    required this.totalDuration, // Add this line
   });
 
   factory Playlist.fromJson(Map<String, dynamic> json) {
@@ -22,7 +24,8 @@ class Playlist {
       description: json['description'],
       imageUrl: json['image'],
       category: CategoryPlaylist.fromJson(json['category']),
-      coursesCount: json['courses_count'], // Add this line
+      coursesCount: json['courses_count'],
+      totalDuration: json['total_duration'], // Add this line
     );
   }
 
@@ -33,7 +36,8 @@ class Playlist {
       'description': description,
       'image_url': imageUrl,
       'category': category.toJson(),
-      'courses_count': coursesCount, // Add this line
+      'courses_count': coursesCount,
+      'total_duration': totalDuration, // Add this line
     };
   }
 }

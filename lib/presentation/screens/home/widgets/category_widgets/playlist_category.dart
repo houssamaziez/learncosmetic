@@ -4,7 +4,10 @@ import 'package:learncosmetic/core/constants/api_constants.dart';
 import 'package:learncosmetic/domain/usecases/category.dart';
 import 'package:learncosmetic/domain/usecases/playlist.dart';
 import 'package:learncosmetic/presentation/controllers/category_controller.dart';
+import 'package:learncosmetic/presentation/screens/error/not_found_list.dart'
+    show NotFoundScreenList;
 
+import '../../../error/not_found_screen.dart';
 import '../../playlist/screenplaylist.dart';
 import '../playlist_widgets/popular_playlist_card.dart';
 
@@ -32,7 +35,7 @@ class PlaylistCategory extends StatelessWidget {
         }
 
         if (controller.playlist.isEmpty) {
-          return const Center(child: Text('لا توجد قوائم تشغيل'));
+          return NotFoundScreenList();
         }
 
         return GridView.builder(
@@ -47,9 +50,7 @@ class PlaylistCategory extends StatelessWidget {
           itemBuilder: (context, index) {
             final item = controller.playlist[index];
             return PopularPlaylistCard(
-              imagePath: (item.imageUrl ?? ''),
-              subtitle: item.description ?? '',
-              title: item.title ?? '',
+              playlist: item,
               onTap: () {
                 Get.to(CourseScreen(id: item.id.toString()));
               },

@@ -7,7 +7,6 @@ class NotFoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Page Not Found'), centerTitle: true),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -25,10 +24,10 @@ class NotFoundScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () => Get.offAllNamed('/'),
-              child: const Text('Go to Home'),
-            ),
+            // ElevatedButton(
+            //   onPressed: () => Get.offAllNamed('/'),
+            //   child: const Text('Go to Home'),
+            // ),
           ],
         ),
       ),

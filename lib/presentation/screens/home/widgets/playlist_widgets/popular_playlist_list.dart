@@ -42,9 +42,7 @@ class PopularPlayListList extends StatelessWidget {
             return SizedBox(
               width: 180,
               child: PopularPlaylistCard(
-                title: item.title!,
-                imagePath: item.imageUrl!,
-                subtitle: item.description!,
+                playlist: item,
                 onTap: () {
                   Get.to(CourseScreen(id: item.id.toString()));
                 },
