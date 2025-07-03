@@ -1,73 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:learncosmetic/core/constants/api_constants.dart';
+import 'package:get/get.dart';
+import 'package:learncosmetic/presentation/screens/home/widgets/playlist_widgets/popular_playlist_card.dart';
+import '../../../../../routes/app_routes.dart';
+import '../../../../controllers/playlist_controller.dart';
+import '../../playlist/screenplaylist.dart';
+import 'popular_playlist_list.dart';
 
-class PopularPlaylistCard extends StatelessWidget {
-  final String title;
-  final String imagePath;
-  final String subtitle;
-  final VoidCallback? onTap;
-
-  const PopularPlaylistCard({
-    super.key,
-    required this.title,
-    required this.imagePath,
-    required this.subtitle,
-    this.onTap,
-  });
+class PopularPlayListList extends StatelessWidget {
+  const PopularPlayListList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.white,
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 6,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image
-            Expanded(
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(16),
-                ),
-                child: Image.network(imagePath, height: 100, fit: BoxFit.cover),
-              ),
-            ),
+    final PlaylistController controllerPlaylist =
+        Get.find<PlaylistController>();
 
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.grey),
-                  ),
-                ],
+    return Obx(() {
+      if (controllerPlaylist.isLoading.value) {
+        return const SizedBox(
+          height: 180,
+          child: Center(child: CircularProgressIndicator()),
+        );
+      }
+
+      if (controllerPlaylist.playlist.isEmpty) {
+        return const SizedBox(
+          height: 180,
+          child: Center(child: Text('No categories found')),
+        );
+      }
+
+      return SizedBox(
+        height: 220,
+        width: double.infinity,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemCount: controllerPlaylist.playlist.length,
+          separatorBuilder: (_, __) => const SizedBox(width: 12),
+          itemBuilder: (context, index) {
+            final item = controllerPlaylist.playlist[index];
+            return SizedBox(
+              width: 180,
+              child: PopularPlaylistCard(
+                title: item.title!,
+                imagePath: item.imageUrl!,
+                subtitle: item.description!,
+                onTap: () {
+                  Get.to(CourseScreen(id: item.id.toString()));
+                },
               ),
-            ),
-          ],
+            );
+          },
         ),
-      ),
-    );
+      );
+    });
   }
 }

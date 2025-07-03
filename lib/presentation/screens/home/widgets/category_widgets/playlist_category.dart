@@ -6,7 +6,7 @@ import 'package:learncosmetic/domain/usecases/playlist.dart';
 import 'package:learncosmetic/presentation/controllers/category_controller.dart';
 
 import '../../playlist/screenplaylist.dart';
-import '../playlist_widgets/popular_playlist_list.dart';
+import '../playlist_widgets/popular_playlist_card.dart';
 
 class PlaylistCategory extends StatelessWidget {
   final int id;

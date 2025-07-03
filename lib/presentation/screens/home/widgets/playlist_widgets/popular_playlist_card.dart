@@ -1,54 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:learncosmetic/presentation/screens/home/widgets/playlist_widgets/popular_playlist_list.dart';
-import '../../../../../routes/app_routes.dart';
-import '../../../../controllers/playlist_controller.dart';
-import '../../playlist/screenplaylist.dart';
-import 'popular_playlist_card.dart';
+import 'package:learncosmetic/core/constants/api_constants.dart';
 
-class PopularPlayListList extends StatelessWidget {
-  const PopularPlayListList({super.key});
+class PopularPlaylistCard extends StatelessWidget {
+  final String title;
+  final String imagePath;
+  final String subtitle;
+  final VoidCallback? onTap;
+
+  const PopularPlaylistCard({
+    super.key,
+    required this.title,
+    required this.imagePath,
+    required this.subtitle,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final PlaylistController controllerPlaylist =
-        Get.find<PlaylistController>();
-
-    return Obx(() {
-      if (controllerPlaylist.isLoading.value) {
-        return const SizedBox(
-          height: 180,
-          child: Center(child: CircularProgressIndicator()),
-        );
-      }
-
-      if (controllerPlaylist.playlist.isEmpty) {
-        return const SizedBox(
-          height: 180,
-          child: Center(child: Text('No categories found')),
-        );
-      }
-
-      return SizedBox(
-        height: 180,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: controllerPlaylist.playlist.length,
-          separatorBuilder: (_, __) => const SizedBox(width: 12),
-          itemBuilder: (context, index) {
-            final item = controllerPlaylist.playlist[index];
-            return PopularPlaylistCard(
-              title: item.title!,
-              imagePath: item.imageUrl!,
-              subtitle: item.description!,
-              onTap: () {
-                Get.to(CourseScreen(id: item.id.toString()));
-              },
-            );
-          },
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6,
+              offset: Offset(0, 2),
+            ),
+          ],
         ),
-      );
-    });
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(16),
+                ),
+                child: Image.network(imagePath, height: 100, fit: BoxFit.cover),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

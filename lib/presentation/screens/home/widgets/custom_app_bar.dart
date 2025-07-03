@@ -1,77 +1,72 @@
 import 'package:flutter/material.dart';
-import 'package:learncosmetic/core/constants/app_colors.dart';
+import 'package:learncosmetic/core/constants/app_size.dart';
 
-class CustomAppBar extends StatelessWidget {
-  final VoidCallback? onNotificationTap;
-  final VoidCallback? onProfileTap;
-  final int notificationCount;
+import '../../../../core/constants/app_colors.dart';
 
-  const CustomAppBar({
-    super.key,
-    this.onNotificationTap,
-    this.onProfileTap,
-    this.notificationCount = 0,
-  });
+class AppbarHome extends StatelessWidget implements PreferredSizeWidget {
+  const AppbarHome({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Notifications with badge
-          GestureDetector(
-            onTap: onNotificationTap,
-            child: Stack(
-              alignment: Alignment.topRight,
-              children: [
-                const Icon(
-                  Icons.notifications_none,
-                  size: 28,
-                  color: AppColors.primary,
+    return AppBar(
+      backgroundColor: Colors.white,
+      title: const Text(
+        'Learn Cosmetic',
+        style: TextStyle(
+          color: AppColors.primary,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      centerTitle: true,
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GestureDetector(
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              const Icon(
+                Icons.notifications_none,
+                size: 28,
+                color: AppColors.primary,
+              ),
+              Container(
+                padding: const EdgeInsets.all(3),
+                decoration: const BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
                 ),
-                if (notificationCount > 0)
-                  Container(
-                    padding: const EdgeInsets.all(3),
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      notificationCount.toString(),
-                      style: const TextStyle(fontSize: 10, color: Colors.white),
-                    ),
+                child: Text(
+                  '0',
+                  style: const TextStyle(
+                    fontSize: AppSize.fontSizeS,
+                    color: Colors.white,
                   ),
-              ],
-            ),
+                ),
+              ),
+            ],
           ),
-
-          // App name
-          const Text(
-            'Learn Cosmetic',
-            style: TextStyle(
-              color: AppColors.primary,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-
-          // Profile avatar
-          GestureDetector(
-            onTap: onProfileTap,
+        ),
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
             child: CircleAvatar(
               backgroundColor: AppColors.primary,
-              radius: 18,
+              radius: AppSize.radiusM + 2,
               child: const CircleAvatar(
-                radius: 16,
+                radius: AppSize.radiusM,
                 backgroundColor: Colors.white,
                 child: Icon(Icons.person, color: Colors.brown),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
