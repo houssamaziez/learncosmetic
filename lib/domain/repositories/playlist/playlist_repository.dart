@@ -5,7 +5,7 @@ import '../../../data/models/promotion_banner.dart';
 
 abstract class PlaylistRepository {
   Future<List<Playlist>?> getPlaylist();
-  Future<Playlist?> getByIdPlaylist(int id);
+  Future<List<Playlist>?> getByIdPlaylist(int id);
 
   Future<void> addPromotion();
 

@@ -1,3 +1,5 @@
+import 'package:learncosmetic/core/constants/api_constants.dart';
+
 class Episode {
   final int id;
   final int playlistId;
@@ -31,8 +33,8 @@ class Episode {
       playlistId: json['playlist_id'],
       title: json['title'],
       description: json['description'],
-      videoPath: json['video_path'],
-      imagePath: json['image_path'],
+      videoPath: ApiConstants.host + "/" + json['video_path'],
+      imagePath: ApiConstants.host + "/" + json['image_path'],
       videoDuration: json['video_duration'],
       isWatched: json['is_watched'] == 1,
       createdAt: DateTime.parse(json['created_at']),

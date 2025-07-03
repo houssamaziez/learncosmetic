@@ -8,5 +8,4 @@ abstract class AppRoutes {
   static const onboarding = '/onboarding';
   static const forgotPassword = '/forgot-password';
   static const notFound = '/not-found';
-  static const playlistDetails = '/playlistDetails';
 }

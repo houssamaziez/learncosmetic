@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/playlist_widgets/popular_playlist_list.dart';
 import '../../../../../routes/app_routes.dart';
 import '../../../../controllers/playlist_controller.dart';
+import '../../playlist/screenplaylist.dart';
 import 'popular_playlist_card.dart';
 
 class PopularPlayListList extends StatelessWidget {
@@ -42,8 +43,7 @@ class PopularPlayListList extends StatelessWidget {
               imagePath: item.imageUrl!,
               subtitle: item.description!,
               onTap: () {
-                controllerPlaylist.getByIdPlaylist(item.id!);
-                Get.toNamed(AppRoutes.playlistDetails);
+                Get.to(CourseScreen(id: item.id.toString()));
               },
             );
           },

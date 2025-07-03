@@ -37,16 +37,19 @@ class PlaylistController extends GetxController {
     }
   }
 
-  Future<void> getByIdPlaylist(int id) async {
+  Future<List<Episode>> getByIdPlaylist(int id) async {
     isLoading.value = true;
     try {
       final List<Episode>? result = await episodeUsecase(id);
       episodes.value = result!;
       update();
+
+      return result;
     } catch (e) {
       throw Exception('Playlist not found');
     } finally {
       isLoading.value = false;
+      return episodes;
     }
   }
 
@@ -63,5 +66,6 @@ class PlaylistController extends GetxController {
     }
 
     currentIndex.value = index;
+    update();
   }
 }

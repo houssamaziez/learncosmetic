@@ -58,15 +58,20 @@ class PlaylistRepositoryImpl implements PlaylistRepository {
   }
 
   @override
-  Future<Playlist?> getByIdPlaylist(int id) async {
+  Future<List<Playlist>?> getByIdPlaylist(int id) async {
     final response = await client.get(
-      Uri.parse(ApiConstants.playlists + id.toString()),
+      Uri.parse(ApiConstants.playlistsCategory + id.toString()),
       headers: ApiHeaders.json,
     );
     if (response.statusCode == 200) {
-      return Playlist.fromJson(json.decode(response.body)['data']);
+      var data =
+          (json.decode(response.body)['data'] as List)
+              .map((playlist) => Playlist.fromJson(playlist))
+              .toList();
+      return data;
     } else {
       HttpErrorHandler.handle(response.statusCode, response.body);
     }
+    return [];
   }
 }

@@ -5,7 +5,7 @@ class AppColors {
   static const Color primary = Color(0xFF540B0E);
 
   // Secondary and accent colors
-  static const Color secondary = Color(0xFFE63946);
+  static const Color secondary = Color.fromARGB(255, 255, 102, 115);
   static const Color accent = Color(0xFF6A994E);
 
   // Background colors for light and dark modes

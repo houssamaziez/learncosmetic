@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/controllers/category_controller.dart';
+import 'package:learncosmetic/presentation/screens/home/widgets/category_widgets/playlist_category.dart';
 import 'category_item.dart';
 
 class CategoryList extends StatelessWidget {
@@ -39,7 +40,7 @@ class CategoryList extends StatelessWidget {
               title: item.name as String,
               icon: item.icon as String,
               onTap: () {
-                // Handle category tap
+                Get.to(PlaylistCategory(id: item.id as int));
               },
             );
           },

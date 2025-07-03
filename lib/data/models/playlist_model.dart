@@ -4,6 +4,7 @@ class Playlist {
   final String description;
   final String? imageUrl;
   final CategoryPlaylist category;
+  final int coursesCount; // Add this line
 
   Playlist({
     required this.id,
@@ -11,6 +12,7 @@ class Playlist {
     required this.description,
     this.imageUrl,
     required this.category,
+    required this.coursesCount, // Add this line
   });
 
   factory Playlist.fromJson(Map<String, dynamic> json) {
@@ -18,8 +20,9 @@ class Playlist {
       id: json['id'],
       title: json['title'],
       description: json['description'],
-      imageUrl: json['image_url'],
+      imageUrl: json['image'],
       category: CategoryPlaylist.fromJson(json['category']),
+      coursesCount: json['courses_count'], // Add this line
     );
   }
 
@@ -30,6 +33,7 @@ class Playlist {
       'description': description,
       'image_url': imageUrl,
       'category': category.toJson(),
+      'courses_count': coursesCount, // Add this line
     };
   }
 }

@@ -10,7 +10,7 @@ class PlaylistUsecase {
     return repository.getPlaylist();
   }
 
-  Future<List<Playlist>?> getbyId() {
-    return repository.getPlaylist();
+  Future<List<Playlist>?> getbyId(int id) {
+    return repository.getByIdPlaylist(id);
   }
 }
