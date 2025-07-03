@@ -21,14 +21,19 @@ class CourseScreenController extends GetxController {
 
   bool get isInitialized =>
       chewieController != null && videoPlayerController.value.isInitialized;
-
+  bool isloading = false;
   Future<void> fetchEpisodes(String id) async {
+    isloading = true;
+    update();
     try {
       episodes = (await episodeUsecase(int.parse(id)))!;
       await initializePlayer(episodes[0].videoPath);
       update();
     } catch (e) {
       print('Error loading episodes: $e');
+    } finally {
+      isloading = false;
+      update();
     }
   }
 

@@ -26,6 +26,12 @@ class _CourseScreenState extends State<CourseScreen> {
   @override
   void initState() {
     super.initState();
+    Get.put(
+      CourseScreenController(
+        PlaylistUsecase(Get.find()),
+        EpisodeUsecase(Get.find()),
+      ),
+    ).fetchEpisodes(widget.id);
     _scrollController.addListener(_handleScroll);
   }
 
@@ -61,15 +67,16 @@ class _CourseScreenState extends State<CourseScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CourseScreenController>(
-      init: CourseScreenController(
-        PlaylistUsecase(Get.find()),
-        EpisodeUsecase(Get.find()),
-      )..fetchEpisodes(widget.id),
       builder: (controller) {
-        if (controller.episodes.isEmpty ||
-            controller.chewieController == null) {
+        if (controller.isloading) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
+          );
+        }
+
+        if (controller.episodes.isEmpty) {
+          return const Scaffold(
+            body: Center(child: Text('لا توجد قوائم تشغيل')),
           );
         }
 
@@ -172,7 +179,10 @@ class _CourseScreenState extends State<CourseScreen> {
           ),
         ],
       ),
-      leading: const Icon(Icons.arrow_back_ios_new, color: AppColors.primary),
+      leading: IconButton(
+        onPressed: () => Get.back(),
+        icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.primary),
+      ),
       actions: const [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),

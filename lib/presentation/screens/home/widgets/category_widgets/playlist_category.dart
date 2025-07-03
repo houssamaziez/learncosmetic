@@ -5,6 +5,7 @@ import 'package:learncosmetic/domain/usecases/category.dart';
 import 'package:learncosmetic/domain/usecases/playlist.dart';
 import 'package:learncosmetic/presentation/controllers/category_controller.dart';
 
+import '../../playlist/screenplaylist.dart';
 import '../playlist_widgets/popular_playlist_list.dart';
 
 class PlaylistCategory extends StatelessWidget {
@@ -50,10 +51,7 @@ class PlaylistCategory extends StatelessWidget {
               subtitle: item.description ?? '',
               title: item.title ?? '',
               onTap: () {
-                Get.toNamed(
-                  '/playlist',
-                  arguments: {'id': item.id, 'title': item.title},
-                );
+                Get.to(CourseScreen(id: item.id.toString()));
               },
             );
           },
