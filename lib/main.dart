@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:learncosmetic/core/services/local_storage_service.dart';
+import 'package:learncosmetic/domain/repositories/search/search_repository_impl.dart'
+    show SearchRepositoryImpl;
 import 'package:learncosmetic/domain/repositories/user/user_repository_impl.dart';
 import 'package:learncosmetic/domain/usecases/%20login_user.dart';
 import 'package:learncosmetic/domain/usecases/register_user.dart';
+import 'package:learncosmetic/domain/usecases/search.dart';
 import 'package:learncosmetic/presentation/controllers/login_controller.dart';
+import 'package:learncosmetic/presentation/controllers/search_controller.dart';
 import 'package:learncosmetic/presentation/screens/error/not_found_screen.dart';
 import 'package:learncosmetic/routes/app_pages.dart';
 import 'package:learncosmetic/routes/app_routes.dart';
@@ -18,6 +22,9 @@ void main() async {
   final repository = UserRemoteDataSourceImpl(client);
   final usecaselogin = LoginUser(repository);
   final usecaseregister = RegisterUser(repository);
+  Get.put(SearchRepositoryImpl(client: client));
+  Get.put(SearchUsecase(Get.find()));
+  Get.put(AppSearchController(Get.find()));
 
   final controller = AuthController(
     loginUser: usecaselogin,
@@ -37,7 +44,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'My App',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splash,
+      initialRoute: AppRoutes.login,
       getPages: AppPages.routes,
       unknownRoute: GetPage(
         name: AppRoutes.notFound,

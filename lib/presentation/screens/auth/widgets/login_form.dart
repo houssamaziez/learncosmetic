@@ -80,6 +80,10 @@ class LoginForm extends StatelessWidget {
             onPressed: controller.login,
           ),
         ),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.2,
+          color: Colors.white,
+        ),
       ],
     );
   }

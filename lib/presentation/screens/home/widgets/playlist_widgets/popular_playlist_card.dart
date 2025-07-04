@@ -106,7 +106,7 @@ class PopularPlaylistCard extends StatelessWidget {
                 children: [
                   Text(
                     playlist.description,
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: theme.hintColor,

@@ -8,6 +8,7 @@ class PromotionBanner {
   final int isActive;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final int playlistId; // Added playlist_id
 
   PromotionBanner({
     required this.id,
@@ -19,6 +20,7 @@ class PromotionBanner {
     required this.isActive,
     required this.createdAt,
     required this.updatedAt,
+    required this.playlistId, // Added playlist_id to constructor
   });
 
   Map<String, dynamic> toJson() {
@@ -32,6 +34,7 @@ class PromotionBanner {
       'is_active': isActive == 1 ? 1 : 0,
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
+      'playlist_id': playlistId, // Added playlist_id to JSON
     };
   }
 
@@ -46,6 +49,7 @@ class PromotionBanner {
       isActive: json['is_active'] ?? 0,
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
+      playlistId: json['playlist_id'] ?? 0, // Added playlist_id from JSON
     );
   }
 }

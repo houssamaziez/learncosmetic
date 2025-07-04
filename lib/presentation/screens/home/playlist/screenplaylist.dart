@@ -77,7 +77,7 @@ class _CourseScreenState extends State<CourseScreen> {
         }
 
         if (controller.episodes.isEmpty) {
-          return NotFoundScreenList();
+          return Scaffold(body: NotFoundScreenList());
         }
 
         final episode = controller.episodes[controller.selectedIndex];

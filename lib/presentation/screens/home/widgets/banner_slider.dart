@@ -7,6 +7,7 @@ import 'package:learncosmetic/presentation/controllers/promotions_controller.dar
     show PromotionsController;
 
 import '../../../../core/constants/api_constants.dart';
+import '../playlist/screenplaylist.dart';
 
 class BannerSlider extends StatefulWidget {
   const BannerSlider({super.key});
@@ -139,7 +140,13 @@ class _BannerSliderState extends State<BannerSlider> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.to(
+                                    CourseScreen(
+                                      id: banner.playlistId.toString(),
+                                    ),
+                                  );
+                                },
                                 child: const Text('اكتشف الآن'),
                               ),
                             ],

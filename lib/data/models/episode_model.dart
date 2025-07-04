@@ -1,4 +1,6 @@
 import 'package:learncosmetic/core/constants/api_constants.dart';
+import '../../core/constants/api_constants.dart';
+import 'playlist_model.dart'; // أو الملف الذي يحتوي على PlaylistEpisode
 
 class Episode {
   final int id;
@@ -11,7 +13,7 @@ class Episode {
   final bool isWatched;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final PlaylistEpisode playlist;
+  final PlaylistEpisode? playlist;
 
   Episode({
     required this.id,
@@ -35,11 +37,14 @@ class Episode {
       description: json['description'],
       videoPath: ApiConstants.host + "/" + json['video_path'],
       imagePath: ApiConstants.host + "/" + json['image_path'],
-      videoDuration: json['video_duration'],
+      videoDuration: json['video_duration'].toString(),
       isWatched: json['is_watched'] == 1,
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
-      playlist: PlaylistEpisode.fromJson(json['playlist']),
+      playlist:
+          json['playlist'] != null
+              ? PlaylistEpisode.fromJson(json['playlist'])
+              : null,
     );
   }
 }

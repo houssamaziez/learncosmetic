@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../bindings/search_binding.dart';
+import '../../search/search_screen.dart';
 
 class HomeSearchBar extends StatelessWidget {
   final ValueChanged<String>? onChanged;
@@ -8,34 +12,30 @@ class HomeSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          height: 50,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey, width: 0.5),
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Row(
-            children: [
-              const Icon(Icons.search, color: Colors.grey, size: 20),
-              const SizedBox(width: 8),
-              Expanded(
-                child: TextField(
-                  onChanged: onChanged,
-                  decoration: const InputDecoration(
-                    hintText: 'ابحث عن دورات، منتجات...',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none,
-                    isDense: true,
-                  ),
+    return InkWell(
+      onTap: () => Get.to(SearchScreen(), binding: SearchBinding()),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        child: GestureDetector(
+          onTap: () => Get.to(SearchScreen()),
+          child: Container(
+            height: 50,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey, width: 0.5),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.search, color: Colors.grey, size: 20),
+                const SizedBox(width: 8),
+                Text(
+                  'ابحث عن دورات، منتجات...',
+                  style: TextStyle(color: Colors.grey.shade600),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

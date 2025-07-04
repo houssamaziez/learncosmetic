@@ -1,4 +1,7 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
-    "cmake.sourceDirectory": "/Users/mac/Desktop/learncosmetic/windows/runner"
+    "cmake.sourceDirectory": "/Users/mac/Desktop/learncosmetic/windows/runner",
+    "cSpell.words": [
+        "Usecase"
+    ]
 }
