@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:learncosmetic/core/constants/app_colors.dart';
 import 'package:learncosmetic/domain/usecases/playlist.dart'
     show PlaylistUsecase;
+import 'package:learncosmetic/presentation/screens/home/playlist/episode_commenter_screen.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../data/models/episode_model.dart';
 import '../../../../domain/usecases/episode.dart' show EpisodeUsecase;
@@ -204,7 +205,14 @@ class _CourseScreenState extends State<CourseScreen> {
             children: [
               _tag(label: "جديد", color: Colors.red),
               const SizedBox(width: 12),
-              _iconText(Icons.comment, episode.commentsCount.toString() ?? "0"),
+              InkWell(
+                onTap:
+                    () => Get.to(EpisodeCommenterScreen(episodeId: episode.id)),
+                child: _iconText(
+                  Icons.comment,
+                  episode.commentsCount.toString() ?? "0",
+                ),
+              ),
               const SizedBox(width: 12),
               _iconText(
                 Icons.thumb_up_alt_outlined,

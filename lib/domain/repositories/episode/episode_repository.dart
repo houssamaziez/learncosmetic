@@ -1,10 +1,10 @@
+import 'package:learncosmetic/data/models/commenter.dart';
 import 'package:learncosmetic/data/models/episode_model.dart';
-
-import '../../../data/models/category_model.dart';
-import '../../../data/models/promotion_banner.dart';
 
 abstract class EpisodeRepository {
   Future<List<Episode>?> getEpisode(int idPlaylist);
+  Future<List<Commenter>?> getEpisodeCommenter(int idEpisode);
+  Future<void> addEpisodeCommenter(int idEpisode, String content);
 
   Future<void> addPromotion();
 

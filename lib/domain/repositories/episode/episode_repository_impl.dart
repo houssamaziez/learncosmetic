@@ -3,6 +3,7 @@ import 'package:learncosmetic/core/constants/api_headers.dart';
 import 'package:learncosmetic/core/network/http_error_handler.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:learncosmetic/data/models/commenter.dart';
 import 'package:learncosmetic/data/models/episode_model.dart';
 import 'package:learncosmetic/domain/repositories/episode/episode_repository.dart';
 import 'dart:convert';
@@ -17,7 +18,7 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
   @override
   Future<List<Episode>?> getEpisode(int idPlaylist) async {
     final response = await client.get(
-      Uri.parse(ApiConstants.episode + idPlaylist.toString()),
+      Uri.parse(ApiConstants.episodePlaylist + idPlaylist.toString()),
       headers: ApiHeaders.json,
     );
     if (response.statusCode == 200) {
@@ -55,5 +56,45 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
   Future<void> updatePromotion() {
     // TODO: implement updatePromotion
     throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Commenter>?> getEpisodeCommenter(int idEpisode) async {
+    final response = await client.get(
+      Uri.parse(ApiConstants.episode + idEpisode.toString() + '/comments'),
+      headers: ApiHeaders.json,
+    );
+    if (response.statusCode == 200) {
+      var varmapdata = json.decode(response.body)['data'];
+      var data =
+          (varmapdata as List)
+              .map((promotion) => Commenter.fromJson(promotion))
+              .toList();
+      return data;
+    } else {
+      HttpErrorHandler.handle(response.statusCode, response.body);
+    }
+    return [];
+  }
+
+  @override
+  Future<void> addEpisodeCommenter(int idEpisode, String content) async {
+    try {
+      final response = await client.post(
+        Uri.parse(ApiConstants.episode + 'comment'),
+        headers: ApiHeaders.json,
+        body: json.encode({
+          "user_id": 1,
+          "course_id": idEpisode,
+          "content": content,
+        }),
+      );
+      if (response.statusCode == 200) {
+      } else {
+        HttpErrorHandler.handle(response.statusCode, response.body);
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 }

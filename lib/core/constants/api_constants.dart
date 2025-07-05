@@ -11,7 +11,9 @@ class ApiConstants {
   static const String promotions = '$baseUrl/promotions';
   static const String categories = '$baseUrl/categories';
   static const String playlists = '$baseUrl/playlists';
-  static const String episode = '$baseUrl/episode/playlist/';
+
+  static const String episode = '$baseUrl/episode/';
+  static const String episodePlaylist = '$baseUrl/episode/playlist/';
   static const String playlistsCategory = '$baseUrl/playlists/category/';
   static const String search = '$baseUrl/search';
 }
