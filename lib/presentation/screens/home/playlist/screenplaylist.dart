@@ -5,13 +5,9 @@ import 'package:learncosmetic/core/constants/app_colors.dart';
 import 'package:learncosmetic/domain/usecases/playlist.dart'
     show PlaylistUsecase;
 import 'package:video_player/video_player.dart';
+import '../../../../data/models/episode_model.dart';
 import '../../../../domain/usecases/episode.dart' show EpisodeUsecase;
 import '../../../controllers/course_screen_controller.dart';
-import 'package:flutter/material.dart';
-import 'package:chewie/chewie.dart';
-import 'package:get/get.dart';
-import 'package:video_player/video_player.dart';
-
 import '../../error/not_found_list.dart';
 
 class CourseScreen extends StatefulWidget {
@@ -86,7 +82,7 @@ class _CourseScreenState extends State<CourseScreen> {
           textDirection: TextDirection.rtl,
           child: Scaffold(
             backgroundColor: Colors.grey[100],
-            appBar: _buildAppBar(),
+            appBar: _buildAppBar(controller.episodes[controller.selectedIndex]),
             body: Stack(
               children: [
                 Positioned.fill(
@@ -156,7 +152,7 @@ class _CourseScreenState extends State<CourseScreen> {
     );
   }
 
-  AppBar _buildAppBar() {
+  AppBar _buildAppBar(Episode episode) {
     return AppBar(
       backgroundColor: Colors.white,
       foregroundColor: Colors.black,
@@ -164,29 +160,29 @@ class _CourseScreenState extends State<CourseScreen> {
       centerTitle: true,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
+        children: [
           Text(
-            'تعلم صنع مستحضرات التجميل',
-            style: TextStyle(
+            episode.title,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: AppColors.primary,
             ),
           ),
-          Text(
-            '3 مكتملة من 12',
-            style: TextStyle(fontSize: 12, color: AppColors.primary),
-          ),
         ],
       ),
-      leading: IconButton(
-        onPressed: () => Get.back(),
-        icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.primary),
-      ),
-      actions: const [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Icon(Icons.more_vert, color: AppColors.primary),
+      leading: SizedBox.shrink(),
+      actions: [
+        Directionality(
+          textDirection: TextDirection.ltr,
+
+          child: IconButton(
+            onPressed: () => Get.back(),
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              color: AppColors.primary,
+            ),
+          ),
         ),
       ],
     );
@@ -200,7 +196,7 @@ class _CourseScreenState extends State<CourseScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            episode.title,
+            episode.description,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),
@@ -208,11 +204,14 @@ class _CourseScreenState extends State<CourseScreen> {
             children: [
               _tag(label: "جديد", color: Colors.red),
               const SizedBox(width: 12),
-              _iconText(Icons.visibility, "245"),
+              _iconText(Icons.comment, episode.commentsCount.toString() ?? "0"),
               const SizedBox(width: 12),
-              _iconText(Icons.thumb_up_alt_outlined, "12"),
-              const SizedBox(width: 12),
-              _iconText(Icons.favorite_border, "24"),
+              _iconText(
+                Icons.thumb_up_alt_outlined,
+                episode.likesCount.toString() ?? "0",
+              ),
+              // const SizedBox(width: 12),
+              // _iconText(Icons.favorite_border, "24"),
             ],
           ),
         ],

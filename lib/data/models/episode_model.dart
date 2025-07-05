@@ -1,7 +1,3 @@
-import 'package:learncosmetic/core/constants/api_constants.dart';
-import '../../core/constants/api_constants.dart';
-import 'playlist_model.dart'; // أو الملف الذي يحتوي على PlaylistEpisode
-
 class Episode {
   final int id;
   final int playlistId;
@@ -14,6 +10,8 @@ class Episode {
   final DateTime createdAt;
   final DateTime updatedAt;
   final PlaylistEpisode? playlist;
+  final int commentsCount;
+  final int likesCount;
 
   Episode({
     required this.id,
@@ -27,6 +25,8 @@ class Episode {
     required this.createdAt,
     required this.updatedAt,
     required this.playlist,
+    required this.commentsCount, // New parameter
+    required this.likesCount, // New parameter
   });
 
   factory Episode.fromJson(Map<String, dynamic> json) {
@@ -35,8 +35,8 @@ class Episode {
       playlistId: json['playlist_id'],
       title: json['title'],
       description: json['description'],
-      videoPath: ApiConstants.host + "/" + json['video_path'],
-      imagePath: ApiConstants.host + "/" + json['image_path'],
+      videoPath: json['video_path'],
+      imagePath: json['image_path'],
       videoDuration: json['video_duration'].toString(),
       isWatched: json['is_watched'] == 1,
       createdAt: DateTime.parse(json['created_at']),
@@ -45,6 +45,8 @@ class Episode {
           json['playlist'] != null
               ? PlaylistEpisode.fromJson(json['playlist'])
               : null,
+      commentsCount: json['comments_count'] ?? 0, // New field from JSON
+      likesCount: json['likes_count'] ?? 0, // New field from JSON
     );
   }
 }
@@ -70,7 +72,7 @@ class PlaylistEpisode {
 
   factory PlaylistEpisode.fromJson(Map<String, dynamic> json) {
     return PlaylistEpisode(
-      id: json['id'],
+      id: json['id'] ?? 0,
       categoryId: json['category_id'],
       title: json['title'],
       image: json['image'],

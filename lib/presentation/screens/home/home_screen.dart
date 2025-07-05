@@ -32,6 +32,8 @@ class HomeScreen extends StatelessWidget {
             CategoryList(),
             SectionHeader(title: "الدورات الأكثر شعبية", onSeeAll: () {}),
             PopularPlayListList(),
+            SectionHeader(title: "الدورات الأكثر شعبية", onSeeAll: () {}),
+            PopularPlayListList(),
           ],
         ),
       ),

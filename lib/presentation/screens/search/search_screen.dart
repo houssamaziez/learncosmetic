@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learncosmetic/core/constants/app_assets.dart';
 import 'package:learncosmetic/presentation/screens/error/not_found_list.dart';
 import 'package:learncosmetic/presentation/screens/home/playlist/screenplaylist.dart';
 import 'package:learncosmetic/presentation/screens/search/widgets/category_card.dart';
@@ -60,11 +61,17 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
 
                     const SizedBox(height: AppSize.spacingM),
-                    if (controller.videos.isEmpty &&
-                        controller.playlists.isEmpty &&
-                        controller.categories.isEmpty &&
-                        controller.searchController.text.isNotEmpty)
-                      NotFoundScreenList(),
+                    (controller.videos.isEmpty &&
+                            controller.playlists.isEmpty &&
+                            controller.categories.isEmpty &&
+                            controller.searchController.text.isNotEmpty)
+                        ? NotFoundScreenList()
+                        : Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 100),
+                            child: Image.asset(AppAssets.search, height: 400),
+                          ),
+                        ),
 
                     // TagList(tags: controller.tags),
                     const SizedBox(height: AppSize.spacingS),

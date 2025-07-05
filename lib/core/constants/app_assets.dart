@@ -3,6 +3,7 @@ class AppAssets {
   static const String _imagesPath = 'assets/images/';
   static const String _iconsPath = 'assets/icons/';
   static const String _animationsPath = 'assets/animations/';
+  static const String search = '${_imagesPath}Search-unscreen.gif';
 
   // Logo and branding
   static const String logo = '${_imagesPath}logo.png';

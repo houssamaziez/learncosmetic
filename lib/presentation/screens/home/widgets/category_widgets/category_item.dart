@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learncosmetic/core/constants/api_constants.dart';
+import 'package:learncosmetic/core/constants/app_colors.dart';
 
 class CategoryItem extends StatelessWidget {
   final String title;
@@ -20,10 +21,10 @@ class CategoryItem extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 64,
-            height: 64,
+            width: 60,
+            height: 60,
             decoration: BoxDecoration(
-              color: const Color(0xFF540B0E).withOpacity(0.1),
+              color: AppColors.primary.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
             child: Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learncosmetic/data/models/playlist_model.dart';
 
+import '../../../../../core/constants/app_size.dart';
 import '../../../../../core/utils/convert_time.dart';
 
 class PopularPlaylistCard extends StatelessWidget {
@@ -13,14 +14,10 @@ class PopularPlaylistCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final double rating = 4.5;
-    final int views = 1280;
-    final String level = "مبتدئ";
-
     return Material(
       color: theme.cardColor,
-      elevation: 4,
-      borderRadius: BorderRadius.circular(16),
+      elevation: 0,
+      borderRadius: BorderRadius.circular(AppSize.radiusS),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
@@ -41,7 +38,6 @@ class PopularPlaylistCard extends StatelessWidget {
                           child: const Icon(Icons.broken_image, size: 48),
                         ),
                   ),
-                  // شريط علوي شفاف للمستوى
                   // Positioned(
                   //   top: 8,
                   //   left: 8,
@@ -155,12 +151,8 @@ class PopularPlaylistCard extends StatelessWidget {
                     ],
                   ),
 
-                  const SizedBox(height: 6),
-
-                  // تقييم ومشاهدات
                   const SizedBox(height: 10),
 
-                  // زر الإجراء
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
