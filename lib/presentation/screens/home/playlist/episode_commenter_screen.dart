@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:learncosmetic/domain/usecases/episode.dart' show EpisodeUsecase;
 import 'package:learncosmetic/domain/usecases/playlist.dart';
+import 'package:learncosmetic/presentation/widgets/spinkit.dart' show spinkit;
 
 import '../../../../data/models/commenter.dart';
 import '../../../controllers/playlist_controller.dart';
@@ -36,6 +37,8 @@ class _EpisodeCommenterScreenState extends State<EpisodeCommenterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    controller.getEpisodeCommenter(widget.episodeId);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('التعليقات', style: TextStyle(fontFamily: 'Tajawal')),
@@ -45,7 +48,9 @@ class _EpisodeCommenterScreenState extends State<EpisodeCommenterScreen> {
         children: [
           Expanded(
             child: Obx(() {
-              controller.getEpisodeCommenter(widget.episodeId);
+              if (controller.isLoadingCommenter.value) {
+                return Center(child: spinkit);
+              }
 
               if (controller.commenter.isEmpty) {
                 return const Center(
@@ -77,7 +82,7 @@ class _EpisodeCommenterScreenState extends State<EpisodeCommenterScreen> {
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
-                        child: CircularProgressIndicator(),
+                        child: spinkit,
                       ),
                     ),
                 ],

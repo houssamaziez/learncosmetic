@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
+import 'package:learncosmetic/presentation/widgets/spinkit.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -65,7 +66,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       ),
       body:
           isLoading
-              ? const Center(child: CircularProgressIndicator())
+              ? Center(child: spinkit)
               : Column(
                 children: [
                   AspectRatio(

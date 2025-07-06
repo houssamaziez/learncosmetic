@@ -7,6 +7,7 @@ import 'package:learncosmetic/presentation/controllers/category_controller.dart'
 import 'package:learncosmetic/presentation/screens/error/not_found_list.dart'
     show NotFoundScreenList;
 
+import '../../../../widgets/spinkit.dart';
 import '../../../error/not_found_screen.dart';
 import '../../playlist/screenplaylist.dart';
 import '../playlist_widgets/popular_playlist_card.dart';
@@ -31,7 +32,7 @@ class PlaylistCategory extends StatelessWidget {
       appBar: AppBar(title: const Text('Playlist Category')),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: spinkit);
         }
 
         if (controller.playlist.isEmpty) {

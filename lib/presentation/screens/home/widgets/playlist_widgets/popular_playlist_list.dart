@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/playlist_widgets/popular_playlist_card.dart';
 import '../../../../../routes/app_routes.dart';
 import '../../../../controllers/playlist_controller.dart';
+import '../../../../widgets/spinkit.dart';
 import '../../playlist/screenplaylist.dart';
 import 'popular_playlist_list.dart';
 
@@ -16,10 +17,7 @@ class PopularPlayListList extends StatelessWidget {
 
     return Obx(() {
       if (controllerPlaylist.isLoading.value) {
-        return const SizedBox(
-          height: 180,
-          child: Center(child: CircularProgressIndicator()),
-        );
+        return SizedBox(height: 180, child: Center(child: spinkit));
       }
 
       if (controllerPlaylist.playlist.isEmpty) {

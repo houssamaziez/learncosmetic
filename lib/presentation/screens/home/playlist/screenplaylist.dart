@@ -9,6 +9,7 @@ import 'package:video_player/video_player.dart';
 import '../../../../data/models/episode_model.dart';
 import '../../../../domain/usecases/episode.dart' show EpisodeUsecase;
 import '../../../controllers/course_screen_controller.dart';
+import '../../../widgets/spinkit.dart';
 import '../../error/not_found_list.dart';
 
 class CourseScreen extends StatefulWidget {
@@ -68,9 +69,7 @@ class _CourseScreenState extends State<CourseScreen> {
     return GetBuilder<CourseScreenController>(
       builder: (controller) {
         if (controller.isloading) {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
+          return Scaffold(body: Center(child: spinkit));
         }
 
         if (controller.episodes.isEmpty) {
@@ -137,9 +136,7 @@ class _CourseScreenState extends State<CourseScreen> {
                                   ? Chewie(
                                     controller: controller.chewieController!,
                                   )
-                                  : const Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
+                                  : Center(child: spinkit),
                         ),
                       ),
                     );

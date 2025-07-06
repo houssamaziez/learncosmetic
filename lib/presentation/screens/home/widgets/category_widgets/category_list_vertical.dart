@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/controllers/category_controller.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/category_widgets/playlist_category.dart';
+import 'package:learncosmetic/presentation/widgets/spinkit.dart' show spinkit;
 import '../../../error/not_found_list.dart';
 import 'category_item.dart';
 
@@ -15,10 +16,7 @@ class CategoryListVertical extends StatelessWidget {
 
     return Obx(() {
       if (controllerCategory.isLoading.value) {
-        return const SizedBox(
-          height: 180,
-          child: Center(child: CircularProgressIndicator()),
-        );
+        return SizedBox(height: 180, child: Center(child: spinkit));
       }
 
       if (controllerCategory.category.isEmpty) {

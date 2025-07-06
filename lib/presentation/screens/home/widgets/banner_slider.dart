@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/controllers/home_controller.dart';
 import 'package:learncosmetic/presentation/controllers/promotions_controller.dart'
     show PromotionsController;
+import 'package:learncosmetic/presentation/widgets/spinkit.dart' show spinkit;
 
 import '../../../../core/constants/api_constants.dart';
 import '../playlist/screenplaylist.dart';
@@ -54,10 +55,7 @@ class _BannerSliderState extends State<BannerSlider> {
   Widget build(BuildContext context) {
     return Obx(() {
       if (controllerPromotions.isLoading.value) {
-        return const SizedBox(
-          height: 180,
-          child: Center(child: CircularProgressIndicator()),
-        );
+        return SizedBox(height: 180, child: Center(child: spinkit));
       }
       if (controllerPromotions.promotions.isEmpty) {
         return const SizedBox(

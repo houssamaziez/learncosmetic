@@ -15,6 +15,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../domain/usecases/search.dart';
 import '../../controllers/search_controller.dart';
 import '../../widgets/play_video.dart';
+import '../../widgets/spinkit.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -47,7 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
       body: SafeArea(
         child: Obx(() {
           return controller.isLoading.value
-              ? const Center(child: CircularProgressIndicator())
+              ? Center(child: spinkit)
               : SingleChildScrollView(
                 padding: const EdgeInsets.all(AppSize.paddingL),
                 child: Column(
