@@ -9,6 +9,7 @@ import 'package:video_player/video_player.dart';
 import '../../../../data/models/episode_model.dart';
 import '../../../../domain/usecases/episode.dart' show EpisodeUsecase;
 import '../../../controllers/course_screen_controller.dart';
+import '../../../controllers/playlist_controller.dart';
 import '../../../widgets/spinkit.dart';
 import '../../error/not_found_list.dart';
 
@@ -211,10 +212,25 @@ class _CourseScreenState extends State<CourseScreen> {
                 ),
               ),
               const SizedBox(width: 12),
-              _iconText(
-                Icons.thumb_up_alt_outlined,
-                episode.likesCount.toString() ?? "0",
+              GetBuilder<CourseScreenController>(
+                init: CourseScreenController(
+                  PlaylistUsecase(Get.find()),
+                  EpisodeUsecase(Get.find()),
+                ),
+                builder: (controller) {
+                  return InkWell(
+                    onTap: () => controller.addEpisodeLike(episode.id),
+                    child:
+                        controller.isLoadingAddlike
+                            ? SizedBox(height: 24, width: 24, child: spinkit)
+                            : _iconText(
+                              Icons.thumb_up_alt_outlined,
+                              episode.likesCount.toString(),
+                            ),
+                  );
+                },
               ),
+
               // const SizedBox(width: 12),
               // _iconText(Icons.favorite_border, "24"),
             ],
@@ -365,7 +381,7 @@ class _CourseScreenState extends State<CourseScreen> {
   Widget _iconText(IconData icon, String text) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: AppColors.primary),
+        Icon(icon, size: 20, color: AppColors.primary),
         const SizedBox(width: 4),
         Text(
           text,

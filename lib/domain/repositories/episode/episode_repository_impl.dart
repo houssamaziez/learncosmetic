@@ -97,4 +97,23 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<bool?> addEpisodeLike(int idEpisode) async {
+    try {
+      final response = await client.post(
+        Uri.parse(ApiConstants.episode + 'like'),
+        headers: ApiHeaders.json,
+        body: json.encode({"user_id": 1, "course_id": idEpisode}),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return json.decode(response.body)['is_liked'] as bool;
+      } else {
+        HttpErrorHandler.handle(response.statusCode, response.body);
+        return null;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

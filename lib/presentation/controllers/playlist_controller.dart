@@ -15,6 +15,7 @@ class PlaylistController extends GetxController {
   final isLoading = false.obs;
   final isLoadingCommenter = false.obs;
   final isLoadingAddCommenter = false.obs;
+  final isLoadingAddlike = false.obs;
   final playlist = <Playlist>[].obs; // Example list of promotions
   final episodes = <Episode>[].obs; // Example list of episodes
   final commenter = <Commenter>[].obs; // Example list of episodes

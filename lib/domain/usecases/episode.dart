@@ -28,4 +28,10 @@ class EpisodeUsecase {
       content,
     ); // Replace 'someOtherArgument' with the actual argument needed.
   }
+
+  Future<bool?> addLike(int id) {
+    return repository.addEpisodeLike(
+      id,
+    ); // Replace 'someOtherArgument' with the actual argument needed.
+  }
 }

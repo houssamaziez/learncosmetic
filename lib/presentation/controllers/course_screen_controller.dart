@@ -10,7 +10,7 @@ class CourseScreenController extends GetxController {
   final PlaylistUsecase playlistUsecase;
   final EpisodeUsecase episodeUsecase;
   bool isMiniPlayer = false;
-
+  bool isLoadingAddlike = false;
   CourseScreenController(this.playlistUsecase, this.episodeUsecase);
 
   List<Episode> episodes = [];
@@ -80,6 +80,36 @@ class CourseScreenController extends GetxController {
     }
 
     update();
+  }
+
+  Future<void> addEpisodeLike(int id) async {
+    isLoadingAddlike = true;
+    update();
+    try {
+      final result = await episodeUsecase.addLike(id);
+
+      if (result == true || result == false) {
+        for (int i = 0; i < episodes.length; i++) {
+          if (episodes[i].id == id) {
+            final updated = episodes[i].copyWith(
+              likesCount:
+                  result == true
+                      ? episodes[i].likesCount + 1
+                      : episodes[i].likesCount - 1,
+            );
+            episodes[i] = updated;
+            update();
+            break;
+          }
+        }
+        update();
+      }
+    } catch (e) {
+      throw Exception('like not sent');
+    } finally {
+      isLoadingAddlike = false;
+      update();
+    }
   }
 
   @override

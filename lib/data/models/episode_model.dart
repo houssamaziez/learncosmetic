@@ -11,7 +11,7 @@ class Episode {
   final DateTime updatedAt;
   final PlaylistEpisode? playlist;
   final int commentsCount;
-  final int likesCount;
+  int likesCount;
 
   Episode({
     required this.id,
@@ -25,8 +25,8 @@ class Episode {
     required this.createdAt,
     required this.updatedAt,
     required this.playlist,
-    required this.commentsCount, // New parameter
-    required this.likesCount, // New parameter
+    required this.commentsCount,
+    required this.likesCount,
   });
 
   factory Episode.fromJson(Map<String, dynamic> json) {
@@ -45,8 +45,40 @@ class Episode {
           json['playlist'] != null
               ? PlaylistEpisode.fromJson(json['playlist'])
               : null,
-      commentsCount: json['comments_count'] ?? 0, // New field from JSON
-      likesCount: json['likes_count'] ?? 0, // New field from JSON
+      commentsCount: json['comments_count'] ?? 0,
+      likesCount: json['likes_count'] ?? 0,
+    );
+  }
+
+  Episode copyWith({
+    int? id,
+    int? playlistId,
+    String? title,
+    String? description,
+    String? videoPath,
+    String? imagePath,
+    String? videoDuration,
+    bool? isWatched,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    PlaylistEpisode? playlist,
+    int? commentsCount,
+    int? likesCount,
+  }) {
+    return Episode(
+      id: id ?? this.id,
+      playlistId: playlistId ?? this.playlistId,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      videoPath: videoPath ?? this.videoPath,
+      imagePath: imagePath ?? this.imagePath,
+      videoDuration: videoDuration ?? this.videoDuration,
+      isWatched: isWatched ?? this.isWatched,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      playlist: playlist ?? this.playlist,
+      commentsCount: commentsCount ?? this.commentsCount,
+      likesCount: likesCount ?? this.likesCount,
     );
   }
 }
