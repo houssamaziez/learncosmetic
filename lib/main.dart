@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:learncosmetic/core/services/local_storage_service.dart';
+import 'package:learncosmetic/data/models/book.dart';
+import 'package:learncosmetic/domain/repositories/book/category_repository_impl.dart';
 import 'package:learncosmetic/domain/repositories/search/search_repository_impl.dart'
     show SearchRepositoryImpl;
 import 'package:learncosmetic/domain/repositories/user/user_repository_impl.dart';
 import 'package:learncosmetic/domain/usecases/%20login_user.dart';
+import 'package:learncosmetic/domain/usecases/book.dart';
 import 'package:learncosmetic/domain/usecases/register_user.dart';
 import 'package:learncosmetic/domain/usecases/search.dart';
+import 'package:learncosmetic/presentation/controllers/book_controller.dart';
 import 'package:learncosmetic/presentation/controllers/login_controller.dart';
 import 'package:learncosmetic/presentation/controllers/search_controller.dart';
 import 'package:learncosmetic/presentation/screens/error/not_found_screen.dart';
@@ -42,7 +46,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.splash,
       getPages: AppPages.routes,
       unknownRoute: GetPage(
         name: AppRoutes.notFound,

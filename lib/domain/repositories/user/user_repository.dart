@@ -9,5 +9,5 @@ abstract class UserRepository {
     String confirmPassword,
   );
 
-  Future<UserModel> getProfile(String token);
+  Future<UserModel> getProfile();
 }

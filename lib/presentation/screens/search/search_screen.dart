@@ -67,12 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             controller.categories.isEmpty &&
                             controller.searchController.text.isNotEmpty)
                         ? NotFoundScreenList()
-                        : Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 100),
-                            child: Image.asset(AppAssets.search, height: 400),
-                          ),
-                        ),
+                        : Center(child: SizedBox.shrink()),
 
                     // TagList(tags: controller.tags),
                     const SizedBox(height: AppSize.spacingS),

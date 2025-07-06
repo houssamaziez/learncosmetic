@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/controllers/home_controller.dart';
+import 'package:learncosmetic/presentation/screens/books/books_screen.dart'
+    show BooksScreen;
 import 'package:learncosmetic/presentation/screens/home/widgets/bottom_nav_bar.dart';
 
 // صفحاتك
@@ -11,7 +13,7 @@ class HomeWrapperScreen extends GetView<HomeController> {
 
   final _pages = [
     HomeScreen(),
-    // CoursesScreen(),
+    BooksScreen(),
     // CartScreen(),
     // ProfileScreen(),
   ];

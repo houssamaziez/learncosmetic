@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:learncosmetic/domain/repositories/book/category_repository_impl.dart';
 import 'package:learncosmetic/domain/repositories/category/category_repository_impl.dart';
 import 'package:learncosmetic/domain/repositories/episode/episode_repository_impl.dart';
 import 'package:learncosmetic/domain/repositories/playlist/playlist_repository_impl.dart';
+import 'package:learncosmetic/domain/usecases/book.dart';
+import 'package:learncosmetic/presentation/controllers/book_controller.dart';
 import 'package:learncosmetic/presentation/controllers/category_controller.dart';
 import 'package:learncosmetic/presentation/controllers/playlist_controller.dart';
 import 'package:learncosmetic/presentation/controllers/promotions_controller.dart';
@@ -36,7 +39,9 @@ class HomeController extends GetxController {
     Get.put(CategoryRepositoryImpl(client: client));
     Get.put(PlaylistRepositoryImpl(client: client));
     Get.put(EpisodeRepositoryImpl(client: client));
-
+    Get.put(BookRepositoryImpl(client: client));
+    Get.put(BookUsecase(Get.find()));
+    Get.put(BookController(bookUsecase: Get.find()));
     Get.put(
       PromotionsController(PromotionUsecase(Get.find())),
     ).fetchPromotions();

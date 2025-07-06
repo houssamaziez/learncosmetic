@@ -1,3 +1,5 @@
+import 'package:learncosmetic/core/services/local_storage_service.dart';
+
 class ApiHeaders {
   /// Header without auth
   static Map<String, String> json = {
@@ -6,9 +8,9 @@ class ApiHeaders {
   };
 
   /// Header with bearer token
-  static Map<String, String> withToken(String token) => {
+  static Map<String, String> withToken() => {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': 'Bearer $token',
+    'Authorization': 'Bearer ${LocalStorageService.getString('token')}',
   };
 }

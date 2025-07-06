@@ -34,10 +34,10 @@ class UserRemoteDataSourceImpl implements UserRepository {
   }
 
   @override
-  Future<UserModel> fetchUserProfile(String token) async {
+  Future<UserModel> fetchUserProfile() async {
     final response = await client.get(
-      Uri.parse('https://your-api.com/api/profile'),
-      headers: {'Authorization': 'Bearer $token', 'Accept': 'application/json'},
+      Uri.parse(ApiConstants.getme),
+      headers: ApiHeaders.withToken(),
     );
 
     if (response.statusCode == 200) {
@@ -52,9 +52,21 @@ class UserRemoteDataSourceImpl implements UserRepository {
   }
 
   @override
-  Future<UserModel> getProfile(String token) {
-    // TODO: implement getProfile
-    throw UnimplementedError();
+  Future<UserModel> getProfile() async {
+    final response = await client.get(
+      Uri.parse(ApiConstants.getme),
+      headers: ApiHeaders.withToken(),
+    );
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return UserModel.fromJson(data['user']);
+    } else {
+      throw ServerException(
+        message: 'Failed to fetch profile',
+        statusCode: response.statusCode,
+      );
+    }
   }
 
   @override

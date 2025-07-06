@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learncosmetic/data/models/user_model.dart';
 import 'package:learncosmetic/domain/usecases/%20login_user.dart';
 import '../../../core/constants/error_notifier.dart';
 import '../../../core/services/local_storage_service.dart';
@@ -22,6 +23,8 @@ class AuthController extends GetxController {
   final loginError = ''.obs;
   final isLogin = true.obs;
 
+  UserModel? user;
+
   void setLogin(bool value) => isLogin.value = value;
 
   Future<void> login() async {
@@ -37,7 +40,21 @@ class AuthController extends GetxController {
     loginError.value = '';
 
     try {
-      final user = await loginUser(email, password);
+      user = await loginUser(email, password);
+      Get.offAllNamed(AppRoutes.home);
+    } catch (e) {
+      ErrorNotifier.show(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> getMe() async {
+    isLoading.value = true;
+    loginError.value = '';
+
+    try {
+      user = await loginUser.getMe();
       Get.offAllNamed(AppRoutes.home);
     } catch (e) {
       ErrorNotifier.show(e.toString());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learncosmetic/presentation/controllers/login_controller.dart';
 
 import '../../core/services/local_storage_service.dart';
 import '../../routes/app_routes.dart';
@@ -11,7 +12,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
   @override
   void onInit() {
     super.onInit();
-
+    Get.find<AuthController>().getMe();
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),

@@ -25,8 +25,8 @@ class CustomBottomNavBar extends StatelessWidget {
             label: 'الرئيسية',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school_outlined),
-            label: 'الدورات',
+            icon: Icon(Icons.book_outlined),
+            label: 'كتب',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_outlined),
