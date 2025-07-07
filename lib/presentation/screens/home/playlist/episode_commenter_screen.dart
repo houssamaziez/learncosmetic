@@ -149,10 +149,13 @@ class CommentListTile extends StatelessWidget {
           CircleAvatar(
             backgroundColor: Colors.blue.shade100,
             radius: 22,
-            child: Text(
-              firstLetter,
-              style: const TextStyle(fontSize: 20, color: Colors.black),
-            ),
+            child:
+                comment.userimage.isNotEmpty
+                    ? Image.network(comment.userimage, fit: BoxFit.cover)
+                    : Text(
+                      firstLetter,
+                      style: const TextStyle(fontSize: 20, color: Colors.black),
+                    ),
           ),
           const SizedBox(width: 12),
           // Comment content

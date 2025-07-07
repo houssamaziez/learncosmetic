@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:learncosmetic/data/models/book.dart';
 import 'package:learncosmetic/presentation/screens/books/widgets/screen_pdf_book.dart';
 
+import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_size.dart';
 import '../../controllers/book_controller.dart';
 
@@ -17,10 +18,10 @@ class BooksScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'الكتب التعليمية',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: AppColors.primary),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFF540B0E),
+        backgroundColor: AppColors.primary.withOpacity(0.1),
       ),
       body: Obx(() {
         if (controller.isLoading.value) {

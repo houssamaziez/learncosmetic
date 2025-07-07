@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learncosmetic/data/models/user_model.dart';
@@ -20,6 +22,8 @@ class AuthController extends GetxController {
   final confirmPasswordController = TextEditingController();
 
   final isLoading = false.obs;
+  bool isLoadingUpdate = false;
+
   final loginError = ''.obs;
   final isLogin = true.obs;
 
@@ -55,7 +59,7 @@ class AuthController extends GetxController {
 
     try {
       user = await loginUser.getMe();
-      Get.offAllNamed(AppRoutes.home);
+      // Get.offAllNamed(AppRoutes.home);
     } catch (e) {
       ErrorNotifier.show(e.toString());
     } finally {
@@ -98,6 +102,39 @@ class AuthController extends GetxController {
       ErrorNotifier.show(e.toString());
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> updateProfile({
+    String? name,
+    String? email,
+    String? password,
+    String? confirmPassword,
+    String? phone,
+    String? address,
+    File? imageuser,
+  }) async {
+    isLoadingUpdate = true;
+    update();
+
+    try {
+      await loginUser
+          .updateProfile(
+            name: name,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+            phone: phone,
+            address: address,
+            imageuser: imageuser,
+          )
+          .then((value) => getMe());
+      update();
+    } catch (e) {
+      ErrorNotifier.show(e.toString());
+    } finally {
+      isLoadingUpdate = false;
+      update();
     }
   }
 

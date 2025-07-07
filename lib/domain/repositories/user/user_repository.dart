@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../../../data/models/user_model.dart';
 
 abstract class UserRepository {
@@ -10,4 +12,14 @@ abstract class UserRepository {
   );
 
   Future<UserModel> getProfile();
+
+  Future<void> updateProfile({
+    String? name,
+    String? email,
+    String? password,
+    String? confirmPassword,
+    String? phone,
+    String? address,
+    File? imageuser,
+  });
 }

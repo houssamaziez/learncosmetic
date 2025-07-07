@@ -1,3 +1,5 @@
+import '../../core/constants/api_constants.dart';
+
 class UserModel {
   final String id;
   final String name;
@@ -37,7 +39,7 @@ class UserModel {
       updatedAt: json['updated_at'],
       phone: json['phone'],
       address: json['address'],
-      imageUser: json['imageuser'],
+      imageUser: ApiConstants.host + '/' + json['imageuser'],
       role: json['role'],
       active: json['active'],
       isPayment: json['ispayment'],

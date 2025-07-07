@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const String host = 'http://192.168.2.96:8000';
+  static const String host = 'http://192.168.2.112:8000';
   static const String apiPath = "/api";
 
   static const String baseUrl = '$host$apiPath';
@@ -7,6 +7,8 @@ class ApiConstants {
   // Endpoints
   static const String login = '$baseUrl/login';
   static const String getme = '$baseUrl/me';
+  static const String updateProfile = '$baseUrl/user/update';
+
   static const String profile = '$baseUrl/profile';
   static const String register = '$baseUrl/register';
   static const String promotions = '$baseUrl/promotions';

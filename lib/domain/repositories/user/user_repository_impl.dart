@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:learncosmetic/domain/repositories/promotion/promotion_repository.dart';
 import '../../../../core/errors/exceptions.dart';
@@ -93,6 +94,55 @@ class UserRemoteDataSourceImpl implements UserRepository {
       return UserModel.fromJson(data['user']);
     } else {
       HttpErrorHandler.handle(response.statusCode, response.body);
+    }
+  }
+
+  @override
+  Future<void> updateProfile({
+    String? name,
+    String? email,
+    String? password,
+    String? confirmPassword,
+    String? phone,
+    String? address,
+    File? imageuser,
+  }) async {
+    try {
+      final uri = Uri.parse(ApiConstants.updateProfile);
+
+      final request = http.MultipartRequest('POST', uri);
+
+      request.headers.addAll({
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${LocalStorageService.getString('token')}',
+      });
+
+      if (name != null) request.fields['name'] = name;
+      if (email != null) request.fields['email'] = email;
+      if (password != null) request.fields['password'] = password;
+      if (confirmPassword != null) {
+        request.fields['password_confirmation'] = confirmPassword;
+      }
+      if (phone != null) request.fields['phone'] = phone;
+      if (address != null) request.fields['address'] = address;
+
+      if (imageuser != null) {
+        request.files.add(
+          await http.MultipartFile.fromPath('imageuser', imageuser.path),
+        );
+      }
+
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        // ErrorNotifier.showSuccess('تم تحديث الملف الشخصي بنجاح');
+      } else {
+        HttpErrorHandler.handle(response.statusCode, response.body);
+      }
+    } catch (e) {
+      ErrorNotifier.show('حدث خطأ أثناء التحديث: ${e.toString()}');
     }
   }
 }

@@ -6,17 +6,13 @@ import 'package:learncosmetic/presentation/screens/books/books_screen.dart'
 import 'package:learncosmetic/presentation/screens/home/widgets/bottom_nav_bar.dart';
 
 // صفحاتك
+import '../profile/profile_screen.dart';
 import 'home_screen.dart';
 
 class HomeWrapperScreen extends GetView<HomeController> {
   HomeWrapperScreen({super.key});
 
-  final _pages = [
-    HomeScreen(),
-    BooksScreen(),
-    // CartScreen(),
-    // ProfileScreen(),
-  ];
+  final _pages = [HomeScreen(), BooksScreen(), UserProfileScreen()];
 
   @override
   Widget build(BuildContext context) {
