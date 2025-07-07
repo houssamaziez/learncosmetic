@@ -16,6 +16,11 @@ class EpisodeUsecase {
     ); // Replace 'someOtherArgument' with the actual argument needed.
   }
 
+  Future<List<Episode>?> getALL() {
+    return repository
+        .getAllEpisode(); // Replace 'someOtherArgument' with the actual argument needed.
+  }
+
   Future<List<Commenter>?> getCommenter(int id) {
     return repository.getEpisodeCommenter(
       id,

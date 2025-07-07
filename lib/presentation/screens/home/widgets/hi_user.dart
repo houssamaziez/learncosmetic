@@ -19,8 +19,8 @@ class HiUser extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              // "! ${Get.find<AuthController>().user!.name ?? ""}، أهلاً بكِ ",
-              "! ، أهلاً بكِ ",
+              "! ${Get.find<AuthController>().user!.name ?? ""}، أهلاً بكِ ",
+              // "! ، أهلاً بكِ ",
               style: TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.bold,

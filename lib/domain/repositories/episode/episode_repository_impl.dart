@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:learncosmetic/core/constants/api_constants.dart';
 import 'package:learncosmetic/core/constants/api_headers.dart';
 import 'package:learncosmetic/core/network/http_error_handler.dart';
@@ -9,6 +10,8 @@ import 'package:learncosmetic/domain/repositories/episode/episode_repository.dar
 import 'dart:convert';
 
 import '../../../data/models/category_model.dart';
+import '../../../presentation/controllers/login_controller.dart';
+import '../user/user_repository.dart';
 
 class EpisodeRepositoryImpl implements EpisodeRepository {
   final http.Client client;
@@ -84,7 +87,7 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
         Uri.parse(ApiConstants.episode + 'comment'),
         headers: ApiHeaders.json,
         body: json.encode({
-          "user_id": 1,
+          "user_id": Get.find<AuthController>().user!.id,
           "course_id": idEpisode,
           "content": content,
         }),
@@ -104,7 +107,10 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
       final response = await client.post(
         Uri.parse(ApiConstants.episode + 'like'),
         headers: ApiHeaders.json,
-        body: json.encode({"user_id": 1, "course_id": idEpisode}),
+        body: json.encode({
+          "user_id": Get.find<AuthController>().user!.id,
+          "course_id": idEpisode,
+        }),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         return json.decode(response.body)['is_liked'] as bool;
@@ -115,5 +121,24 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<List<Episode>?> getAllEpisode() async {
+    final response = await client.get(
+      Uri.parse(ApiConstants.episode),
+      headers: ApiHeaders.json,
+    );
+    if (response.statusCode == 200) {
+      var varmapdata = json.decode(response.body)['data'];
+      var data =
+          (varmapdata as List)
+              .map((promotion) => Episode.fromJson(promotion))
+              .toList();
+      return data;
+    } else {
+      HttpErrorHandler.handle(response.statusCode, response.body);
+    }
+    return [];
   }
 }

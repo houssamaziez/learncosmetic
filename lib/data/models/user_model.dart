@@ -39,7 +39,10 @@ class UserModel {
       updatedAt: json['updated_at'],
       phone: json['phone'],
       address: json['address'],
-      imageUser: ApiConstants.host + '/' + json['imageuser'],
+      imageUser:
+          json['imageuser'] != null
+              ? ApiConstants.host + '/' + json['imageuser']
+              : '',
       role: json['role'],
       active: json['active'],
       isPayment: json['ispayment'],

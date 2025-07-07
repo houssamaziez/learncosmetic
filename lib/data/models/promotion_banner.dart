@@ -46,10 +46,12 @@ class PromotionBanner {
       image: json['image'] ?? '',
       startDate: DateTime.parse(json['start_date']),
       endDate: DateTime.parse(json['end_date']),
-      isActive: json['is_active'] ?? 0,
+      isActive: int.tryParse(json['is_active'].toString()) ?? 0,
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
-      playlistId: json['playlist_id'] ?? 0, // Added playlist_id from JSON
+      playlistId:
+          int.tryParse(json['playlist_id'].toString()) ??
+          0, // Added playlist_id from JSON
     );
   }
 }

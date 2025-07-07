@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learncosmetic/data/models/book.dart';
 import 'package:learncosmetic/presentation/screens/books/widgets/screen_pdf_book.dart';
+import 'package:learncosmetic/presentation/widgets/spinkit.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_size.dart';
@@ -25,7 +26,7 @@ class BooksScreen extends StatelessWidget {
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: spinkit);
         }
 
         if (controller.books.isEmpty) {

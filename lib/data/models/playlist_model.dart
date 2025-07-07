@@ -24,7 +24,7 @@ class Playlist {
       description: json['description'],
       imageUrl: json['image'],
       category: CategoryPlaylist.fromJson(json['category']),
-      coursesCount: json['courses_count'],
+      coursesCount: int.parse(json['courses_count'].toString()),
       totalDuration: json['total_duration'], // Add this line
     );
   }

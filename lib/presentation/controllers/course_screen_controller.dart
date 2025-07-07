@@ -14,6 +14,7 @@ class CourseScreenController extends GetxController {
   CourseScreenController(this.playlistUsecase, this.episodeUsecase);
 
   List<Episode> episodes = [];
+  List<Episode> episodesHome = [];
   int selectedIndex = 0;
 
   late VideoPlayerController videoPlayerController;
@@ -22,6 +23,7 @@ class CourseScreenController extends GetxController {
   bool get isInitialized =>
       chewieController != null && videoPlayerController.value.isInitialized;
   bool isloading = false;
+  bool isloadingHome = false;
   Future<void> fetchEpisodes(String id) async {
     isloading = true;
     update();
@@ -33,6 +35,20 @@ class CourseScreenController extends GetxController {
       print('Error loading episodes: $e');
     } finally {
       isloading = false;
+      update();
+    }
+  }
+
+  Future<void> getALLHomeEpisodes() async {
+    isloadingHome = true;
+    update();
+    try {
+      episodesHome = (await episodeUsecase.getALL())!;
+      update();
+    } catch (e) {
+      print('Error loading episodes: $e');
+    } finally {
+      isloadingHome = false;
       update();
     }
   }

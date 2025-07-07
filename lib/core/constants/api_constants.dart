@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const String host = 'http://192.168.2.112:8000';
+  static const String host = 'https://test.hatlifood.com';
   static const String apiPath = "/api";
 
   static const String baseUrl = '$host$apiPath';

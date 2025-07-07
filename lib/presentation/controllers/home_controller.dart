@@ -7,6 +7,7 @@ import 'package:learncosmetic/domain/repositories/playlist/playlist_repository_i
 import 'package:learncosmetic/domain/usecases/book.dart';
 import 'package:learncosmetic/presentation/controllers/book_controller.dart';
 import 'package:learncosmetic/presentation/controllers/category_controller.dart';
+import 'package:learncosmetic/presentation/controllers/course_screen_controller.dart';
 import 'package:learncosmetic/presentation/controllers/playlist_controller.dart';
 import 'package:learncosmetic/presentation/controllers/promotions_controller.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/banner_slider.dart';
@@ -57,5 +58,11 @@ class HomeController extends GetxController {
         EpisodeUsecase(Get.find()),
       ),
     ).fetchPlaylist();
+    Get.put(
+      CourseScreenController(
+        PlaylistUsecase(Get.find()),
+        EpisodeUsecase(Get.find()),
+      ),
+    ).getALLHomeEpisodes();
   }
 }

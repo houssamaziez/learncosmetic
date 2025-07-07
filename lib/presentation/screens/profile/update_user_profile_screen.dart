@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_size.dart';
 import '../../../data/models/user_model.dart';
 import '../../controllers/login_controller.dart';
@@ -79,12 +80,12 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
         centerTitle: true,
         title: const Text(
           'تعديل الملف الشخصي',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: AppColors.primary),
         ),
-        backgroundColor: const Color(0xFF540B0E),
+        backgroundColor: AppColors.primary.withOpacity(0.1),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.primary),
           onPressed: () => Get.back(),
         ),
       ),

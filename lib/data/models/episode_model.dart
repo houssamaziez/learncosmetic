@@ -32,7 +32,7 @@ class Episode {
   factory Episode.fromJson(Map<String, dynamic> json) {
     return Episode(
       id: json['id'],
-      playlistId: json['playlist_id'],
+      playlistId: int.parse(json['playlist_id'].toString()) ?? 0,
       title: json['title'],
       description: json['description'],
       videoPath: json['video_path'],
@@ -45,8 +45,8 @@ class Episode {
           json['playlist'] != null
               ? PlaylistEpisode.fromJson(json['playlist'])
               : null,
-      commentsCount: json['comments_count'] ?? 0,
-      likesCount: json['likes_count'] ?? 0,
+      commentsCount: int.parse(json['comments_count'].toString()) ?? 0,
+      likesCount: int.parse(json['likes_count'].toString()) ?? 0,
     );
   }
 
@@ -105,7 +105,7 @@ class PlaylistEpisode {
   factory PlaylistEpisode.fromJson(Map<String, dynamic> json) {
     return PlaylistEpisode(
       id: json['id'] ?? 0,
-      categoryId: json['category_id'],
+      categoryId: int.parse(json['category_id'].toString()) ?? 0,
       title: json['title'],
       image: json['image'],
       description: json['description'],

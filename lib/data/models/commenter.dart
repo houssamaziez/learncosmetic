@@ -20,7 +20,7 @@ class Commenter {
   factory Commenter.fromJson(Map<String, dynamic> json) {
     return Commenter(
       id: json['id'],
-      userId: json['user_id'],
+      userId: int.parse(json['user_id'].toString()),
       userName: json['user_name'],
       content: json['content'],
       userimage: ApiConstants.host + "/" + json['imageuser'],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learncosmetic/core/constants/app_colors.dart';
 import 'package:learncosmetic/presentation/controllers/category_controller.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/category_widgets/playlist_category.dart';
 import 'package:learncosmetic/presentation/widgets/spinkit.dart' show spinkit;
@@ -24,7 +25,11 @@ class CategoryListVertical extends StatelessWidget {
       }
 
       return Scaffold(
-        appBar: AppBar(title: const Text('All Categories')),
+        appBar: AppBar(
+          title: const Text('كل الأقسام'),
+          centerTitle: true,
+          backgroundColor: AppColors.primary.withOpacity(0.1),
+        ),
         body: SizedBox(
           child: GridView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),

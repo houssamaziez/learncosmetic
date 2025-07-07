@@ -28,10 +28,10 @@ class CustomBottomNavBar extends StatelessWidget {
             icon: Icon(Icons.book_outlined),
             label: 'كتب',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'السلة',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.shopping_cart_outlined),
+          //   label: 'السلة',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             label: 'الحساب',
