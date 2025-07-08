@@ -108,6 +108,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               onTap: () {
                                 Get.to(
                                   () => VideoPlayerScreen(
+                                    episode: video,
                                     videoUrl: video.videoPath!,
                                     title: video.title,
                                     description: video.description,

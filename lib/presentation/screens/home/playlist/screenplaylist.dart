@@ -27,12 +27,15 @@ class _CourseScreenState extends State<CourseScreen> {
   @override
   void initState() {
     super.initState();
-    Get.put(
-      CourseScreenController(
-        PlaylistUsecase(Get.find()),
-        EpisodeUsecase(Get.find()),
-      ),
-    ).fetchEpisodes(widget.id);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.put(
+        CourseScreenController(
+          PlaylistUsecase(Get.find()),
+          EpisodeUsecase(Get.find()),
+        ),
+      ).fetchEpisodes(widget.id);
+    });
+
     _scrollController.addListener(_handleScroll);
   }
 
@@ -99,10 +102,6 @@ class _CourseScreenState extends State<CourseScreen> {
                   ),
                 ),
                 GetBuilder<CourseScreenController>(
-                  init: CourseScreenController(
-                    PlaylistUsecase(Get.find()),
-                    EpisodeUsecase(Get.find()),
-                  ),
                   builder: (controllerbuild) {
                     return AnimatedPositioned(
                       duration: const Duration(milliseconds: 300),
@@ -213,10 +212,6 @@ class _CourseScreenState extends State<CourseScreen> {
               ),
               const SizedBox(width: 12),
               GetBuilder<CourseScreenController>(
-                init: CourseScreenController(
-                  PlaylistUsecase(Get.find()),
-                  EpisodeUsecase(Get.find()),
-                ),
                 builder: (controller) {
                   return InkWell(
                     onTap: () => controller.addEpisodeLike(episode.id),

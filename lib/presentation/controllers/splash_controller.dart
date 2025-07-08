@@ -28,7 +28,8 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void _navigateToNext() {
-    LocalStorageService.getString('token') != null
+    (LocalStorageService.getString('token') != null &&
+            Get.find<AuthController>().user != null)
         ? Get.offAllNamed(AppRoutes.home)
         : Get.offAllNamed(AppRoutes.login);
   }

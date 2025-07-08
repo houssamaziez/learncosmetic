@@ -1,11 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learncosmetic/data/models/user_model.dart';
 import 'package:learncosmetic/domain/usecases/%20login_user.dart';
 import '../../../core/constants/error_notifier.dart';
-import '../../../core/services/local_storage_service.dart';
 import '../../domain/usecases/register_user.dart';
 import '../../routes/app_routes.dart';
 
@@ -17,7 +15,7 @@ class AuthController extends GetxController {
 
   // Fields
   final nameController = TextEditingController();
-  final emailController = TextEditingController(text: 'houssam@gmail.com');
+  final emailController = TextEditingController(text: 'houssamaziez@gmail.com');
   final passwordController = TextEditingController(text: 'secret123');
   final confirmPasswordController = TextEditingController();
 

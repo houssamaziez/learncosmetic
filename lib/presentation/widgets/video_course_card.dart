@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learncosmetic/data/models/episode_model.dart';
+import 'package:learncosmetic/presentation/widgets/image_cached.dart'
+    show CustomCachedImage;
 
 class VideoCourseCard extends StatelessWidget {
   final String title;
@@ -43,8 +45,8 @@ class VideoCourseCard extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Image.network(
-                    imagePath,
+                  CustomCachedImage(
+                    imageUrl: imagePath,
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,

@@ -6,7 +6,7 @@ import 'package:learncosmetic/core/constants/app_colors.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/%20search_bar.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/banner_slider.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/category_widgets/category_list.dart';
-import 'package:learncosmetic/presentation/screens/home/widgets/playlist_widgets/category_list_vertical.dart'
+import 'package:learncosmetic/presentation/screens/home/widgets/playlist_widgets/playlist_list_vertical.dart'
     show PlayListListVertical;
 import 'package:learncosmetic/presentation/screens/home/widgets/playlist_widgets/popular_playlist_list.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/custom_app_bar.dart';
@@ -73,6 +73,7 @@ class HomeScreen extends StatelessWidget {
                         onTap: () {
                           Get.to(
                             () => VideoPlayerScreen(
+                              episode: controller.episodesHome[index],
                               videoUrl:
                                   controller.episodesHome[index].videoPath!,
                               title: controller.episodesHome[index].title,

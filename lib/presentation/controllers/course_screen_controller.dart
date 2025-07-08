@@ -98,7 +98,7 @@ class CourseScreenController extends GetxController {
     update();
   }
 
-  Future<void> addEpisodeLike(int id) async {
+  Future<bool?> addEpisodeLike(int id) async {
     isLoadingAddlike = true;
     update();
     try {
@@ -120,6 +120,7 @@ class CourseScreenController extends GetxController {
         }
         update();
       }
+      return result;
     } catch (e) {
       throw Exception('like not sent');
     } finally {
