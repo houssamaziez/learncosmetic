@@ -99,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                             tag: controller.episodesHome[index].description,
                             imagePath: controller.episodesHome[index].imagePath,
                             commenter:
-                                controller.episodesHome[index].likesCount
+                                controller.episodesHome[index].commentsCount
                                     .toString(),
                           ),
                     ),

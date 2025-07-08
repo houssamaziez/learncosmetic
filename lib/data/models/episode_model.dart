@@ -45,8 +45,14 @@ class Episode {
           json['playlist'] != null
               ? PlaylistEpisode.fromJson(json['playlist'])
               : null,
-      commentsCount: int.parse(json['comments_count'].toString()) ?? 0,
-      likesCount: int.parse(json['likes_count'].toString()) ?? 0,
+      commentsCount:
+          json['comments_count'] != null
+              ? (int.tryParse(json['comments_count'].toString()) ?? 0)
+              : 0,
+      likesCount:
+          json['likes_count'] == null
+              ? 0
+              : (int.tryParse(json['likes_count'].toString()) ?? 0),
     );
   }
 

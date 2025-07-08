@@ -55,7 +55,8 @@ class _EpisodeListALllState extends State<EpisodeListALll> {
               tag: widget.controller.episodesHome[index].description,
               imagePath: widget.controller.episodesHome[index].imagePath,
               commenter:
-                  widget.controller.episodesHome[index].likesCount.toString(),
+                  widget.controller.episodesHome[index].commentsCount
+                      .toString(),
             ),
       ),
     );

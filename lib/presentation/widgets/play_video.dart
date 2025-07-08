@@ -34,7 +34,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late VideoPlayerController _videoPlayerController;
   ChewieController? _chewieController;
   bool isLoading = true;
-  final PlaylistController controller = Get.put(
+  final PlaylistController controllerplaylist = Get.put(
     PlaylistController(PlaylistUsecase(Get.find()), EpisodeUsecase(Get.find())),
   );
 
@@ -45,7 +45,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     if (text.isEmpty) return;
 
     // TODO: Replace this with your real add-comment logic
-    controller.addEpisodeCommenter(widget.episode.id, text);
+    controllerplaylist.addEpisodeCommenter(widget.episode.id, text);
 
     commentController.clear();
     FocusScope.of(context).unfocus();
@@ -54,7 +54,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void initState() {
     super.initState();
-
+    controllerplaylist.getEpisodeCommenter(widget.episode.id);
     _videoPlayerController = VideoPlayerController.network(widget.videoUrl);
 
     _videoPlayerController.initialize().then((_) {
@@ -187,11 +187,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       Column(
                         children: [
                           Obx(() {
-                            if (controller.isLoadingCommenter.value) {
+                            if (controllerplaylist.isLoadingCommenter.value) {
                               return Center(child: spinkit);
                             }
 
-                            if (controller.commenter.isEmpty) {
+                            if (controllerplaylist.commenter.isEmpty) {
                               return const Center(
                                 child: Text(
                                   'لا توجد تعليقات حتى الآن',
@@ -206,16 +206,20 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   padding: const EdgeInsets.all(16),
-                                  itemCount: controller.commenter.length,
+                                  itemCount:
+                                      controllerplaylist.commenter.length,
                                   separatorBuilder:
                                       (_, __) => const SizedBox(height: 12),
                                   itemBuilder: (context, index) {
-                                    final comment = controller.commenter[index];
+                                    final comment =
+                                        controllerplaylist.commenter[index];
                                     return CommentListTile(comment: comment);
                                   },
                                 ),
 
-                                if (controller.isLoadingAddCommenter.value)
+                                if (controllerplaylist
+                                    .isLoadingAddCommenter
+                                    .value)
                                   Center(
                                     child: Container(
                                       height: 50,

@@ -10,6 +10,7 @@ import '../../../../data/models/episode_model.dart';
 import '../../../../domain/usecases/episode.dart' show EpisodeUsecase;
 import '../../../controllers/course_screen_controller.dart';
 import '../../../controllers/playlist_controller.dart';
+import '../../../widgets/image_cached.dart';
 import '../../../widgets/spinkit.dart';
 import '../../error/not_found_list.dart';
 
@@ -309,8 +310,8 @@ class _CourseScreenState extends State<CourseScreen> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    episode.imagePath,
+                  child: CustomCachedImage(
+                    imageUrl: episode.imagePath,
                     height: 70,
                     width: 70,
                     fit: BoxFit.cover,

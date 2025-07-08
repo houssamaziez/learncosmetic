@@ -10,6 +10,7 @@ import 'package:learncosmetic/presentation/screens/search/widgets/search_input.d
 import 'package:learncosmetic/presentation/screens/search/widgets/section_title.dart';
 import 'package:learncosmetic/presentation/screens/search/widgets/tag_list.dart';
 import 'package:learncosmetic/presentation/screens/search/widgets/video_card.dart';
+import '../../../core/constants/api_constants.dart';
 import '../../../core/constants/app_size.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../domain/usecases/search.dart';
@@ -109,7 +110,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                 Get.to(
                                   () => VideoPlayerScreen(
                                     episode: video,
-                                    videoUrl: video.videoPath!,
+                                    videoUrl:
+                                        ApiConstants.host +
+                                        "/public/" +
+                                        video.videoPath!,
                                     title: video.title,
                                     description: video.description,
                                   ),

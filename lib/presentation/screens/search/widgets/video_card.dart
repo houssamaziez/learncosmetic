@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learncosmetic/core/constants/api_constants.dart';
 import 'package:learncosmetic/core/constants/app_colors.dart';
 import 'package:learncosmetic/core/constants/app_size.dart';
 import 'package:learncosmetic/data/models/episode_model.dart';
@@ -32,7 +33,7 @@ class VideoCard extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   Image.network(
-                    video.imagePath!,
+                    ApiConstants.host + "/public/" + video.imagePath!,
                     width: 90,
                     height: 70,
                     fit: BoxFit.cover,

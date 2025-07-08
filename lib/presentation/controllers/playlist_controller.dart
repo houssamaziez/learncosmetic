@@ -42,6 +42,19 @@ class PlaylistController extends GetxController {
     }
   }
 
+  /*************  ✨ Windsurf Command ⭐  *************/
+  /// Fetches episodes based on the given playlist ID.
+  ///
+  /// This method updates the [isLoading] state to indicate the loading process
+  /// and retrieves the list of episodes for the specified playlist ID using the
+  /// [episodeUsecase]. The retrieved episodes are stored in [episodes] and also
+  /// returned. If an error occurs while fetching, an exception is thrown with
+  /// the message 'Playlist not found'.
+  ///
+  /// The [isLoading] state is reset to false once the operation is completed.
+  ///
+
+  /*******  b1ffaf20-ca1b-44c3-8b13-846f51961740  *******/
   Future<List<Episode>> getByIdPlaylist(int id) async {
     isLoading.value = true;
     try {

@@ -23,6 +23,8 @@ class CustomCachedImage extends StatelessWidget {
       borderRadius: borderRadius ?? BorderRadius.circular(12),
       child: CachedNetworkImage(
         imageUrl: imageUrl,
+        filterQuality: FilterQuality.low,
+
         width: width,
         height: height,
         fit: fit,
