@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:learncosmetic/core/constants/app_colors.dart';
 import 'package:learncosmetic/domain/usecases/playlist.dart'
     show PlaylistUsecase;
-import 'package:learncosmetic/presentation/screens/home/playlist/episode_commenter_screen.dart';
+import 'package:learncosmetic/presentation/screens/home/episode/episode_commenter_screen.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../data/models/episode_model.dart';
 import '../../../../domain/usecases/episode.dart' show EpisodeUsecase;
@@ -53,18 +53,33 @@ class _CourseScreenState extends State<CourseScreen> {
 
   @override
   void dispose() {
-    _scrollController.dispose();
     _scrollController.removeListener(_handleScroll);
-    final controller = Get.find<CourseScreenController>();
-    controller.videoPlayerController.dispose();
-    controller.chewieController?.dispose();
-    controller.chewieController = null;
-    controller.videoPlayerController = VideoPlayerController.network('');
-    controller.episodes.clear();
-    controller.selectedIndex = 0;
-    controller.update();
-    Get.delete<CourseScreenController>();
-    // Dispose of the controller to free up resources
+    _scrollController.dispose();
+
+    if (Get.isRegistered<CourseScreenController>()) {
+      final controller = Get.find<CourseScreenController>();
+
+      try {
+        if (controller.videoPlayerController.value.isInitialized) {
+          controller.videoPlayerController.pause();
+        }
+        controller.videoPlayerController.dispose();
+      } catch (e) {
+        debugPrint('Error disposing videoPlayerController: $e');
+      }
+
+      try {
+        controller.chewieController?.dispose();
+      } catch (e) {
+        debugPrint('Error disposing chewieController: $e');
+      }
+
+      controller.chewieController = null;
+      controller.videoPlayerController = VideoPlayerController.network('');
+      controller.episodes.clear();
+      controller.selectedIndex = 0;
+    }
+
     super.dispose();
   }
 

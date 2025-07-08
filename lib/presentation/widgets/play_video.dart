@@ -10,7 +10,7 @@ import '../../core/constants/app_colors.dart';
 import '../../domain/usecases/episode.dart';
 import '../../domain/usecases/playlist.dart';
 import '../controllers/playlist_controller.dart';
-import '../screens/home/playlist/episode_commenter_screen.dart';
+import '../screens/home/episode/episode_commenter_screen.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final String videoUrl;

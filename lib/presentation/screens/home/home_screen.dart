@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learncosmetic/core/constants/app_colors.dart';
+import 'package:learncosmetic/presentation/screens/home/episode/episode_all.dart'
+    show EpisodeListALll;
 import 'package:learncosmetic/presentation/screens/home/widgets/%20search_bar.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/banner_slider.dart';
 import 'package:learncosmetic/presentation/screens/home/widgets/category_widgets/category_list.dart';
@@ -45,7 +47,7 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             PopularPlayListList(),
-            SectionHeader(title: 'الفيديو الأكثر شاهدة', onSeeAll: () {}),
+
             GetBuilder<CourseScreenController>(
               builder: (controller) {
                 if (controller.isloadingHome) {
@@ -56,40 +58,52 @@ class HomeScreen extends StatelessWidget {
                     child: Text('لا توجد دورات متاحة حالياً'),
                   );
                 }
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount:
-                      controller.episodesHome.length > 4
-                          ? 4
-                          : controller.episodesHome.length,
+                return Column(
+                  children: [
+                    SectionHeader(
+                      title: 'الفيديو الأكثر شاهدة',
+                      onSeeAll: () {
+                        Get.to(EpisodeListALll(controller: controller));
+                      },
+                    ),
+                    ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount:
+                          controller.episodesHome.length > 4
+                              ? 4
+                              : controller.episodesHome.length,
 
-                  itemBuilder:
-                      (context, index) => VideoCourseCard(
-                        likes:
-                            controller.episodesHome[index].likesCount
-                                .toString(),
-                        course: controller.episodesHome[index],
-                        onTap: () {
-                          Get.to(
-                            () => VideoPlayerScreen(
-                              episode: controller.episodesHome[index],
-                              videoUrl:
-                                  controller.episodesHome[index].videoPath!,
-                              title: controller.episodesHome[index].title,
-                              description:
-                                  controller.episodesHome[index].description,
-                            ),
-                          );
-                        },
-                        title: controller.episodesHome[index].title,
-                        views: Random().nextInt(500).toString(),
-                        tag: controller.episodesHome[index].description,
-                        imagePath: controller.episodesHome[index].imagePath,
-                        commenter:
-                            controller.episodesHome[index].likesCount
-                                .toString(),
-                      ),
+                      itemBuilder:
+                          (context, index) => VideoCourseCard(
+                            likes:
+                                controller.episodesHome[index].likesCount
+                                    .toString(),
+                            course: controller.episodesHome[index],
+                            onTap: () {
+                              Get.to(
+                                () => VideoPlayerScreen(
+                                  episode: controller.episodesHome[index],
+                                  videoUrl:
+                                      controller.episodesHome[index].videoPath!,
+                                  title: controller.episodesHome[index].title,
+                                  description:
+                                      controller
+                                          .episodesHome[index]
+                                          .description,
+                                ),
+                              );
+                            },
+                            title: controller.episodesHome[index].title,
+                            views: Random().nextInt(500).toString(),
+                            tag: controller.episodesHome[index].description,
+                            imagePath: controller.episodesHome[index].imagePath,
+                            commenter:
+                                controller.episodesHome[index].likesCount
+                                    .toString(),
+                          ),
+                    ),
+                  ],
                 );
               },
             ),
