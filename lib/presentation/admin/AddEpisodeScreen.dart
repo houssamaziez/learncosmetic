@@ -5,8 +5,13 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:learncosmetic/core/constants/app_colors.dart';
-
+import 'dart:async';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:learncosmetic/presentation/admin/widgets/filePreview.dart';
+import 'package:path/path.dart' as path;
 import '../../data/models/playlist_model.dart';
+import 'widgets/uploadEpisodeWithProgress.dart' show uploadEpisodeWithProgress;
 
 class AddEpisodeScreen extends StatefulWidget {
   const AddEpisodeScreen({Key? key}) : super(key: key);
@@ -28,7 +33,7 @@ class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
   int selectedPlaylistId = 7;
   int? selectedCategoryId;
   String selectedCategoryName = 'اختر القسم';
-
+  double uploadProgress = 0.0;
   Future<List<Playlist>> fetchCategories() async {
     final response = await http.get(
       Uri.parse('https://test.hatlifood.com/api/playlists'),
@@ -59,82 +64,6 @@ class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
         }
       });
     }
-  }
-
-  Future<void> uploadEpisode() async {
-    if (!_formKey.currentState!.validate() ||
-        selectedImage == null ||
-        selectedVideo == null) {
-      Get.snackbar(
-        "تنبيه",
-        "يرجى إدخال كل الحقول واختيار الملفات",
-        backgroundColor: Colors.amber,
-      );
-      return;
-    }
-
-    setState(() => isLoading = true);
-    try {
-      var request = http.MultipartRequest(
-        'POST',
-        Uri.parse('https://test.hatlifood.com/api/episode'),
-      );
-      request.fields.addAll({
-        'title': titleController.text.trim(),
-        'description': descriptionController.text.trim(),
-        'playlist_id': selectedPlaylistId.toString(),
-      });
-      request.files.add(
-        await http.MultipartFile.fromPath('image', selectedImage!.path),
-      );
-      request.files.add(
-        await http.MultipartFile.fromPath('video', selectedVideo!.path),
-      );
-
-      var response = await request.send();
-
-      if (response.statusCode == 201) {
-        Get.snackbar(
-          "نجاح",
-          "تمت إضافة الحلقة بنجاح",
-          backgroundColor: Colors.green,
-        );
-        titleController.clear();
-        descriptionController.clear();
-        setState(() {
-          selectedImage = null;
-          selectedVideo = null;
-        });
-      } else {
-        final body = await response.stream.bytesToString();
-        Get.snackbar("فشل", body, backgroundColor: Colors.red);
-      }
-    } catch (e) {
-      Get.snackbar(
-        "خطأ",
-        "حدث خطأ أثناء الإرسال",
-        backgroundColor: Colors.redAccent,
-      );
-    } finally {
-      setState(() => isLoading = false);
-    }
-  }
-
-  Widget filePreview(File? file, IconData icon, String label) {
-    return file != null
-        ? Row(
-          children: [
-            Icon(icon, color: Colors.green),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                file.path.split('/').last,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        )
-        : Text(label, style: TextStyle(color: Colors.grey));
   }
 
   @override
@@ -236,7 +165,25 @@ class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
 
               /// Submit Button
               ElevatedButton(
-                onPressed: isLoading ? null : uploadEpisode,
+                onPressed:
+                    isLoading
+                        ? null
+                        : () {
+                          uploadEpisodeWithProgress(
+                            imageFile: selectedImage!,
+                            videoFile: selectedVideo!,
+                            title: titleController.text,
+                            description: descriptionController.text,
+                            playlistId: selectedPlaylistId,
+                            onProgress: (progress) {
+                              setState(() {
+                                uploadProgress = progress;
+
+                                print('Upload progress: $progress');
+                              });
+                            },
+                          );
+                        },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   padding: const EdgeInsets.symmetric(vertical: 14),
