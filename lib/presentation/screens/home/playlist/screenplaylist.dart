@@ -9,7 +9,6 @@ import 'package:video_player/video_player.dart';
 import '../../../../data/models/episode_model.dart';
 import '../../../../domain/usecases/episode.dart' show EpisodeUsecase;
 import '../../../controllers/course_screen_controller.dart';
-import '../../../controllers/playlist_controller.dart';
 import '../../../widgets/image_cached.dart';
 import '../../../widgets/spinkit.dart';
 import '../../error/not_found_list.dart';
@@ -50,6 +49,14 @@ class _CourseScreenState extends State<CourseScreen> {
       controller.isMiniPlayer = false;
       controller.update();
     }
+  }
+
+  Future<void> scrollToTop() async {
+    await _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
@@ -149,8 +156,25 @@ class _CourseScreenState extends State<CourseScreen> {
                           clipBehavior: Clip.antiAlias,
                           child:
                               controller.isInitialized
-                                  ? Chewie(
-                                    controller: controller.chewieController!,
+                                  ? Stack(
+                                    children: [
+                                      Chewie(
+                                        controller:
+                                            controller.chewieController!,
+                                      ),
+                                      controllerbuild.isMiniPlayer
+                                          ? Positioned.fill(
+                                            child: GestureDetector(
+                                              onTap: () => scrollToTop(),
+                                              behavior:
+                                                  HitTestBehavior.translucent,
+                                              child: Container(
+                                                color: Colors.transparent,
+                                              ),
+                                            ),
+                                          )
+                                          : Container(),
+                                    ],
                                   )
                                   : Center(child: spinkit),
                         ),
@@ -285,7 +309,9 @@ class _CourseScreenState extends State<CourseScreen> {
         final isSelected = index == controller.selectedIndex;
 
         return GestureDetector(
-          onTap: () => controller.onEpisodeTap(index),
+          onTap: () {
+            controller.onEpisodeTap(index);
+          },
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 250),
             margin: const EdgeInsets.symmetric(horizontal: 16),

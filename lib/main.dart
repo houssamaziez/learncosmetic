@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splash,
+      initialRoute: AppRoutes.addEpisode,
       getPages: AppPages.routes,
       unknownRoute: GetPage(
         name: AppRoutes.notFound,
