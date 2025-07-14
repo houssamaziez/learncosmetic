@@ -1,40 +1,61 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
-import 'package:learncosmetic/core/constants/app_colors.dart';
-import 'dart:async';
-import 'dart:io';
-import 'package:http/http.dart' as http;
-import 'package:learncosmetic/presentation/admin/widgets/buildUploadProgressBar.dart';
-import 'package:learncosmetic/presentation/admin/widgets/filePreview.dart';
-import 'package:path/path.dart' as path;
-import '../../data/models/playlist_model.dart';
-import 'widgets/uploadEpisodeWithProgress.dart' show uploadEpisodeWithProgress;
 
-class AddEpisodeScreen extends StatefulWidget {
-  const AddEpisodeScreen({Key? key}) : super(key: key);
+import '../../data/models/playlist_model.dart';
+
+class AddPromotionScreen extends StatefulWidget {
+  const AddPromotionScreen({super.key});
 
   @override
-  State<AddEpisodeScreen> createState() => _AddEpisodeScreenState();
+  State<AddPromotionScreen> createState() => _AddPromotionScreenState();
 }
 
-class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
+class _AddPromotionScreenState extends State<AddPromotionScreen> {
   final _formKey = GlobalKey<FormState>();
+
+  String selectedCategoryName = 'اختر القسم';
+  int? selectedCategoryId;
+
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
+  DateTime? startDate;
+  DateTime? endDate;
   File? selectedImage;
-  File? selectedVideo;
+
   bool isLoading = false;
 
-  TextEditingController categoryIdController = TextEditingController();
+  Future<void> _pickImage() async {
+    final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (picked != null) {
+      setState(() {
+        selectedImage = File(picked.path);
+      });
+    }
+  }
 
-  int selectedPlaylistId = 7;
-  int? selectedCategoryId;
-  String selectedCategoryName = 'اختر القسم';
-  double uploadProgress = 0.0;
+  Future<void> _pickDate({required bool isStart}) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: isStart ? DateTime.now() : startDate ?? DateTime.now(),
+      firstDate: DateTime(2024),
+      lastDate: DateTime(2030),
+    );
+    if (picked != null) {
+      setState(() {
+        if (isStart) {
+          startDate = picked;
+        } else {
+          endDate = picked;
+        }
+      });
+    }
+  }
+
   Future<List<Playlist>> fetchCategories() async {
     final response = await http.get(
       Uri.parse('https://test.hatlifood.com/api/playlists'),
@@ -49,24 +70,67 @@ class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
     }
   }
 
-  Future<void> pickFile(bool isImage) async {
-    final picker = ImagePicker();
-    final picked =
-        isImage
-            ? await picker.pickImage(source: ImageSource.gallery)
-            : await picker.pickVideo(source: ImageSource.gallery);
+  Future<void> _submit() async {
+    if (!_formKey.currentState!.validate() ||
+        selectedImage == null ||
+        startDate == null ||
+        endDate == null) {
+      Get.snackbar("خطأ", "يرجى ملء جميع الحقول واختيار صورة وتاريخين");
+      return;
+    }
 
-    if (picked != null) {
-      setState(() {
-        if (isImage) {
-          selectedImage = File(picked.path);
-        } else {
-          selectedVideo = File(picked.path);
-        }
+    setState(() => isLoading = true);
+
+    try {
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse('https://test.hatlifood.com/api/promotions'),
+      );
+
+      request.fields.addAll({
+        'title': titleController.text.trim(),
+        'description': descriptionController.text.trim(),
+        'start_date': DateFormat('yyyy/MM/dd').format(startDate!),
+        'end_date': DateFormat('yyyy/MM/dd').format(endDate!),
+        'playlist_id': selectedCategoryId.toString(),
       });
+
+      request.files.add(
+        await http.MultipartFile.fromPath('image', selectedImage!.path),
+      );
+
+      final response = await request.send();
+
+      final body = await response.stream.bytesToString();
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Get.snackbar(
+          "نجاح",
+          "تم إضافة العرض بنجاح",
+          backgroundColor: Colors.green,
+        );
+        titleController.clear();
+        descriptionController.clear();
+        setState(() {
+          selectedImage = null;
+          startDate = null;
+          endDate = null;
+        });
+      } else {
+        Get.snackbar("فشل", body, backgroundColor: Colors.red);
+      }
+    } catch (e) {
+      Get.snackbar(
+        "خطأ",
+        "حدث خطأ أثناء الإرسال",
+        backgroundColor: Colors.redAccent,
+      );
+    } finally {
+      setState(() => isLoading = false);
     }
   }
 
+  TextEditingController categoryIdController = TextEditingController();
   @override
   void initState() {
     fetchCategories();
@@ -77,11 +141,12 @@ class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
         title: const Text(
-          'إضافة حلقة جديدة',
+          "إضافة عرض ترويجي",
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: AppColors.primary,
+        backgroundColor: const Color(0xFF540B0E),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -89,6 +154,8 @@ class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
           key: _formKey,
           child: ListView(
             children: [
+              const SizedBox(height: 12),
+
               GestureDetector(
                 onTap: () => _showCategoryBottomSheet(context),
                 child: Container(
@@ -120,93 +187,106 @@ class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
               ),
               const SizedBox(height: 12),
 
-              TextFormField(
-                controller: titleController,
-                decoration: const InputDecoration(
-                  labelText: 'عنوان الحلقة',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (v) => v!.isEmpty ? 'العنوان مطلوب' : null,
+              _buildTextField("عنوان العرض", titleController),
+              const SizedBox(height: 12),
+              _buildTextField("وصف العرض", descriptionController, maxLines: 3),
+              const SizedBox(height: 12),
+
+              _buildDateSelector(
+                "تاريخ البداية",
+                startDate,
+                () => _pickDate(isStart: true),
               ),
               const SizedBox(height: 12),
-              TextFormField(
-                controller: descriptionController,
-                decoration: const InputDecoration(
-                  labelText: 'الوصف',
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 3,
-                validator: (v) => v!.isEmpty ? 'الوصف مطلوب' : null,
+              _buildDateSelector(
+                "تاريخ النهاية",
+                endDate,
+                () => _pickDate(isStart: false),
               ),
+              const SizedBox(height: 12),
+
+              _buildImagePicker(),
+
               const SizedBox(height: 20),
-
-              /// Pick Image
-              TextButton.icon(
-                onPressed: () => pickFile(true),
-                icon: const Icon(Icons.image),
-                label: const Text("اختيار صورة"),
-              ),
-              filePreview(selectedImage, Icons.image, "لم يتم اختيار صورة"),
-
-              const SizedBox(height: 12),
-
-              /// Pick Video
-              TextButton.icon(
-                onPressed: () => pickFile(false),
-                icon: const Icon(Icons.video_library),
-                label: const Text("اختيار فيديو"),
-              ),
-              filePreview(
-                selectedVideo,
-                Icons.video_file,
-                "لم يتم اختيار فيديو",
-              ),
-
-              const SizedBox(height: 24),
-              Visibility(
-                visible: uploadProgress > 0 && uploadProgress < 1,
-                child: buildUploadProgressBar(uploadProgress),
-              ),
-
-              /// Submit Button
-              Visibility(
-                visible: !(uploadProgress > 0 && uploadProgress < 1),
-                child: ElevatedButton(
-                  onPressed:
-                      isLoading
-                          ? null
-                          : () {
-                            uploadEpisodeWithProgress(
-                              imageFile: selectedImage!,
-                              videoFile: selectedVideo!,
-                              title: titleController.text,
-                              description: descriptionController.text,
-                              playlistId: selectedPlaylistId,
-                              onProgress: (progress) {
-                                setState(() {
-                                  uploadProgress = progress;
-
-                                  print('Upload progress: $progress');
-                                });
-                              },
-                            );
-                          },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+              ElevatedButton.icon(
+                onPressed: isLoading ? null : _submit,
+                icon: const Icon(Icons.upload, color: Colors.white),
+                label:
+                    isLoading
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text(
+                          "رفع العرض",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF540B0E),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  child:
-                      isLoading
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text(
-                            "نشر الحلقة",
-                            style: TextStyle(color: Colors.white),
-                          ),
                 ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(
+    String label,
+    TextEditingController controller, {
+    int maxLines = 1,
+  }) {
+    return TextFormField(
+      controller: controller,
+      validator: (val) => val == null || val.isEmpty ? "مطلوب" : null,
+      maxLines: maxLines,
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 16,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDateSelector(String label, DateTime? date, VoidCallback onTap) {
+    return ListTile(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      tileColor: Colors.grey.shade100,
+      title: Text(label),
+      subtitle: Text(
+        date != null ? DateFormat('yyyy/MM/dd').format(date) : "لم يتم التحديد",
+      ),
+      trailing: const Icon(Icons.date_range),
+      onTap: onTap,
+    );
+  }
+
+  Widget _buildImagePicker() {
+    return InkWell(
+      onTap: _pickImage,
+      child: Container(
+        height: 150,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey.shade400),
+        ),
+        child:
+            selectedImage == null
+                ? const Center(child: Text("اختر صورة العرض"))
+                : ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.file(
+                    selectedImage!,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
+                ),
       ),
     );
   }

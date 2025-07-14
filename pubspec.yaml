@@ -51,6 +51,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^30.1.38
   image_picker: ^1.1.2
   cached_network_image: ^3.4.1
+  file_picker: ^10.2.0
   # shared_preferences: any
 
   # shared_preferences: ^2.2.2

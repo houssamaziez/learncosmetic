@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:learncosmetic/core/services/local_storage_service.dart';
 import 'package:learncosmetic/domain/repositories/search/search_repository_impl.dart'
     show SearchRepositoryImpl;
@@ -32,6 +33,7 @@ void main() async {
   );
 
   Get.put(controller);
+  await initializeDateFormatting('ar', null);
   runApp(const MyApp());
 }
 
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.addEpisode,
+      initialRoute: AppRoutes.homeAdmine,
       getPages: AppPages.routes,
       unknownRoute: GetPage(
         name: AppRoutes.notFound,

@@ -61,7 +61,6 @@ class PlaylistController extends GetxController {
       final List<Episode>? result = await episodeUsecase(id);
       episodes.value = result!;
       update();
-
       return result;
     } catch (e) {
       throw Exception('Playlist not found');

@@ -11,4 +11,12 @@ abstract class AppRoutes {
   static const addCategory = '/addCategory';
   static const addPlaylist = '/AddPlaylistScreen';
   static const addEpisode = '/addEpisode';
+  static const addPromotions = '/addpromotions';
+  static const addbooks = '/addbooks';
+  static const homeAdmine = '/homeAdmine';
+  static const adminCategoryListVertical = "/AdminCategoryListVertical";
+  static const adminPlayListListVertical = "/AdminPlayListListVertical";
+  static const episodeListALll = "/EpisodeListALll";
+  static const adminBooks = "/AdminBooksScreen";
+  static const adminPromotions = "/AdminPromotionsScreen";
 }
