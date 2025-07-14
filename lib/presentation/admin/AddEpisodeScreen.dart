@@ -8,6 +8,7 @@ import 'package:learncosmetic/core/constants/app_colors.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:learncosmetic/presentation/admin/widgets/buildUploadProgressBar.dart';
 import 'package:learncosmetic/presentation/admin/widgets/filePreview.dart';
 import 'package:path/path.dart' as path;
 import '../../data/models/playlist_model.dart';
@@ -162,39 +163,46 @@ class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
               ),
 
               const SizedBox(height: 24),
+              Visibility(
+                visible: uploadProgress > 0 && uploadProgress < 1,
+                child: buildUploadProgressBar(uploadProgress),
+              ),
 
               /// Submit Button
-              ElevatedButton(
-                onPressed:
-                    isLoading
-                        ? null
-                        : () {
-                          uploadEpisodeWithProgress(
-                            imageFile: selectedImage!,
-                            videoFile: selectedVideo!,
-                            title: titleController.text,
-                            description: descriptionController.text,
-                            playlistId: selectedPlaylistId,
-                            onProgress: (progress) {
-                              setState(() {
-                                uploadProgress = progress;
+              Visibility(
+                visible: !(uploadProgress > 0 && uploadProgress < 1),
+                child: ElevatedButton(
+                  onPressed:
+                      isLoading
+                          ? null
+                          : () {
+                            uploadEpisodeWithProgress(
+                              imageFile: selectedImage!,
+                              videoFile: selectedVideo!,
+                              title: titleController.text,
+                              description: descriptionController.text,
+                              playlistId: selectedPlaylistId,
+                              onProgress: (progress) {
+                                setState(() {
+                                  uploadProgress = progress;
 
-                                print('Upload progress: $progress');
-                              });
-                            },
-                          );
-                        },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                                  print('Upload progress: $progress');
+                                });
+                              },
+                            );
+                          },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  child:
+                      isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text(
+                            "نشر الحلقة",
+                            style: TextStyle(color: Colors.white),
+                          ),
                 ),
-                child:
-                    isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
-                          "نشر الحلقة",
-                          style: TextStyle(color: Colors.white),
-                        ),
               ),
             ],
           ),
