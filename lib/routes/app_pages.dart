@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/admin/AddBookScreen.dart';
 import 'package:learncosmetic/presentation/admin/AddPlaylistScreen.dart';
 import 'package:learncosmetic/presentation/admin/AddPromotionScreen.dart';
+import 'package:learncosmetic/presentation/admin/AddUserScreen.dart';
 import 'package:learncosmetic/presentation/admin/admin_add_category_screen.dart';
 import 'package:learncosmetic/presentation/bindings/home_binding.dart';
 import 'package:learncosmetic/presentation/bindings/splash_binding.dart';
@@ -95,6 +96,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.adminUsers,
       page: () => AllUsersScreen(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.addUser,
+      page: () => const AddUserScreen(),
       binding: HomeBinding(),
     ),
     // GetPage(

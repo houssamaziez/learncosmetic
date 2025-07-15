@@ -23,11 +23,10 @@ class _HomeAdminScreenState extends State<HomeAdminScreen> {
   @override
   Widget build(BuildContext context) {
     final items = [
-      _AdminItem(title: 'الكتب', icon: Icons.book, route: AppRoutes.adminBooks),
       _AdminItem(
-        title: 'الحلقات',
-        icon: Icons.ondemand_video,
-        route: AppRoutes.episodeListALll,
+        title: 'الأقسام',
+        icon: Icons.category,
+        route: AppRoutes.adminCategoryListVertical,
       ),
       _AdminItem(
         title: 'القوائم',
@@ -35,14 +34,22 @@ class _HomeAdminScreenState extends State<HomeAdminScreen> {
         route: AppRoutes.adminPlayListListVertical,
       ),
       _AdminItem(
+        title: 'الحلقات',
+        icon: Icons.ondemand_video,
+        route: AppRoutes.episodeListALll,
+      ),
+
+      _AdminItem(
         title: 'العروض الترويجية',
         icon: Icons.campaign,
         route: AppRoutes.adminPromotions,
       ),
+      _AdminItem(title: 'الكتب', icon: Icons.book, route: AppRoutes.adminBooks),
+
       _AdminItem(
-        title: 'الأقسام',
-        icon: Icons.category,
-        route: AppRoutes.adminCategoryListVertical,
+        title: 'المستخدمين',
+        icon: Icons.person,
+        route: AppRoutes.adminUsers,
       ),
     ];
 
@@ -100,6 +107,7 @@ class _AdminCard extends StatelessWidget {
             ),
           ],
         ),
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
