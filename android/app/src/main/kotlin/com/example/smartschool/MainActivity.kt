@@ -1,4 +1,4 @@
-package com.example.smartschool
+package com.houssamaziez.Learncosmeticadmin
 
 import android.os.Bundle
 import android.view.WindowManager
@@ -15,7 +15,7 @@ class MainActivity : FlutterActivity() {
         )
     }
 }
-// package com.example.smartschool
+// package com.houssamaziez.Learncosmeticadmin
 
 // import io.flutter.embedding.android.FlutterActivity
 

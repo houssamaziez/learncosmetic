@@ -8,7 +8,7 @@
 <uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:requestLegacyExternalStorage="true"
-        android:label="Learn Cosmetic"
+        android:label="Admin Learn Cosmetic"
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
