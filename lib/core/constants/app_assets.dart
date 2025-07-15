@@ -7,6 +7,7 @@ class AppAssets {
 
   // Logo and branding
   static const String logo = '${_imagesPath}logo.png';
+  static const String logo2 = '${_imagesPath}logo2.png';
   static const String appIcon = '${_iconsPath}app_icon.svg';
 
   // Onboarding images

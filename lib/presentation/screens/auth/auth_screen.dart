@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_size.dart';
+import '../../../core/constants/error_notifier.dart';
 import '../../controllers/login_controller.dart';
 import '../../widgets/language_selector.dart';
 import 'widgets/auth_tabs.dart';
@@ -33,7 +34,7 @@ class AuthScreen extends GetView<AuthController> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(AppSize.radiusM),
                       child: Image.asset(
-                        AppAssets.logo,
+                        AppAssets.logo2,
                         height: 100,
                         fit: BoxFit.cover,
                       ),
@@ -71,7 +72,10 @@ class AuthScreen extends GetView<AuthController> {
                       LoginTabs(
                         isLoginSelected: controller.isLogin.value,
                         onLoginTap: () => controller.setLogin(true),
-                        onRegisterTap: () => controller.setLogin(false),
+                        onRegisterTap:
+                            () => ErrorNotifier.show(
+                              "تواصل مع الدعم لإنشاء حساب".toString(),
+                            ),
                       ),
                       const SizedBox(height: AppSize.spacingM),
                       controller.isLogin.value

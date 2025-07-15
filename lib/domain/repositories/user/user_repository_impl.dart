@@ -70,11 +70,19 @@ class UserRemoteDataSourceImpl implements UserRepository {
 
   @override
   Future<UserModel> getProfile() async {
-    final response = await client.get(
+    String? imei = await FlutterDeviceImei.instance.getIMEI();
+
+    final response = await client.post(
       Uri.parse(ApiConstants.getme),
       headers: ApiHeaders.withToken(),
+      body: json.encode({"device_id": imei}),
     );
-
+    if (response.statusCode == 403 || response.statusCode == 401) {
+      throw ServerException(
+        message: json.decode(response.body)['message'],
+        statusCode: response.statusCode,
+      );
+    }
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return UserModel.fromJson(data['user']);
