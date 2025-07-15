@@ -11,6 +11,7 @@ import 'package:learncosmetic/presentation/screens/splash/splash_screen.dart';
 
 import '../presentation/admin/AddEpisodeScreen.dart';
 import '../presentation/admin/HomeAdminScreen.dart';
+import '../presentation/admin/screens/AllUsersScreen.dart';
 import '../presentation/admin/screens/PromotionsListScreen.dart'
     show PromotionsListScreen;
 import '../presentation/admin/screens/books.dart';
@@ -89,6 +90,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.adminPromotions,
       page: () => PromotionsListScreen(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.adminUsers,
+      page: () => AllUsersScreen(),
       binding: HomeBinding(),
     ),
     // GetPage(

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_device_imei/flutter_device_imei.dart';
 import 'package:http/http.dart' as http;
 import 'package:learncosmetic/domain/repositories/promotion/promotion_repository.dart';
 import '../../../../core/errors/exceptions.dart';
@@ -18,10 +19,17 @@ class UserRemoteDataSourceImpl implements UserRepository {
 
   @override
   Future<UserModel?> login(String email, String password) async {
+    String? imei = await FlutterDeviceImei.instance.getIMEI();
+
     final response = await client.post(
       Uri.parse(ApiConstants.login),
       headers: ApiHeaders.json,
-      body: json.encode({'email': email, 'password': password}),
+
+      body: json.encode({
+        'email': email,
+        'password': password,
+        "device_id": imei,
+      }),
     );
 
     if (response.statusCode == 200) {
@@ -30,6 +38,14 @@ class UserRemoteDataSourceImpl implements UserRepository {
 
       return UserModel.fromJson(data['user']);
     } else {
+      final data = json.decode(response.body);
+
+      if (response.statusCode == 403 || response.statusCode == 401) {
+        throw ServerException(
+          message: data['message'],
+          statusCode: response.statusCode,
+        );
+      }
       HttpErrorHandler.handle(response.statusCode, response.body);
     }
   }

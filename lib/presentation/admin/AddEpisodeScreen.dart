@@ -31,7 +31,7 @@ class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
 
   TextEditingController categoryIdController = TextEditingController();
 
-  int selectedPlaylistId = 7;
+  int? selectedPlaylistId;
   int? selectedCategoryId;
   String selectedCategoryName = 'اختر القسم';
   double uploadProgress = 0.0;
@@ -181,7 +181,7 @@ class _AddEpisodeScreenState extends State<AddEpisodeScreen> {
                               videoFile: selectedVideo!,
                               title: titleController.text,
                               description: descriptionController.text,
-                              playlistId: selectedPlaylistId,
+                              playlistId: int.parse(categoryIdController.text),
                               onProgress: (progress) {
                                 setState(() {
                                   uploadProgress = progress;

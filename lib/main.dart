@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_device_imei/flutter_device_imei.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeAdmine,
+      initialRoute: AppRoutes.adminUsers,
       getPages: AppPages.routes,
       unknownRoute: GetPage(
         name: AppRoutes.notFound,

@@ -6,7 +6,10 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
+import '../../core/constants/app_colors.dart';
 import '../../data/models/playlist_model.dart';
+import '../../domain/usecases/promotion.dart';
+import '../controllers/promotions_controller.dart';
 
 class AddPromotionScreen extends StatefulWidget {
   const AddPromotionScreen({super.key});
@@ -70,6 +73,10 @@ class _AddPromotionScreenState extends State<AddPromotionScreen> {
     }
   }
 
+  final PromotionsController controller = Get.put(
+    PromotionsController(PromotionUsecase(Get.find())),
+  );
+
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate() ||
         selectedImage == null ||
@@ -116,6 +123,7 @@ class _AddPromotionScreenState extends State<AddPromotionScreen> {
           startDate = null;
           endDate = null;
         });
+        controller.fetchPromotions();
       } else {
         Get.snackbar("فشل", body, backgroundColor: Colors.red);
       }
@@ -141,12 +149,10 @@ class _AddPromotionScreenState extends State<AddPromotionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
-        title: const Text(
-          "إضافة عرض ترويجي",
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: const Color(0xFF540B0E),
+        title: const Text("إضافة عرض ترويجي"),
+
+        centerTitle: true,
+        backgroundColor: AppColors.primary.withOpacity(0.1),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

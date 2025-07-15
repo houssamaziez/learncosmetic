@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:learncosmetic/core/constants/app_colors.dart';
+import 'package:learncosmetic/presentation/controllers/category_controller.dart';
 import 'package:path/path.dart' as path;
 
 class AdminAddCategoryScreen extends StatefulWidget {
@@ -29,6 +32,7 @@ class _AdminAddCategoryScreenState extends State<AdminAddCategoryScreen> {
     }
   }
 
+  final CategoryController controllerCategory = Get.find<CategoryController>();
   Future<void> _submitCategory() async {
     if (!_formKey.currentState!.validate() || _selectedImage == null) return;
 
@@ -55,12 +59,14 @@ class _AdminAddCategoryScreenState extends State<AdminAddCategoryScreen> {
 
       if (response.statusCode == 201) {
         final responseBody = await response.stream.bytesToString();
+        controllerCategory.fetchCategory();
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text('تمت إضافة التصنيف بنجاح')));
         nameController.clear();
         descriptionController.clear();
         setState(() => _selectedImage = null);
+        Get.back();
       } else {
         final body = await response.stream.bytesToString();
         print('Error ${response.statusCode}: $body');
@@ -83,7 +89,8 @@ class _AdminAddCategoryScreenState extends State<AdminAddCategoryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('إضافة تصنيف جديد'),
-        backgroundColor: const Color(0xFF540B0E),
+        centerTitle: true,
+        backgroundColor: AppColors.primary.withOpacity(0.1),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -139,11 +146,14 @@ class _AdminAddCategoryScreenState extends State<AdminAddCategoryScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(Icons.add, color: Colors.white),
                   label:
                       isLoading
                           ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text('إضافة'),
+                          : const Text(
+                            'إضافة',
+                            style: TextStyle(color: Colors.white),
+                          ),
                 ),
               ),
             ],

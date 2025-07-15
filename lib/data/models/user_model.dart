@@ -13,6 +13,8 @@ class UserModel {
   final String? role;
   final bool? active;
   final bool? isPayment;
+  final String? expirydate;
+  final String? device_id;
 
   UserModel({
     required this.id,
@@ -27,6 +29,8 @@ class UserModel {
     this.role,
     this.active,
     this.isPayment,
+    this.expirydate,
+    this.device_id,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -46,6 +50,8 @@ class UserModel {
       role: json['role'],
       active: json['active'],
       isPayment: json['ispayment'],
+      expirydate: json['expiry_date'],
+      device_id: json['device_id'],
     );
   }
 
@@ -63,6 +69,8 @@ class UserModel {
       'role': role,
       'active': active,
       'ispayment': isPayment,
+      'expiry_date': expirydate,
+      'device_id': device_id,
     };
   }
 }

@@ -6,7 +6,9 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import 'dart:convert';
 
+import '../../core/constants/app_colors.dart';
 import '../../data/models/category_model.dart';
+import '../controllers/playlist_controller.dart';
 
 class AddPlaylistScreen extends StatefulWidget {
   const AddPlaylistScreen({Key? key}) : super(key: key);
@@ -36,7 +38,7 @@ class _AddPlaylistScreenState extends State<AddPlaylistScreen> {
 
   File? imageFile;
   bool isLoading = false;
-
+  final PlaylistController controllerPlaylist = Get.find<PlaylistController>();
   Future<void> _pickImage() async {
     final picker = ImagePicker();
     final picked = await picker.pickImage(source: ImageSource.gallery);
@@ -80,6 +82,7 @@ class _AddPlaylistScreenState extends State<AddPlaylistScreen> {
         descController.clear();
         categoryIdController.clear();
         setState(() => imageFile = null);
+        controllerPlaylist.fetchPlaylist();
       } else {
         final decoded = json.decode(body);
         Get.snackbar('فشل', decoded['message'] ?? 'حدث خطأ');
@@ -109,8 +112,9 @@ class _AddPlaylistScreenState extends State<AddPlaylistScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إضافة Playlist'),
-        backgroundColor: const Color(0xFF540B0E),
+        title: const Text('إضافة قائمة جديدة'),
+        centerTitle: true,
+        backgroundColor: AppColors.primary.withOpacity(0.1),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -122,14 +126,20 @@ class _AddPlaylistScreenState extends State<AddPlaylistScreen> {
               TextFormField(
                 controller: titleController,
                 decoration: const InputDecoration(
-                  labelText: 'عنوان البلاي ليست',
+                  border: OutlineInputBorder(),
+
+                  labelText: 'العنوان',
                 ),
                 validator: (value) => value!.isEmpty ? 'أدخل العنوان' : null,
               ),
               const SizedBox(height: 12),
               TextFormField(
                 controller: descController,
-                decoration: const InputDecoration(labelText: 'الوصف'),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+
+                  labelText: 'الوصف',
+                ),
                 maxLines: 3,
                 validator: (value) => value!.isEmpty ? 'أدخل الوصف' : null,
               ),

@@ -19,4 +19,5 @@ abstract class AppRoutes {
   static const episodeListALll = "/EpisodeListALll";
   static const adminBooks = "/AdminBooksScreen";
   static const adminPromotions = "/AdminPromotionsScreen";
+  static const adminUsers = "/AllUsersScreen";
 }

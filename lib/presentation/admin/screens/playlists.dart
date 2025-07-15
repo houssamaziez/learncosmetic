@@ -7,8 +7,10 @@ import 'package:learncosmetic/presentation/screens/home/widgets/playlist_widgets
     show PopularPlaylistCard;
 import 'package:learncosmetic/presentation/widgets/spinkit.dart' show spinkit;
 
+import '../../../routes/app_routes.dart';
 import '../../controllers/playlist_controller.dart';
 import '../../screens/home/playlist/screenplaylist.dart';
+import '../controller/adminecontroller.dart';
 
 class AdminPlayListListVertical extends StatelessWidget {
   const AdminPlayListListVertical({super.key});
@@ -26,14 +28,33 @@ class AdminPlayListListVertical extends StatelessWidget {
       }
 
       if (controllerPlaylist.playlist.isEmpty) {
-        return const SizedBox(
+        return SizedBox(
           height: 180,
-          child: Scaffold(body: Center(child: Text('No categories found'))),
+          child: Scaffold(
+            appBar: AppBar(
+              actions: [
+                IconButton(
+                  onPressed: () => Get.toNamed(AppRoutes.addPlaylist),
+                  icon: const Icon(Icons.add, color: Colors.black),
+                ),
+              ],
+              title: const Text('كل الدورات'),
+              centerTitle: true,
+              backgroundColor: AppColors.primary.withOpacity(0.1),
+            ),
+            body: Center(child: Text('No categories found')),
+          ),
         );
       }
 
       return Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () => Get.toNamed(AppRoutes.addPlaylist),
+              icon: const Icon(Icons.add, color: Colors.black),
+            ),
+          ],
           title: const Text('كل الدورات'),
           centerTitle: true,
           backgroundColor: AppColors.primary.withOpacity(0.1),
@@ -50,14 +71,43 @@ class AdminPlayListListVertical extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               final item = controllerPlaylist.playlist[index];
-              return SizedBox(
-                width: 180,
-                child: PopularPlaylistCard(
-                  playlist: item,
-                  onTap: () {
-                    Get.to(CourseScreen(id: item.id.toString()));
-                  },
-                ),
+              return Stack(
+                children: [
+                  SizedBox(
+                    width: 180,
+                    child: PopularPlaylistCard(
+                      playlist: item,
+                      onTap: () {
+                        Get.to(CourseScreen(id: item.id.toString()));
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+
+                    child: IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () {
+                        Get.put(AdminController())
+                            .delete(item.id, 'playlists')
+                            .then((value) {
+                              controllerPlaylist.fetchPlaylist();
+                            })
+                            .catchError((error) {
+                              Get.snackbar(
+                                'خطاء',
+                                'فشل الاتصال بالخادم',
+                                backgroundColor:
+                                    Get.theme.colorScheme.errorContainer,
+                                colorText:
+                                    Get.theme.colorScheme.onErrorContainer,
+                              );
+                            });
+                      },
+                    ),
+                  ),
+                ],
               );
             },
           ),

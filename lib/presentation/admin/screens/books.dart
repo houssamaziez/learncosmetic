@@ -6,7 +6,9 @@ import 'package:learncosmetic/presentation/widgets/spinkit.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_size.dart';
+import '../../../routes/app_routes.dart';
 import '../../controllers/book_controller.dart';
+import '../controller/adminecontroller.dart';
 
 class AdminBooksScreen extends StatelessWidget {
   const AdminBooksScreen({super.key});
@@ -17,6 +19,12 @@ class AdminBooksScreen extends StatelessWidget {
     controller.getBooks();
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(AppRoutes.adminBooks),
+            icon: const Icon(Icons.add, color: Colors.black),
+          ),
+        ],
         title: const Text(
           'الكتب التعليمية',
           style: TextStyle(color: AppColors.primary),
@@ -38,14 +46,14 @@ class AdminBooksScreen extends StatelessWidget {
           itemCount: controller.books.length,
           itemBuilder: (context, index) {
             final book = controller.books[index];
-            return bookCard(book);
+            return bookCard(book, controller);
           },
         );
       }),
     );
   }
 
-  Widget bookCard(Book book) {
+  Widget bookCard(Book book, controller) {
     return InkWell(
       onTap: () {
         Get.to(ScreenPdfBook(url: book.pdfUrl));
@@ -81,15 +89,41 @@ class AdminBooksScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      book.title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: AppSize.fontSizeL,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF540B0E),
-                      ),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            book.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: AppSize.fontSizeM,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF540B0E),
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {
+                            Get.put(AdminController())
+                                .delete(book.id, 'books')
+                                .then((value) {
+                                  controller.getBooks();
+                                })
+                                .catchError((error) {
+                                  Get.snackbar(
+                                    'خطاء',
+                                    'فشل الاتصال بالخادم',
+                                    backgroundColor:
+                                        Get.theme.colorScheme.errorContainer,
+                                    colorText:
+                                        Get.theme.colorScheme.onErrorContainer,
+                                  );
+                                });
+                          },
+                        ),
+                      ],
                     ),
                     const SizedBox(height: AppSize.spacingXS),
                     Text(

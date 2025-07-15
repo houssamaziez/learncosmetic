@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
+
+import '../../controllers/course_screen_controller.dart';
 
 Future<void> uploadEpisodeWithProgress({
   required File imageFile,
@@ -12,6 +15,7 @@ Future<void> uploadEpisodeWithProgress({
   required void Function(double) onProgress,
 }) async {
   final uri = Uri.parse("https://test.hatlifood.com/api/episode");
+  final CourseScreenController controller = Get.find();
 
   final request = http.MultipartRequest('POST', uri);
   request.fields['title'] = title;
@@ -70,6 +74,8 @@ Future<void> uploadEpisodeWithProgress({
 
   if (response.statusCode == 201 || response.statusCode == 200) {
     final responseBody = await response.stream.bytesToString();
+    controller.getALLHomeEpisodes();
+    Get.back();
     print('✅ Success: $responseBody');
   } else {
     final responseBody = await response.stream.bytesToString();
