@@ -8,6 +8,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_size.dart';
 import '../../../routes/app_routes.dart';
 import '../../controllers/book_controller.dart';
+import '../AddBookScreen.dart';
 import '../controller/adminecontroller.dart';
 
 class AdminBooksScreen extends StatelessWidget {
@@ -21,7 +22,9 @@ class AdminBooksScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => Get.toNamed(AppRoutes.adminBooks),
+            onPressed: () {
+              Get.to(AddBookScreen());
+            },
             icon: const Icon(Icons.add, color: Colors.black),
           ),
         ],

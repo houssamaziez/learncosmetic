@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_device_imei/flutter_device_imei.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:learncosmetic/domain/repositories/promotion/promotion_repository.dart';
 import '../../../../core/errors/exceptions.dart';
@@ -10,6 +11,7 @@ import '../../../core/constants/error_notifier.dart';
 import '../../../core/network/http_error_handler.dart';
 import '../../../core/services/local_storage_service.dart';
 import '../../../data/models/user_model.dart';
+import '../../../presentation/controllers/login_controller.dart';
 import 'user_repository.dart';
 
 class UserRemoteDataSourceImpl implements UserRepository {
@@ -132,7 +134,10 @@ class UserRemoteDataSourceImpl implements UserRepository {
     File? imageuser,
   }) async {
     try {
-      final uri = Uri.parse(ApiConstants.updateProfile);
+      final uri = Uri.parse(
+        ApiConstants.updateProfile +
+            Get.find<AuthController>().user!.id.toString(),
+      );
 
       final request = http.MultipartRequest('POST', uri);
 

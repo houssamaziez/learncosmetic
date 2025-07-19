@@ -150,11 +150,11 @@ class CommentListTile extends StatelessWidget {
             radius: 24,
             backgroundColor: Colors.blue.shade100,
             backgroundImage:
-                (comment.userimage != null && comment.userimage.isNotEmpty)
-                    ? NetworkImage(comment.userimage)
+                (comment.userImage != null && comment.userImage!.isNotEmpty)
+                    ? NetworkImage(comment.userImage!)
                     : null,
             child:
-                (comment.userimage == null || comment.userimage.isEmpty)
+                (comment.userImage == null || comment.userImage!.isEmpty)
                     ? Text(
                       firstLetter,
                       style: const TextStyle(

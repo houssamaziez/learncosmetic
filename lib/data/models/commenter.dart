@@ -6,7 +6,7 @@ class Commenter {
   final String userName;
   final String content;
   final DateTime createdAt;
-  final String userimage;
+  String? userImage;
 
   Commenter({
     required this.id,
@@ -14,7 +14,7 @@ class Commenter {
     required this.userName,
     required this.content,
     required this.createdAt,
-    required this.userimage,
+    required this.userImage,
   });
 
   factory Commenter.fromJson(Map<String, dynamic> json) {
@@ -23,7 +23,10 @@ class Commenter {
       userId: int.parse(json['user_id'].toString()),
       userName: json['user_name'],
       content: json['content'],
-      userimage: ApiConstants.host + "/" + json['imageuser'],
+      userImage:
+          json['imageuser'] != null
+              ? "${ApiConstants.host}/${json['imageuser']}"
+              : "",
       createdAt: DateTime.parse(json['created_at']),
     );
   }
@@ -34,7 +37,7 @@ class Commenter {
       'user_id': userId,
       'user_name': userName,
       'content': content,
-      'imageuser': userimage,
+      'imageuser': userImage,
       'created_at': createdAt.toIso8601String(),
     };
   }

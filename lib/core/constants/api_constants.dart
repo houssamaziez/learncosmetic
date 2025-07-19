@@ -7,7 +7,7 @@ class ApiConstants {
   // Endpoints
   static const String login = '$baseUrl/login';
   static const String getme = '$baseUrl/me';
-  static const String updateProfile = '$baseUrl/user/update';
+  static const String updateProfile = '$baseUrl/users/update/';
 
   static const String profile = '$baseUrl/profile';
   static const String register = '$baseUrl/register';

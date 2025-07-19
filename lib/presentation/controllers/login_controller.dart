@@ -15,8 +15,8 @@ class AuthController extends GetxController {
 
   // Fields
   final nameController = TextEditingController();
-  final emailController = TextEditingController(text: 'houssamaziez@gmail.com');
-  final passwordController = TextEditingController(text: 'secret123');
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
   final isLoading = false.obs;
@@ -59,7 +59,9 @@ class AuthController extends GetxController {
       user = await loginUser.getMe();
       // Get.offAllNamed(AppRoutes.home);
     } catch (e) {
-      ErrorNotifier.show(e.toString());
+      if (!(e.toString().contains("Unauthenticated."))) {
+        ErrorNotifier.show(e.toString());
+      }
     } finally {
       isLoading.value = false;
     }
