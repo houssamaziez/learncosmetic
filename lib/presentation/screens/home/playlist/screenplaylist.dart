@@ -374,13 +374,22 @@ class _CourseScreenState extends State<CourseScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
+                    // Text(
+                    //   episode.videoDuration,
+                    //   style: const TextStyle(
+                    //     fontSize: 12,
+                    //     color: Colors.black54,
+                    //   ),
+                    // ),
                     Text(
-                      episode.videoDuration,
-                      style: const TextStyle(
+                      episode.createdAt.toIso8601String().substring(0, 10),
+                      style: TextStyle(
                         fontSize: 12,
-                        color: Colors.black54,
+                        color: isSelected ? AppColors.primary : Colors.black54,
                       ),
                     ),
+                    const SizedBox(height: 4),
+
                     if (episode.isWatched == true)
                       const Icon(
                         Icons.check_circle,
