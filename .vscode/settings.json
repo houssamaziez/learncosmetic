@@ -1,7 +1,8 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "cmake.sourceDirectory": "/Users/mac/Desktop/learncosmetic/windows/runner",
-    "cSpell.words": [
-        "Usecase"
-    ]
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "cmake.sourceDirectory": "/Users/mac/Desktop/learncosmetic/windows/runner",
+  "cSpell.words": [
+    "Usecase"
+  ],
+  "dart.flutterSdkPath": "~/fvm/versions/3.32.0"
 }

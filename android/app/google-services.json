@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "839967983368",
+    "project_id": "scorespot-a5b10",
+    "storage_bucket": "scorespot-a5b10.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839967983368:android:f1000fa149b3a7a22b0ebd",
+        "android_client_info": {
+          "package_name": "com.houssamaziez.Learncosmetic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839967983368-09e830r6tru2d7k2a8sj8q6gje9n7r77.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTy_RM5-5WnQmS4SwcZ5B3oOkUQEtl7sY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839967983368-09e830r6tru2d7k2a8sj8q6gje9n7r77.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "839967983368-e0spr0faks4qgdidj3ajssmhdn4cl54l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.scoreSpot"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
