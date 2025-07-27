@@ -74,5 +74,8 @@
     "welcome_user": "مرحباً، @name!",
     "change_language": "تغيير اللغة",
     "save": "حفظ",
-    "cancel": "الغاء"
+    "unsaved_changes_title": "تأكيد الخروج",
+    "unsaved_changes_message": "لم تقم بحفظ التغييرات، هل أنت متأكد أنك تريد الرجوع؟",
+    "cancel": "إلغاء",
+    "yes_exit": "نعم، ارجع"
 }

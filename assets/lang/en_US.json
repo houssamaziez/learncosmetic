@@ -73,5 +73,9 @@
     "all_sections": "All sections",
     "welcome_user": "Welcome, @name!",
     "change_language": "Change language",
-    "save": "Save"
+    "save": "Save",
+    "unsaved_changes_title": "Confirm Exit",
+    "unsaved_changes_message": "You have unsaved changes. Are you sure you want to go back?",
+    "cancel": "Cancel",
+    "yes_exit": "Yes, Exit"
 }

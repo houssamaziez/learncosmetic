@@ -92,41 +92,82 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
 
     return Directionality(
       textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
-      child: Scaffold(
-        appBar: AppBar(title: Text('change_language'.tr), centerTitle: true),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              _buildLanguageTile(
-                title: 'العربية',
-                subtitle: 'Arabic',
-                locale: const Locale('ar', 'DZ'),
+      child: WillPopScope(
+        onWillPop: () async {
+          final storedLang = storage.read('languageCode');
+          final storedCountry = storage.read('countryCode');
+
+          final hasUnsavedChanges =
+              storedLang != _selectedLocale?.languageCode ||
+              storedCountry != _selectedLocale?.countryCode;
+
+          if (hasUnsavedChanges) {
+            bool? confirm = await Get.dialog<bool>(
+              AlertDialog(
+                title: Text(
+                  'unsaved_changes_title'.tr,
+                  style: TextStyle(color: AppColors.primary),
+                ),
+                content: Text('unsaved_changes_message'.tr),
+                actions: [
+                  TextButton(
+                    onPressed: () => Get.back(result: false),
+                    child: Text(
+                      'cancel'.tr,
+                      style: TextStyle(color: AppColors.primary),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => Get.back(result: true),
+                    child: Text(
+                      'yes_exit'.tr,
+                      style: TextStyle(color: AppColors.primary),
+                    ),
+                  ),
+                ],
               ),
-              _buildLanguageTile(
-                title: 'English',
-                subtitle: 'English',
-                locale: const Locale('en', 'US'),
-              ),
-              const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  icon: const Icon(Icons.save),
-                  label: Text('save'.tr),
-                  onPressed: _changeLanguage,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    textStyle: const TextStyle(fontSize: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+            );
+            return confirm ?? false;
+          }
+
+          return true;
+        },
+        child: Scaffold(
+          appBar: AppBar(title: Text('change_language'.tr), centerTitle: true),
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                _buildLanguageTile(
+                  title: 'العربية',
+                  subtitle: 'Arabic',
+                  locale: const Locale('ar', 'DZ'),
+                ),
+                _buildLanguageTile(
+                  title: 'English',
+                  subtitle: 'English',
+                  locale: const Locale('en', 'US'),
+                ),
+                const Spacer(),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    icon: const Icon(Icons.save),
+                    label: Text('save'.tr),
+                    onPressed: _changeLanguage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      textStyle: const TextStyle(fontSize: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
