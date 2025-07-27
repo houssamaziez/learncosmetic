@@ -19,8 +19,8 @@ class HiUser extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              "! ${Get.find<AuthController>().user!.name ?? ""}، أهلاً بكِ ",
-              // "! ، أهلاً بكِ ",
+              "! ${Get.find<AuthController>().user!.name ?? ""}" +
+                  "welcome_female".tr, // Assuming you have a translation
               style: TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.bold,
@@ -32,7 +32,7 @@ class HiUser extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              "استكشفي أحدث الدورات في عالم التجميل",
+              "explore_latest_beauty_courses".tr,
               style: TextStyle(
                 color: const Color.fromARGB(255, 65, 16, 20),
                 fontSize: 16,

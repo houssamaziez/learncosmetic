@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../core/constants/app_size.dart';
 import '../../../widgets/custom_tab_button.dart';
 
@@ -36,12 +37,12 @@ class LoginTabs extends StatelessWidget {
       child: Row(
         children: [
           CustomTabButton(
-            label: 'تسجيل الدخول',
+            label: "login".tr,
             isSelected: isLoginSelected,
             onTap: onLoginTap,
           ),
           CustomTabButton(
-            label: 'إنشاء حساب',
+            label: "create_account".tr,
             isSelected: !isLoginSelected,
             onTap: onRegisterTap,
           ),

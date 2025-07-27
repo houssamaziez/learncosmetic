@@ -38,7 +38,7 @@ class LoginForm extends StatelessWidget {
         // ),
         AppTextField(
           controller: controller.emailController,
-          label: 'البريد الإلكتروني',
+          label: "email".tr,
           keyboardType: TextInputType.emailAddress,
         ),
         const SizedBox(height: AppSize.spacingM),
@@ -54,7 +54,7 @@ class LoginForm extends StatelessWidget {
         // ),
         AppTextField(
           controller: controller.passwordController,
-          label: 'كلمة المرور',
+          label: "password".tr,
           isPassword: true,
         ),
         const SizedBox(height: AppSize.spacingS),
@@ -66,7 +66,7 @@ class LoginForm extends StatelessWidget {
             onPressed: () {
               // Navigate to forgot password screen if needed
             },
-            child: const Text('نسيت كلمة المرور؟'),
+            child: Text("forgot_password".tr),
           ),
         ),
 
@@ -75,7 +75,7 @@ class LoginForm extends StatelessWidget {
         // Login button
         Obx(
           () => ButtonAll(
-            label: 'تسجيل الدخول',
+            label: "login".tr,
             isLoading: controller.isLoading.value,
             onPressed: controller.login,
           ),

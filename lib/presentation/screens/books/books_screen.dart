@@ -17,8 +17,8 @@ class BooksScreen extends StatelessWidget {
     controller.getBooks();
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'الكتب التعليمية',
+        title: Text(
+          "educational_books".tr,
           style: TextStyle(color: AppColors.primary),
         ),
         centerTitle: true,
@@ -30,7 +30,7 @@ class BooksScreen extends StatelessWidget {
         }
 
         if (controller.books.isEmpty) {
-          return const Center(child: Text('لا توجد كتب متاحة حالياً'));
+          return Center(child: Text("no_books_available".tr));
         }
 
         return ListView.builder(

@@ -19,9 +19,9 @@ class CategoryList extends StatelessWidget {
       }
 
       if (controllerCategory.category.isEmpty) {
-        return const SizedBox(
+        return SizedBox(
           height: 180,
-          child: Center(child: Text('No categories found')),
+          child: Center(child: Text("no_categories_found".tr)),
         );
       }
 

@@ -33,8 +33,8 @@ class UserProfileScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text(
-              'الصفحة الشخصية',
+            title: Text(
+              "profile_page".tr,
               style: TextStyle(color: AppColors.primary),
             ),
             centerTitle: true,
@@ -83,42 +83,41 @@ class UserProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                /// بطاقة معلومات
                 Card(
                   margin: const EdgeInsets.only(bottom: 12),
                   child: Column(
                     children: [
                       _buildInfoTile(
                         Icons.phone,
-                        'رقم الهاتف',
-                        user.phone ?? 'غير متوفر',
+                        "phone_number".tr,
+                        user.phone ?? "unavailable".tr,
                       ),
                       _buildInfoTile(
                         Icons.home,
-                        'العنوان',
-                        user.address ?? 'غير متوفر',
+                        'address'.tr,
+                        user.address ?? "unavailable".tr,
                       ),
                       _buildInfoTile(
                         Icons.verified_user,
-                        'تم التحقق من الإيميل',
-                        user.emailVerifiedAt != null ? 'نعم' : 'لا',
+                        "email_verified".tr,
+                        user.emailVerifiedAt != null ? 'yes'.tr : 'no'.tr,
                       ),
                       _buildInfoTile(
                         Icons.calendar_today,
-                        'تاريخ الإنشاء',
+                        "creation_date".tr,
                         user.createdAt != null
                             ? user.createdAt!.split('T').first
-                            : 'غير متوفر',
+                            : "unavailable".tr,
                       ),
                       _buildInfoTile(
                         Icons.access_time_filled,
-                        'تاريخ انتهاء الصلاحية',
+                        "expiration_date".tr,
                         expiryDate != null
                             ? dateFormat.format(expiryDate)
-                            : 'غير متوفر',
+                            : "unavailable".tr,
                         trailing: Chip(
                           label: Text(
-                            isExpired ? "انتهت الصلاحية" : "صالحة",
+                            isExpired ? "expired".tr : "valid".tr,
                             style: const TextStyle(color: Colors.white),
                           ),
                           backgroundColor:
@@ -138,8 +137,8 @@ class UserProfileScreen extends StatelessWidget {
                   child: ElevatedButton.icon(
                     onPressed: () => Get.offAll(() => const AuthScreen()),
                     icon: const Icon(Icons.logout, color: Colors.white),
-                    label: const Text(
-                      'تسجيل الخروج',
+                    label: Text(
+                      "logout".tr,
                       style: TextStyle(color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(

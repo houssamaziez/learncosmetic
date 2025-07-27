@@ -41,7 +41,7 @@ class _EpisodeCommenterScreenState extends State<EpisodeCommenterScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('التعليقات', style: TextStyle(fontFamily: 'Tajawal')),
+        title: Text("comments".tr, style: TextStyle(fontFamily: 'Tajawal')),
         centerTitle: true,
       ),
       body: Column(
@@ -53,9 +53,9 @@ class _EpisodeCommenterScreenState extends State<EpisodeCommenterScreen> {
               }
 
               if (controller.commenter.isEmpty) {
-                return const Center(
+                return Center(
                   child: Text(
-                    'لا توجد تعليقات حتى الآن',
+                    "no_comments_yet".tr,
                     style: TextStyle(fontSize: 16),
                   ),
                 );
@@ -104,7 +104,7 @@ class _EpisodeCommenterScreenState extends State<EpisodeCommenterScreen> {
                     controller: commentController,
                     style: const TextStyle(fontFamily: 'Tajawal'),
                     decoration: InputDecoration(
-                      hintText: 'أضف تعليقك...',
+                      hintText: "add_your_comment".tr,
                       hintStyle: const TextStyle(fontFamily: 'Tajawal'),
                       border: InputBorder.none,
                     ),

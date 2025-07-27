@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:learncosmetic/data/models/playlist_model.dart';
 
 import '../../../../../core/constants/app_size.dart';
@@ -122,7 +123,7 @@ class PopularPlaylistCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '${playlist.coursesCount} دورة',
+                            '${playlist.coursesCount}' + 'course'.tr,
                             style: const TextStyle(
                               fontSize: 13,
                               color: Colors.brown,
@@ -165,7 +166,7 @@ class PopularPlaylistCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: const Text('ابدأ التعلم الآن'),
+                      child: Text("start_learning_now".tr),
                     ),
                   ),
                 ],

@@ -32,7 +32,7 @@ class PlayListListVertical extends StatelessWidget {
 
       return Scaffold(
         appBar: AppBar(
-          title: const Text('كل الدورات'),
+          title: Text("all_courses".tr),
           centerTitle: true,
           backgroundColor: AppColors.primary.withOpacity(0.1),
         ),

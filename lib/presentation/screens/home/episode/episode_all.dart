@@ -26,7 +26,7 @@ class _EpisodeListALllState extends State<EpisodeListALll> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('كل الفيديوهات'),
+        title: Text("all_videos".tr),
         centerTitle: true,
         backgroundColor: AppColors.primary.withOpacity(0.1),
       ),

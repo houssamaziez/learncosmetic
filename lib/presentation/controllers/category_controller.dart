@@ -32,7 +32,7 @@ class CategoryController extends GetxController {
       category.value = result!;
       return result;
     } catch (e) {
-      throw Exception('PromotionBanner not found');
+      throw Exception("promotion_banner_not_found".tr);
     } finally {
       isLoading.value = false;
     }

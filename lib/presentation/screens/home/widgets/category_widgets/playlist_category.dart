@@ -31,7 +31,7 @@ class PlaylistCategory extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('الدورات'),
+        title: Text("courses".tr),
         centerTitle: true,
         backgroundColor: AppColors.primary.withOpacity(0.1),
       ),

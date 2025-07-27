@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
@@ -13,7 +14,6 @@ class SectionHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // العنوان
           Text(
             title,
             style: const TextStyle(
@@ -23,7 +23,6 @@ class SectionHeader extends StatelessWidget {
             ),
           ),
 
-          // زر "عرض الكل"
           if (onSeeAll != null)
             TextButton(
               onPressed: onSeeAll,
@@ -31,8 +30,8 @@ class SectionHeader extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 visualDensity: VisualDensity.compact,
               ),
-              child: const Text(
-                'عرض الكل',
+              child: Text(
+                "view_all".tr, // Assuming you have a translation for "view_all"
                 style: TextStyle(fontSize: 13, color: Colors.grey),
               ),
             ),

@@ -14,8 +14,8 @@ class NotFoundScreenList extends StatelessWidget {
           children: [
             Icon(Icons.search_off, size: 100, color: Colors.grey.shade500),
             const SizedBox(height: 24),
-            const Text(
-              'لا توجد نتائج',
+            Text(
+              "no_results".tr,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -24,7 +24,7 @@ class NotFoundScreenList extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              'عذرًا، لم نتمكن من العثور على أي عناصر مطابقة.',
+              "no_matching_items".tr,
               style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
               textAlign: TextAlign.center,
             ),
@@ -45,7 +45,7 @@ class NotFoundScreenList extends StatelessWidget {
                 ),
               ),
               icon: const Icon(Icons.arrow_back),
-              label: const Text('العودة', style: TextStyle(fontSize: 16)),
+              label: Text("go_back".tr, style: TextStyle(fontSize: 16)),
             ),
           ],
         ),

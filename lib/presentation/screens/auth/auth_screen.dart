@@ -42,7 +42,7 @@ class AuthScreen extends GetView<AuthController> {
                   ),
                   const SizedBox(height: AppSize.spacingM),
                   Text(
-                    'اكتشفي عالم الجمال والتجميل',
+                    "discover_beauty_world".tr.toString(),
                     style: TextStyle(
                       color: Colors.white70,
                       fontSize: AppSize.fontSizeS,
@@ -74,7 +74,7 @@ class AuthScreen extends GetView<AuthController> {
                         onLoginTap: () => controller.setLogin(true),
                         onRegisterTap:
                             () => ErrorNotifier.show(
-                              "تواصل مع الدعم لإنشاء حساب".toString(),
+                              "contact_support_to_create_account".tr.toString(),
                             ),
                       ),
                       const SizedBox(height: AppSize.spacingM),

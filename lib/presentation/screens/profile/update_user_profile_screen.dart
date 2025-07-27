@@ -69,7 +69,7 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
         imageuser: _selectedImage,
       );
       Get.back();
-      Get.snackbar('تم', 'تم تحديث البيانات بنجاح');
+      Get.snackbar("done".tr, "update_success".tr);
     }
   }
 
@@ -78,8 +78,8 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          'تعديل الملف الشخصي',
+        title: Text(
+          "edit_profile".tr,
           style: TextStyle(color: AppColors.primary),
         ),
         backgroundColor: AppColors.primary.withOpacity(0.1),
@@ -143,24 +143,24 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
               ),
               const SizedBox(height: AppSize.spacingL),
 
-              _buildTextField('الاسم الكامل', nameController),
+              _buildTextField("full_name".tr, nameController),
               const SizedBox(height: AppSize.spacingM),
 
               _buildTextField(
-                'البريد الإلكتروني',
+                "email".tr,
                 emailController,
                 inputType: TextInputType.emailAddress,
               ),
               const SizedBox(height: AppSize.spacingM),
 
               _buildTextField(
-                'رقم الهاتف',
+                "phone_number".tr,
                 phoneController,
                 inputType: TextInputType.phone,
               ),
               const SizedBox(height: AppSize.spacingM),
 
-              _buildTextField('العنوان', addressController),
+              _buildTextField("title".tr, addressController),
               const SizedBox(height: AppSize.spacingL),
 
               SizedBox(
@@ -178,8 +178,8 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                     builder: (controller) {
                       return controller.isLoadingUpdate
                           ? spinkit
-                          : const Text(
-                            'حفظ التعديلات',
+                          : Text(
+                            "save_changes".tr,
                             style: TextStyle(color: Colors.white),
                           );
                     },
@@ -208,7 +208,7 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
           keyboardType: inputType,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'هذا الحقل مطلوب';
+              return "field_required".tr;
             }
             return null;
           },

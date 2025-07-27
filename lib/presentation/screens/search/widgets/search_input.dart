@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:learncosmetic/core/constants/app_colors.dart';
 import 'package:learncosmetic/core/constants/app_size.dart';
 
@@ -16,7 +17,7 @@ class SearchInput extends StatelessWidget {
       focusNode: FocusNode(),
 
       decoration: InputDecoration(
-        hintText: 'ابحث عن مستحضرات التجميل، فيديوهات، أو قوائم التشغيل...',
+        hintText: "search_hint".tr,
         prefixIcon: Icon(Icons.search, color: Colors.grey),
         filled: true,
         fillColor: Colors.grey.withOpacity(0.1),

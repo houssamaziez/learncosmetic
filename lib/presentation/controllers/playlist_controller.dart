@@ -36,7 +36,7 @@ class PlaylistController extends GetxController {
       playlist.value = result!;
       return result;
     } catch (e) {
-      throw Exception('Playlist not found');
+      throw Exception("playlist_not_found".tr);
     } finally {
       isLoading.value = false;
     }
@@ -63,7 +63,7 @@ class PlaylistController extends GetxController {
       update();
       return result;
     } catch (e) {
-      throw Exception('Playlist not found');
+      throw Exception("playlist_not_found".tr);
     } finally {
       isLoading.value = false;
       return episodes;
@@ -105,8 +105,8 @@ class PlaylistController extends GetxController {
 
     if (index > currentIndex.value + 1) {
       Get.snackbar(
-        'غير مسموح',
-        'يجب إكمال الحلقات بالترتيب',
+        "not_allowed".tr,
+        "complete_episodes_in_order".tr,
         snackPosition: SnackPosition.BOTTOM,
       );
       return;

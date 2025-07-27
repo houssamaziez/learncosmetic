@@ -145,7 +145,7 @@ class _BannerSliderState extends State<BannerSlider> {
                                     ),
                                   );
                                 },
-                                child: const Text('اكتشف الآن'),
+                                child: Text("discover_now".tr),
                               ),
                             ],
                           ),

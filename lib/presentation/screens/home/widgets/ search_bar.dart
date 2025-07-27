@@ -31,7 +31,7 @@ class HomeSearchBar extends StatelessWidget {
                 const Icon(Icons.search, color: Colors.grey, size: 20),
                 const SizedBox(width: 8),
                 Text(
-                  'ابحث عن دورات، منتجات...',
+                  "search_hint_courses_products".tr,
                   style: TextStyle(color: Colors.grey.shade600),
                 ),
               ],

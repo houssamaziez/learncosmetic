@@ -11,7 +11,7 @@ class ScreenPdfBook extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('عرض الكتاب', style: TextStyle(color: Colors.white)),
+        title: Text("view_book".tr, style: TextStyle(color: Colors.white)),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {

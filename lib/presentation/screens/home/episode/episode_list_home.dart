@@ -20,7 +20,7 @@ class EpisodeListHome extends StatelessWidget {
           return Center(child: spinkit);
         }
         if (controller.episodesHome.isEmpty) {
-          return const Center(child: Text('لا توجد دورات متاحة حالياً'));
+          return Center(child: Text("no_courses_available".tr));
         }
         return ListView.builder(
           physics:

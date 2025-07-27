@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:learncosmetic/core/services/local_storage_service.dart';
+import 'package:learncosmetic/core/services/translations.dart';
 import 'package:learncosmetic/domain/repositories/search/search_repository_impl.dart'
     show SearchRepositoryImpl;
 import 'package:learncosmetic/domain/repositories/user/user_repository_impl.dart';
@@ -44,7 +45,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splash,
+      initialRoute: AppRoutes.homeAdmine,
+      translations: AppTranslations(), // Your translations
+      locale: Locale('en', 'US'), // Default locale
+      fallbackLocale: Locale('en', 'US'),
       getPages: AppPages.routes,
       unknownRoute: GetPage(
         name: AppRoutes.notFound,

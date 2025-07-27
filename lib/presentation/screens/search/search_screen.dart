@@ -37,7 +37,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('بحث'),
+        title: Text('search'.tr),
 
         centerTitle: true,
         elevation: 2,
@@ -73,8 +73,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     // TagList(tags: controller.tags),
                     const SizedBox(height: AppSize.spacingS),
                     if (controller.playlists.isNotEmpty)
-                      const SectionTitle(
-                        title: 'قوائم التشغيل',
+                      SectionTitle(
+                        title: "playlists".tr,
                         icon: Icons.playlist_play,
                       ),
 
@@ -96,10 +96,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       const SizedBox(height: AppSize.spacingL),
 
                     if (controller.videos.isNotEmpty)
-                      const SectionTitle(
-                        title: 'الفيديوهات',
-                        icon: Icons.play_arrow,
-                      ),
+                      SectionTitle(title: 'videos'.tr, icon: Icons.play_arrow),
                     const SizedBox(height: AppSize.spacingS),
                     Column(
                       children:
@@ -130,8 +127,8 @@ class _SearchScreenState extends State<SearchScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const SectionTitle(
-                            title: 'الفئات',
+                          SectionTitle(
+                            title: "categories".tr,
                             icon: Icons.grid_view,
                           ),
                           const SizedBox(height: AppSize.spacingS),

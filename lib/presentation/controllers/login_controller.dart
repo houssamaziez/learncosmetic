@@ -34,7 +34,7 @@ class AuthController extends GetxController {
     final password = passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
-      loginError.value = 'Please fill in all fields';
+      loginError.value = "fill_all_fields".tr; // "Please fill in all fields"
       return;
     }
 
@@ -77,7 +77,7 @@ class AuthController extends GetxController {
         email.isEmpty ||
         password.isEmpty ||
         confirmPassword.isEmpty) {
-      loginError.value = 'Please fill in all fields';
+      loginError.value = "fill_all_fields".tr;
       return;
     }
 

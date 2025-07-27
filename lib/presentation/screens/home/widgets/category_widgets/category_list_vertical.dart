@@ -26,7 +26,7 @@ class CategoryListVertical extends StatelessWidget {
 
       return Scaffold(
         appBar: AppBar(
-          title: const Text('كل الأقسام'),
+          title: Text("all_sections".tr),
           centerTitle: true,
           backgroundColor: AppColors.primary.withOpacity(0.1),
         ),

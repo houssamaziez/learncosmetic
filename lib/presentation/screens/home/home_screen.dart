@@ -34,14 +34,14 @@ class HomeScreen extends StatelessWidget {
             const HomeSearchBar(),
             BannerSlider(),
             SectionHeader(
-              title: "الأقسام الرئيسية",
+              title: "main_sections".tr,
               onSeeAll: () {
                 Get.to(CategoryListVertical());
               },
             ),
             CategoryList(),
             SectionHeader(
-              title: "الدورات الأكثر شعبية",
+              title: "most_popular_courses".tr,
               onSeeAll: () {
                 Get.to(PlayListListVertical());
               },
@@ -54,14 +54,12 @@ class HomeScreen extends StatelessWidget {
                   return Center(child: spinkit);
                 }
                 if (controller.episodesHome.isEmpty) {
-                  return const Center(
-                    child: Text('لا توجد دورات متاحة حالياً'),
-                  );
+                  return Center(child: Text("no_courses_available".tr));
                 }
                 return Column(
                   children: [
                     SectionHeader(
-                      title: 'الفيديو الأكثر شاهدة',
+                      title: "most_viewed_video".tr,
                       onSeeAll: () {
                         Get.to(EpisodeListALll(controller: controller));
                       },

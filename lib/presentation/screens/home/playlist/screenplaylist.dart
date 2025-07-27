@@ -240,7 +240,7 @@ class _CourseScreenState extends State<CourseScreen> {
           const SizedBox(height: 12),
           Row(
             children: [
-              _tag(label: "جديد", color: Colors.red),
+              _tag(label: "new".tr, color: Colors.red),
               const SizedBox(width: 12),
               InkWell(
                 onTap:
@@ -276,14 +276,14 @@ class _CourseScreenState extends State<CourseScreen> {
   }
 
   Widget _buildSectionHeader() {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         children: [
           Icon(Icons.play_circle_outline, color: Colors.red),
           SizedBox(width: 6),
           Text(
-            'حلقات الدورة',
+            "course_episodes".tr,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,

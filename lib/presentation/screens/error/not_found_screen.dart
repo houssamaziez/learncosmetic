@@ -13,13 +13,13 @@ class NotFoundScreen extends StatelessWidget {
           children: [
             Icon(Icons.error_outline, size: 80, color: Colors.red.shade400),
             const SizedBox(height: 16),
-            const Text(
-              '404 - Page Not Found',
+            Text(
+              "404_page_not_found".tr,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'The page you are looking for does not exist.',
+            Text(
+              "page_not_found".tr,
               style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),

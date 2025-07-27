@@ -37,7 +37,7 @@ class AppSearchController extends GetxController {
 
       categories.value = [];
     } catch (e) {
-      Get.snackbar('خطأ', 'فشل تحميل البيانات');
+      Get.snackbar("error".tr, "data_load_failed".tr);
     } finally {
       isLoading.value = false;
     }
@@ -67,7 +67,7 @@ class AppSearchController extends GetxController {
       categories.value = result?.categories ?? [];
       // tags.value = result?.tags ?? [];
     } catch (e) {
-      Get.snackbar('خطأ', 'فشل تحميل البيانات');
+      Get.snackbar("error".tr, "data_load_failed".tr);
     } finally {
       isLoading.value = false;
     }

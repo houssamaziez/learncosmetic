@@ -104,7 +104,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 controller: commentController,
                 style: const TextStyle(fontFamily: 'Tajawal'),
                 decoration: InputDecoration(
-                  hintText: 'أضف تعليقك...',
+                  hintText: "add_your_comment".tr,
                   hintStyle: const TextStyle(fontFamily: 'Tajawal'),
                   border: InputBorder.none,
                 ),
@@ -147,7 +147,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            _tag(label: "جديد", color: Colors.red),
+                            _tag(label: "new".tr, color: Colors.red),
                             const SizedBox(width: 12),
 
                             const SizedBox(width: 12),
@@ -192,9 +192,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             }
 
                             if (controllerplaylist.commenter.isEmpty) {
-                              return const Center(
+                              return Center(
                                 child: Text(
-                                  'لا توجد تعليقات حتى الآن',
+                                  "no_comments_yet".tr,
                                   style: TextStyle(fontSize: 16),
                                 ),
                               );

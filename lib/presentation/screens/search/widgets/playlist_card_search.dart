@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:learncosmetic/core/constants/app_colors.dart';
 import 'package:learncosmetic/core/constants/app_size.dart';
 import 'package:learncosmetic/data/models/playlist_model.dart';
@@ -62,7 +63,10 @@ class PlaylistCard extends StatelessWidget {
                   ),
                   const SizedBox(height: AppSize.spacingXS),
                   Text(
-                    '${playlist.coursesCount} فيديو · ${playlist.totalDuration} دقيقة',
+                    '${playlist.coursesCount} ' +
+                        "video ".tr +
+                        '· ${playlist.totalDuration} ' +
+                        "minute".tr,
                     style: const TextStyle(
                       fontSize: AppSize.fontSizeS,
                       color: Colors.grey,
