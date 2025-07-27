@@ -1,4 +1,4 @@
-package com.houssamaziez.Learncosmeticacademy
+package com.houssamaziez.cosmolearn
 
 import android.os.Bundle
 import android.view.WindowManager
@@ -15,7 +15,7 @@ class MainActivity : FlutterActivity() {
         )
     }
 }
-// package com.houssamaziez.Learncosmeticacademy
+// package com.houssamaziez.cosmolearn
 
 // import io.flutter.embedding.android.FlutterActivity
 

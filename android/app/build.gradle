@@ -15,7 +15,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.houssamaziez.Learncosmeticacademy"
+    namespace = "com.houssamaziez.cosmolearn"
     compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
@@ -29,7 +29,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.houssamaziez.Learncosmeticacademy"
+        applicationId = "com.houssamaziez.cosmolearn"
         minSdk = flutter.minSdkVersion
         targetSdk = 35
         versionCode = flutter.versionCode
