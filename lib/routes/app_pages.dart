@@ -6,6 +6,7 @@ import 'package:learncosmetic/presentation/admin/AddUserScreen.dart';
 import 'package:learncosmetic/presentation/admin/admin_add_category_screen.dart';
 import 'package:learncosmetic/presentation/bindings/home_binding.dart';
 import 'package:learncosmetic/presentation/bindings/splash_binding.dart';
+import 'package:learncosmetic/presentation/screens/Language/ChangeLanguageScreen.dart';
 import 'package:learncosmetic/presentation/screens/auth/auth_screen.dart';
 import 'package:learncosmetic/presentation/screens/home/home_wrapper_screen.dart';
 import 'package:learncosmetic/presentation/screens/splash/splash_screen.dart';
@@ -102,6 +103,10 @@ class AppPages {
       name: AppRoutes.addUser,
       page: () => const AddUserScreen(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.changeLanguageScreen,
+      page: () => const ChangeLanguageScreen(),
     ),
     // GetPage(
     //   name: AppRoutes.settings,

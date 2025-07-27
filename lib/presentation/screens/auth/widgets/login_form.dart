@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/constants/app_size.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../../../controllers/login_controller.dart';
 import '../../../widgets/app_text_field.dart';
 import '../../../widgets/button_all.dart';
@@ -66,7 +67,13 @@ class LoginForm extends StatelessWidget {
             onPressed: () {
               // Navigate to forgot password screen if needed
             },
-            child: Text("forgot_password".tr),
+            child: Text(
+              "forgot_password".tr,
+              style: TextStyle(
+                color: AppColors.primary,
+                fontSize: AppSize.fontSizeS,
+              ),
+            ),
           ),
         ),
 

@@ -27,7 +27,10 @@ class CustomBottomNavBar extends StatelessWidget {
           icon: Icon(Icons.home_outlined),
           label: 'home'.tr,
         ),
-        BottomNavigationBarItem(icon: Icon(Icons.book_outlined), label: 'كتب'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.book_outlined),
+          label: "books".tr,
+        ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person_outline),
           label: 'account'.tr,

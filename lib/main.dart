@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:learncosmetic/core/services/local_storage_service.dart';
@@ -19,11 +20,13 @@ import 'package:learncosmetic/routes/app_routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalStorageService.init();
+
   final client = Client();
   final dataSource = UserRemoteDataSourceImpl(client);
   final repository = UserRemoteDataSourceImpl(client);
   final usecaselogin = LoginUser(repository);
   final usecaseregister = RegisterUser(repository);
+
   Get.put(SearchRepositoryImpl(client: client));
   Get.put(SearchUsecase(Get.find()));
   Get.put(AppSearchController(Get.find()));
@@ -33,22 +36,37 @@ void main() async {
     registerUser: usecaseregister,
   );
 
+  final storage = GetStorage();
+  final String? langCode = storage.read('languageCode');
+  final String? countryCode = storage.read('countryCode');
+
+  Locale? initialLocale;
+  if (langCode != null && countryCode != null) {
+    initialLocale = Locale(langCode, countryCode);
+  } else {
+    initialLocale = const Locale('en', 'US'); // fallback if nothing stored
+  }
+
   Get.put(controller);
-  await initializeDateFormatting('ar', null);
-  runApp(const MyApp());
+  await AppTranslations.loadTranslations();
+  await initializeDateFormatting(initialLocale.languageCode, null);
+
+  runApp(MyApp(initialLocale: initialLocale));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Locale initialLocale;
+
+  const MyApp({super.key, required this.initialLocale});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeAdmine,
-      translations: AppTranslations(), // Your translations
-      locale: Locale('en', 'US'), // Default locale
-      fallbackLocale: Locale('en', 'US'),
+      initialRoute: AppRoutes.splash,
+      translations: AppTranslations(),
+      locale: initialLocale,
+      fallbackLocale: const Locale('en', 'US'),
       getPages: AppPages.routes,
       unknownRoute: GetPage(
         name: AppRoutes.notFound,
@@ -56,9 +74,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-//  test push
-int testPush() {
-  return 1;
 }

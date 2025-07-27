@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:learncosmetic/core/constants/app_size.dart';
+import 'package:learncosmetic/routes/app_routes.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../controllers/login_controller.dart';
@@ -13,6 +14,12 @@ class AppbarHome extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+        onPressed: () {
+          Get.toNamed(AppRoutes.changeLanguageScreen);
+        },
+        icon: const Icon(Icons.language, color: AppColors.primary),
+      ),
       backgroundColor: AppColors.primary.withOpacity(0.1),
       title: const Text(
         'Learn Cosmetic',

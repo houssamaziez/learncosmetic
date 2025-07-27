@@ -21,4 +21,5 @@ abstract class AppRoutes {
   static const adminPromotions = "/AdminPromotionsScreen";
   static const adminUsers = "/AllUsersScreen";
   static const addUser = "/AddUserScreen";
+  static const changeLanguageScreen = "/ChangeLanguageScreen";
 }

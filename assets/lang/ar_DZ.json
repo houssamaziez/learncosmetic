@@ -66,5 +66,13 @@
     "not_allowed": "غير مسموح",
     "playlist_not_found": "قائمة التشغيل غير موجودة",
     "fill_all_fields": "يرجى ملء جميع الحقول",
-    "promotion_banner_not_found": "لا يوجد بانر ترويجي"
+    "promotion_banner_not_found": "لا يوجد بانر ترويجي",
+    "create_account": "إنشاء حساب",
+    "books": "كتب",
+    "discover_now": "اكتشف الآن",
+    "all_sections": "كل الأقسام",
+    "welcome_user": "مرحباً، @name!",
+    "change_language": "تغيير اللغة",
+    "save": "حفظ",
+    "cancel": "الغاء"
 }

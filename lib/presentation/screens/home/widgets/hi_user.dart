@@ -3,25 +3,24 @@ import 'package:get/get.dart';
 import 'package:learncosmetic/presentation/controllers/login_controller.dart';
 
 import '../../../../core/constants/app_colors.dart';
-import '../../../../core/services/local_storage_service.dart';
 
 class HiUser extends StatelessWidget {
   const HiUser({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 8, left: 16.0, top: 8, right: 16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+    final userName = Get.find<AuthController>().user?.name ?? '';
 
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Align(
-            alignment: Alignment.centerRight,
+            alignment: AlignmentDirectional.centerStart,
             child: Text(
-              "! ${Get.find<AuthController>().user!.name ?? ""}" +
-                  "welcome_female".tr, // Assuming you have a translation
-              style: TextStyle(
+              'welcome_user'.trParams({'name': userName}),
+              style: const TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
@@ -29,14 +28,12 @@ class HiUser extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
+          const SizedBox(height: 4),
           Align(
-            alignment: Alignment.centerRight,
+            alignment: AlignmentDirectional.centerStart,
             child: Text(
-              "explore_latest_beauty_courses".tr,
-              style: TextStyle(
-                color: const Color.fromARGB(255, 65, 16, 20),
-                fontSize: 16,
-              ),
+              'explore_latest_beauty_courses'.tr,
+              style: const TextStyle(color: Color(0xFF411014), fontSize: 16),
               textAlign: TextAlign.start,
             ),
           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learncosmetic/core/constants/app_colors.dart';
+import 'package:learncosmetic/routes/app_routes.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_size.dart';
 import '../../../core/constants/error_notifier.dart';
@@ -18,73 +20,84 @@ class AuthScreen extends GetView<AuthController> {
       backgroundColor: const Color(0xFF540B0E),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
+          child: Stack(
             children: [
-              const SizedBox(height: AppSize.spacingL),
-
-              // Logo & Subtitle
               Column(
                 children: [
+                  const SizedBox(height: AppSize.spacingL),
+
+                  // Logo & Subtitle
+                  Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(AppSize.paddingM),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(AppSize.radiusM),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(AppSize.radiusM),
+                          child: Image.asset(
+                            AppAssets.logo2,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: AppSize.spacingM),
+                      Text(
+                        "discover_beauty_world".tr.toString(),
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: AppSize.fontSizeS,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: AppSize.spacingL),
+
+                  // Main content
                   Container(
-                    padding: const EdgeInsets.all(AppSize.paddingM),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(AppSize.radiusM),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSize.paddingL,
+                      vertical: AppSize.paddingM,
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(AppSize.radiusM),
-                      child: Image.asset(
-                        AppAssets.logo2,
-                        height: 100,
-                        fit: BoxFit.cover,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(AppSize.radiusXL),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: AppSize.spacingM),
-                  Text(
-                    "discover_beauty_world".tr.toString(),
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: AppSize.fontSizeS,
-                    ),
+                    child: Obx(() {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          LoginTabs(
+                            isLoginSelected: controller.isLogin.value,
+                            onLoginTap: () => controller.setLogin(true),
+                            onRegisterTap:
+                                () => ErrorNotifier.show(
+                                  "contact_support_to_create_account".tr
+                                      .toString(),
+                                ),
+                          ),
+                          const SizedBox(height: AppSize.spacingM),
+                          controller.isLogin.value
+                              ? const LoginForm()
+                              : const RegisterForm(),
+                          SizedBox(height: AppSize.spacingL),
+                        ],
+                      );
+                    }),
                   ),
                 ],
               ),
-
-              const SizedBox(height: AppSize.spacingL),
-
-              // Main content
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.paddingL,
-                  vertical: AppSize.paddingM,
-                ),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(AppSize.radiusXL),
-                  ),
-                ),
-                child: Obx(() {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      LoginTabs(
-                        isLoginSelected: controller.isLogin.value,
-                        onLoginTap: () => controller.setLogin(true),
-                        onRegisterTap:
-                            () => ErrorNotifier.show(
-                              "contact_support_to_create_account".tr.toString(),
-                            ),
-                      ),
-                      const SizedBox(height: AppSize.spacingM),
-                      controller.isLogin.value
-                          ? const LoginForm()
-                          : const RegisterForm(),
-                      SizedBox(height: AppSize.spacingL),
-                    ],
-                  );
-                }),
+              IconButton(
+                onPressed: () {
+                  Get.toNamed(AppRoutes.changeLanguageScreen);
+                },
+                icon: const Icon(Icons.language, color: Colors.white),
               ),
             ],
           ),
